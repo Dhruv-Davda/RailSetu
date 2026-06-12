@@ -1,0 +1,4484 @@
+{
+  "meta": {
+    "station": "New Delhi (NDLS)",
+    "code": "NDLS",
+    "source": "OpenStreetMap via Overpass (snapshot fixture)",
+    "center": {
+      "lat": 28.6428,
+      "lon": 77.2191
+    },
+    "snap_m": 6.0,
+    "counts": {
+      "nodes": 274,
+      "edges": 305,
+      "platforms": 10,
+      "entrances": 12,
+      "components": 8,
+      "largest_component": 245
+    }
+  },
+  "nodes": [
+    {
+      "id": "n0",
+      "lat": 28.6423944,
+      "lon": 77.2212599,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n1",
+      "lat": 28.6424308,
+      "lon": 77.2214852,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n2",
+      "lat": 28.6424556,
+      "lon": 77.2215594,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n3",
+      "lat": 28.6424742,
+      "lon": 77.2217267,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n4",
+      "lat": 28.6424837,
+      "lon": 77.221812,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n5",
+      "lat": 28.6425866,
+      "lon": 77.2209438,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n6",
+      "lat": 28.6423509,
+      "lon": 77.2209911,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n7",
+      "lat": 28.6421378,
+      "lon": 77.2210297,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n8",
+      "lat": 28.6424146,
+      "lon": 77.2207604,
+      "kind": "elevator",
+      "name": "Elevator"
+    },
+    {
+      "id": "n9",
+      "lat": 28.6425621,
+      "lon": 77.2207338,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n10",
+      "lat": 28.642073,
+      "lon": 77.2206195,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n11",
+      "lat": 28.6422852,
+      "lon": 77.2205901,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n12",
+      "lat": 28.6422018,
+      "lon": 77.2200812,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n13",
+      "lat": 28.6424274,
+      "lon": 77.2200362,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n14",
+      "lat": 28.6419332,
+      "lon": 77.2196378,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n15",
+      "lat": 28.642122,
+      "lon": 77.2195942,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n16",
+      "lat": 28.6421781,
+      "lon": 77.2195815,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n17",
+      "lat": 28.6423761,
+      "lon": 77.2195362,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n18",
+      "lat": 28.6416179,
+      "lon": 77.2204063,
+      "kind": "platform",
+      "name": "Platform 6;7"
+    },
+    {
+      "id": "n19",
+      "lat": 28.643724,
+      "lon": 77.2197745,
+      "kind": "platform",
+      "name": "Platform 4;5"
+    },
+    {
+      "id": "n20",
+      "lat": 28.6415707,
+      "lon": 77.2206842,
+      "kind": "platform",
+      "name": "Platform 8;9"
+    },
+    {
+      "id": "n21",
+      "lat": 28.6410872,
+      "lon": 77.2211328,
+      "kind": "platform",
+      "name": "Platform 12;13"
+    },
+    {
+      "id": "n22",
+      "lat": 28.6416606,
+      "lon": 77.2208708,
+      "kind": "platform",
+      "name": "Platform 10;11"
+    },
+    {
+      "id": "n23",
+      "lat": 28.6412293,
+      "lon": 77.2216254,
+      "kind": "platform",
+      "name": "Platform 16"
+    },
+    {
+      "id": "n24",
+      "lat": 28.6408027,
+      "lon": 77.2214314,
+      "kind": "platform",
+      "name": "Platform 14;15"
+    },
+    {
+      "id": "n25",
+      "lat": 28.6437251,
+      "lon": 77.2195363,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n26",
+      "lat": 28.6435519,
+      "lon": 77.2195739,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n27",
+      "lat": 28.6433907,
+      "lon": 77.2196137,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n28",
+      "lat": 28.6434636,
+      "lon": 77.2216382,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n29",
+      "lat": 28.6434028,
+      "lon": 77.2212728,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n30",
+      "lat": 28.6433638,
+      "lon": 77.2210439,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n31",
+      "lat": 28.643326,
+      "lon": 77.2208227,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n32",
+      "lat": 28.6437178,
+      "lon": 77.220736,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n33",
+      "lat": 28.6436921,
+      "lon": 77.2205521,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n34",
+      "lat": 28.6436643,
+      "lon": 77.2203651,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n35",
+      "lat": 28.6436289,
+      "lon": 77.2201022,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n36",
+      "lat": 28.6435851,
+      "lon": 77.2198183,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n37",
+      "lat": 28.6435123,
+      "lon": 77.21933,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n38",
+      "lat": 28.640675,
+      "lon": 77.2206379,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n39",
+      "lat": 28.6406674,
+      "lon": 77.2205782,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n40",
+      "lat": 28.6406579,
+      "lon": 77.2204984,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n41",
+      "lat": 28.6431571,
+      "lon": 77.2208573,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n42",
+      "lat": 28.643346,
+      "lon": 77.2204167,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n43",
+      "lat": 28.6435735,
+      "lon": 77.219262,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n44",
+      "lat": 28.6435322,
+      "lon": 77.219271,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n45",
+      "lat": 28.6434284,
+      "lon": 77.2198489,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n46",
+      "lat": 28.64229,
+      "lon": 77.2193094,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n47",
+      "lat": 28.6420823,
+      "lon": 77.2193449,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n48",
+      "lat": 28.6431977,
+      "lon": 77.2210953,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n49",
+      "lat": 28.6431902,
+      "lon": 77.2213297,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n50",
+      "lat": 28.6435555,
+      "lon": 77.2205778,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n51",
+      "lat": 28.6432336,
+      "lon": 77.2218312,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n52",
+      "lat": 28.6432211,
+      "lon": 77.2217395,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n53",
+      "lat": 28.6432131,
+      "lon": 77.2216811,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n54",
+      "lat": 28.642381,
+      "lon": 77.2195548,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n55",
+      "lat": 28.643638,
+      "lon": 77.2193299,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n56",
+      "lat": 28.6434105,
+      "lon": 77.2193829,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n57",
+      "lat": 28.6434294,
+      "lon": 77.2192918,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n58",
+      "lat": 28.6435606,
+      "lon": 77.2206154,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n59",
+      "lat": 28.6421018,
+      "lon": 77.2207605,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n60",
+      "lat": 28.642106,
+      "lon": 77.2208168,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n61",
+      "lat": 28.6421176,
+      "lon": 77.220875,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n62",
+      "lat": 28.6434179,
+      "lon": 77.2197749,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n63",
+      "lat": 28.643442,
+      "lon": 77.2199286,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n64",
+      "lat": 28.6420664,
+      "lon": 77.2205697,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n65",
+      "lat": 28.6420819,
+      "lon": 77.2206559,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n66",
+      "lat": 28.6437177,
+      "lon": 77.2194843,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n67",
+      "lat": 28.6437357,
+      "lon": 77.2196013,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n68",
+      "lat": 28.6431499,
+      "lon": 77.2208134,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n69",
+      "lat": 28.643159,
+      "lon": 77.2209017,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n70",
+      "lat": 28.6423851,
+      "lon": 77.2197575,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n71",
+      "lat": 28.6423934,
+      "lon": 77.219825,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n72",
+      "lat": 28.642402,
+      "lon": 77.2198849,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n73",
+      "lat": 28.6425239,
+      "lon": 77.2205011,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n74",
+      "lat": 28.6425305,
+      "lon": 77.2205483,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n75",
+      "lat": 28.6425365,
+      "lon": 77.2205868,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n76",
+      "lat": 28.6424186,
+      "lon": 77.2199748,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n77",
+      "lat": 28.6425945,
+      "lon": 77.2209936,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n78",
+      "lat": 28.6437607,
+      "lon": 77.2198707,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n79",
+      "lat": 28.6437414,
+      "lon": 77.2197032,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n80",
+      "lat": 28.6431796,
+      "lon": 77.2212619,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n81",
+      "lat": 28.6432085,
+      "lon": 77.2214341,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n82",
+      "lat": 28.6421301,
+      "lon": 77.220972,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n83",
+      "lat": 28.6431546,
+      "lon": 77.2203934,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n84",
+      "lat": 28.6431593,
+      "lon": 77.2204463,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n85",
+      "lat": 28.6431654,
+      "lon": 77.2204872,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n86",
+      "lat": 28.641983,
+      "lon": 77.2200674,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n87",
+      "lat": 28.6419913,
+      "lon": 77.2201194,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n88",
+      "lat": 28.6419962,
+      "lon": 77.2201564,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n89",
+      "lat": 28.6425557,
+      "lon": 77.2206879,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n90",
+      "lat": 28.6425706,
+      "lon": 77.2207957,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n91",
+      "lat": 28.643396,
+      "lon": 77.219672,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n92",
+      "lat": 28.643381,
+      "lon": 77.2195508,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n93",
+      "lat": 28.6424732,
+      "lon": 77.220219,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n94",
+      "lat": 28.6424793,
+      "lon": 77.2202676,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n95",
+      "lat": 28.6424877,
+      "lon": 77.2203297,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n96",
+      "lat": 28.6438119,
+      "lon": 77.2192016,
+      "kind": "entrance",
+      "name": "Entrance"
+    },
+    {
+      "id": "n97",
+      "lat": 28.6438866,
+      "lon": 77.2191795,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n98",
+      "lat": 28.643843,
+      "lon": 77.2188058,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n99",
+      "lat": 28.6422792,
+      "lon": 77.219153,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n100",
+      "lat": 28.6422458,
+      "lon": 77.2191129,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n101",
+      "lat": 28.642174,
+      "lon": 77.2191248,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n102",
+      "lat": 28.6427525,
+      "lon": 77.2217577,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n103",
+      "lat": 28.644297,
+      "lon": 77.218545,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n104",
+      "lat": 28.6442453,
+      "lon": 77.2185571,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n105",
+      "lat": 28.6441923,
+      "lon": 77.2182366,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n106",
+      "lat": 28.6443976,
+      "lon": 77.2185251,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n107",
+      "lat": 28.6444876,
+      "lon": 77.2185082,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n108",
+      "lat": 28.6444347,
+      "lon": 77.218195,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n109",
+      "lat": 28.6444156,
+      "lon": 77.2180837,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n110",
+      "lat": 28.6441729,
+      "lon": 77.2181117,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n111",
+      "lat": 28.643585,
+      "lon": 77.2236228,
+      "kind": "entrance",
+      "name": "New Delhi Metro Station Gate 4"
+    },
+    {
+      "id": "n112",
+      "lat": 28.6434872,
+      "lon": 77.2227816,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n113",
+      "lat": 28.6436415,
+      "lon": 77.2217373,
+      "kind": "entrance",
+      "name": "New Delhi Metro Station Gate No 2"
+    },
+    {
+      "id": "n114",
+      "lat": 28.642983,
+      "lon": 77.2221067,
+      "kind": "entrance",
+      "name": "New Delhi Metro Station Gate No. 1"
+    },
+    {
+      "id": "n115",
+      "lat": 28.6430462,
+      "lon": 77.2220992,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n116",
+      "lat": 28.6446782,
+      "lon": 77.2234077,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n117",
+      "lat": 28.643609,
+      "lon": 77.2227908,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n118",
+      "lat": 28.6427375,
+      "lon": 77.2232711,
+      "kind": "entrance",
+      "name": "New Delhi Metro Station Airport Line"
+    },
+    {
+      "id": "n119",
+      "lat": 28.6424786,
+      "lon": 77.2231116,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n120",
+      "lat": 28.642554,
+      "lon": 77.2239608,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n121",
+      "lat": 28.6410744,
+      "lon": 77.2217241,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n122",
+      "lat": 28.6411632,
+      "lon": 77.2220555,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n123",
+      "lat": 28.640898,
+      "lon": 77.2205407,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n124",
+      "lat": 28.6409337,
+      "lon": 77.220788,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n125",
+      "lat": 28.6409638,
+      "lon": 77.2209902,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n126",
+      "lat": 28.6409968,
+      "lon": 77.2212079,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n127",
+      "lat": 28.6410391,
+      "lon": 77.2214893,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n128",
+      "lat": 28.6434844,
+      "lon": 77.2195921,
+      "kind": "platform",
+      "name": "Platform 2;3"
+    },
+    {
+      "id": "n129",
+      "lat": 28.6441676,
+      "lon": 77.2192149,
+      "kind": "platform",
+      "name": "Platform 1"
+    },
+    {
+      "id": "n130",
+      "lat": 28.6427687,
+      "lon": 77.22189,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n131",
+      "lat": 28.6420076,
+      "lon": 77.2191604,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n132",
+      "lat": 28.6408392,
+      "lon": 77.221715,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n133",
+      "lat": 28.6408437,
+      "lon": 77.2217608,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n134",
+      "lat": 28.6426433,
+      "lon": 77.2214072,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n135",
+      "lat": 28.6418818,
+      "lon": 77.2199213,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n136",
+      "lat": 28.6417278,
+      "lon": 77.2199563,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n137",
+      "lat": 28.6422134,
+      "lon": 77.2215233,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n138",
+      "lat": 28.6422041,
+      "lon": 77.2214816,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n139",
+      "lat": 28.6421679,
+      "lon": 77.2198744,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n140",
+      "lat": 28.642332,
+      "lon": 77.2198384,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n141",
+      "lat": 28.6423351,
+      "lon": 77.2202892,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n142",
+      "lat": 28.6412944,
+      "lon": 77.2216382,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n143",
+      "lat": 28.6412998,
+      "lon": 77.2216779,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n144",
+      "lat": 28.642195,
+      "lon": 77.2213589,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n145",
+      "lat": 28.642186,
+      "lon": 77.2212955,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n146",
+      "lat": 28.6421732,
+      "lon": 77.2212314,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n147",
+      "lat": 28.6408024,
+      "lon": 77.2214598,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n148",
+      "lat": 28.640812,
+      "lon": 77.2215259,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n149",
+      "lat": 28.6408218,
+      "lon": 77.2215894,
+      "kind": "platform",
+      "name": "Platform Platform 16"
+    },
+    {
+      "id": "n150",
+      "lat": 28.6407686,
+      "lon": 77.2212453,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n151",
+      "lat": 28.6412248,
+      "lon": 77.2211623,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n152",
+      "lat": 28.6411813,
+      "lon": 77.2209032,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n153",
+      "lat": 28.6411888,
+      "lon": 77.2209653,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n154",
+      "lat": 28.6412605,
+      "lon": 77.2213831,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n155",
+      "lat": 28.6412681,
+      "lon": 77.221443,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n156",
+      "lat": 28.6412771,
+      "lon": 77.2215126,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n157",
+      "lat": 28.64262,
+      "lon": 77.2212145,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n158",
+      "lat": 28.6407611,
+      "lon": 77.2211852,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n159",
+      "lat": 28.6407779,
+      "lon": 77.2212999,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n160",
+      "lat": 28.6426129,
+      "lon": 77.2211545,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n161",
+      "lat": 28.6426305,
+      "lon": 77.2212822,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n162",
+      "lat": 28.6419474,
+      "lon": 77.2203647,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n163",
+      "lat": 28.6422377,
+      "lon": 77.220316,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n164",
+      "lat": 28.6407198,
+      "lon": 77.2209724,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n165",
+      "lat": 28.6407261,
+      "lon": 77.2210203,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n166",
+      "lat": 28.6412188,
+      "lon": 77.2211139,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n167",
+      "lat": 28.6412327,
+      "lon": 77.2212233,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n168",
+      "lat": 28.6417382,
+      "lon": 77.2200113,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n169",
+      "lat": 28.6417194,
+      "lon": 77.2199052,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n170",
+      "lat": 28.6407048,
+      "lon": 77.2220403,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n171",
+      "lat": 28.6406544,
+      "lon": 77.2218911,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n172",
+      "lat": 28.6406479,
+      "lon": 77.2217957,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n173",
+      "lat": 28.6418349,
+      "lon": 77.2196038,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n174",
+      "lat": 28.6419736,
+      "lon": 77.2195807,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n175",
+      "lat": 28.6419186,
+      "lon": 77.21918,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n176",
+      "lat": 28.6411571,
+      "lon": 77.2207102,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n177",
+      "lat": 28.6411628,
+      "lon": 77.2207531,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n178",
+      "lat": 28.6411667,
+      "lon": 77.2207972,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n179",
+      "lat": 28.6406958,
+      "lon": 77.2207814,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n180",
+      "lat": 28.6407065,
+      "lon": 77.2208689,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n181",
+      "lat": 28.643065,
+      "lon": 77.2211314,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n182",
+      "lat": 28.6434484,
+      "lon": 77.2200533,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n183",
+      "lat": 28.643459,
+      "lon": 77.2201251,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n184",
+      "lat": 28.6434661,
+      "lon": 77.2201673,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n185",
+      "lat": 28.6437943,
+      "lon": 77.2199946,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n186",
+      "lat": 28.6438023,
+      "lon": 77.22007,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n187",
+      "lat": 28.6438099,
+      "lon": 77.2201161,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n188",
+      "lat": 28.6415142,
+      "lon": 77.2219876,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n189",
+      "lat": 28.6415284,
+      "lon": 77.2221098,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n190",
+      "lat": 28.6415421,
+      "lon": 77.2222183,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n191",
+      "lat": 28.6415616,
+      "lon": 77.2223186,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n192",
+      "lat": 28.6415019,
+      "lon": 77.2219641,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n193",
+      "lat": 28.6411942,
+      "lon": 77.2220184,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n194",
+      "lat": 28.6460929,
+      "lon": 77.2199005,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n195",
+      "lat": 28.6459668,
+      "lon": 77.219938,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n196",
+      "lat": 28.6459405,
+      "lon": 77.2200569,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n197",
+      "lat": 28.6459205,
+      "lon": 77.2201297,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n198",
+      "lat": 28.6459065,
+      "lon": 77.2201983,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n199",
+      "lat": 28.6458902,
+      "lon": 77.2202516,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n200",
+      "lat": 28.6458785,
+      "lon": 77.2203057,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n201",
+      "lat": 28.6458766,
+      "lon": 77.2203142,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n202",
+      "lat": 28.6458678,
+      "lon": 77.2203539,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n203",
+      "lat": 28.6458532,
+      "lon": 77.2204276,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n204",
+      "lat": 28.6458274,
+      "lon": 77.2205378,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n205",
+      "lat": 28.6458222,
+      "lon": 77.2205796,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n206",
+      "lat": 28.645818,
+      "lon": 77.2206135,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n207",
+      "lat": 28.6460879,
+      "lon": 77.2206459,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n208",
+      "lat": 28.6423166,
+      "lon": 77.2207818,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n209",
+      "lat": 28.6425091,
+      "lon": 77.2223349,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n210",
+      "lat": 28.6425038,
+      "lon": 77.2223708,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n211",
+      "lat": 28.6424583,
+      "lon": 77.2218382,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n212",
+      "lat": 28.6427205,
+      "lon": 77.2223644,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n213",
+      "lat": 28.6427315,
+      "lon": 77.2223731,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n214",
+      "lat": 28.642866,
+      "lon": 77.2222138,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n215",
+      "lat": 28.6428479,
+      "lon": 77.2221867,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n216",
+      "lat": 28.64284,
+      "lon": 77.2221774,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n217",
+      "lat": 28.642526,
+      "lon": 77.2229885,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n218",
+      "lat": 28.6424407,
+      "lon": 77.2229944,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n219",
+      "lat": 28.6424434,
+      "lon": 77.2230896,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n220",
+      "lat": 28.6424646,
+      "lon": 77.2233525,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n221",
+      "lat": 28.6422866,
+      "lon": 77.2203063,
+      "kind": "elevator",
+      "name": "Elevator"
+    },
+    {
+      "id": "n222",
+      "lat": 28.6422829,
+      "lon": 77.2202778,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n223",
+      "lat": 28.6423326,
+      "lon": 77.2202695,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n224",
+      "lat": 28.6423654,
+      "lon": 77.220772,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n225",
+      "lat": 28.6424188,
+      "lon": 77.2207932,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n226",
+      "lat": 28.6423692,
+      "lon": 77.2208015,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n227",
+      "lat": 28.6425236,
+      "lon": 77.2229219,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n228",
+      "lat": 28.642396,
+      "lon": 77.2229256,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n229",
+      "lat": 28.6423946,
+      "lon": 77.2228907,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n230",
+      "lat": 28.6423851,
+      "lon": 77.2226721,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n231",
+      "lat": 28.6425548,
+      "lon": 77.2237874,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n232",
+      "lat": 28.6423701,
+      "lon": 77.2226724,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n233",
+      "lat": 28.6428656,
+      "lon": 77.2221679,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n234",
+      "lat": 28.6410311,
+      "lon": 77.2209731,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n235",
+      "lat": 28.643158,
+      "lon": 77.222086,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n236",
+      "lat": 28.6410179,
+      "lon": 77.2209828,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n237",
+      "lat": 28.6414193,
+      "lon": 77.2197529,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n238",
+      "lat": 28.6414142,
+      "lon": 77.2197213,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n239",
+      "lat": 28.6413842,
+      "lon": 77.219535,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n240",
+      "lat": 28.6428276,
+      "lon": 77.2216847,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n241",
+      "lat": 28.6428507,
+      "lon": 77.2218796,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n242",
+      "lat": 28.6438032,
+      "lon": 77.2217237,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n243",
+      "lat": 28.6438716,
+      "lon": 77.2217149,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n244",
+      "lat": 28.6438649,
+      "lon": 77.2216292,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n245",
+      "lat": 28.6359882,
+      "lon": 77.218262,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n246",
+      "lat": 28.6371327,
+      "lon": 77.2183392,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n247",
+      "lat": 28.6399063,
+      "lon": 77.2185009,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n248",
+      "lat": 28.6405374,
+      "lon": 77.2185326,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n249",
+      "lat": 28.6357955,
+      "lon": 77.218409,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n250",
+      "lat": 28.6369062,
+      "lon": 77.2184963,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n251",
+      "lat": 28.6371549,
+      "lon": 77.2185158,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n252",
+      "lat": 28.6401849,
+      "lon": 77.2187172,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n253",
+      "lat": 28.6440658,
+      "lon": 77.2187461,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n254",
+      "lat": 28.6441372,
+      "lon": 77.2191183,
+      "kind": "entrance",
+      "name": "Entrance"
+    },
+    {
+      "id": "n255",
+      "lat": 28.6431617,
+      "lon": 77.2194409,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n256",
+      "lat": 28.6428615,
+      "lon": 77.2195114,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n257",
+      "lat": 28.6434726,
+      "lon": 77.2192833,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n258",
+      "lat": 28.6437367,
+      "lon": 77.2205851,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n259",
+      "lat": 28.6423369,
+      "lon": 77.2196261,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n260",
+      "lat": 28.6416095,
+      "lon": 77.2197684,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n261",
+      "lat": 28.6423184,
+      "lon": 77.2195231,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n262",
+      "lat": 28.6431197,
+      "lon": 77.2192067,
+      "kind": "entrance",
+      "name": "Entrance"
+    },
+    {
+      "id": "n263",
+      "lat": 28.6431041,
+      "lon": 77.2191149,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n264",
+      "lat": 28.6427981,
+      "lon": 77.2191824,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n265",
+      "lat": 28.6428136,
+      "lon": 77.2192734,
+      "kind": "entrance",
+      "name": "Entrance"
+    },
+    {
+      "id": "n266",
+      "lat": 28.6446684,
+      "lon": 77.2191029,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n267",
+      "lat": 28.6451094,
+      "lon": 77.2190035,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n268",
+      "lat": 28.6454572,
+      "lon": 77.2189251,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n269",
+      "lat": 28.6450935,
+      "lon": 77.2189127,
+      "kind": "junction",
+      "name": null
+    },
+    {
+      "id": "n270",
+      "lat": 28.6439743,
+      "lon": 77.2181952,
+      "kind": "entrance",
+      "name": "Entrance"
+    },
+    {
+      "id": "n271",
+      "lat": 28.6421099,
+      "lon": 77.218534,
+      "kind": "entrance",
+      "name": "Gate 1"
+    },
+    {
+      "id": "n272",
+      "lat": 28.6432634,
+      "lon": 77.2183085,
+      "kind": "entrance",
+      "name": "Entrance"
+    },
+    {
+      "id": "n273",
+      "lat": 28.6432957,
+      "lon": 77.2232493,
+      "kind": "entrance",
+      "name": "New Delhi Metro Station"
+    }
+  ],
+  "edges": [
+    {
+      "u": "n0",
+      "v": "n1",
+      "length_m": 22.36,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n1",
+      "v": "n2",
+      "length_m": 7.75,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n2",
+      "v": "n3",
+      "length_m": 16.46,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n3",
+      "v": "n4",
+      "length_m": 8.39,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n5",
+      "v": "n6",
+      "length_m": 26.61,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n6",
+      "v": "n7",
+      "length_m": 23.99,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n8",
+      "v": "n9",
+      "length_m": 16.61,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n10",
+      "v": "n11",
+      "length_m": 23.77,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n12",
+      "v": "n13",
+      "length_m": 25.47,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n14",
+      "v": "n15",
+      "length_m": 21.42,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n15",
+      "v": "n16",
+      "length_m": 6.36,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n16",
+      "v": "n17",
+      "length_m": 22.46,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n25",
+      "v": "n26",
+      "length_m": 19.61,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n26",
+      "v": "n27",
+      "length_m": 18.34,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n28",
+      "v": "n29",
+      "length_m": 36.29,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n29",
+      "v": "n30",
+      "length_m": 22.75,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n30",
+      "v": "n31",
+      "length_m": 21.99,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n31",
+      "v": "n32",
+      "length_m": 44.38,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n32",
+      "v": "n33",
+      "length_m": 18.17,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n33",
+      "v": "n34",
+      "length_m": 18.51,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n34",
+      "v": "n35",
+      "length_m": 25.96,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n35",
+      "v": "n36",
+      "length_m": 28.13,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n36",
+      "v": "n26",
+      "length_m": 24.13,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n26",
+      "v": "n37",
+      "length_m": 24.21,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n38",
+      "v": "n39",
+      "length_m": 5.89,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n39",
+      "v": "n40",
+      "length_m": 7.86,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n31",
+      "v": "n41",
+      "length_m": 19.08,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n34",
+      "v": "n42",
+      "length_m": 35.75,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n43",
+      "v": "n44",
+      "length_m": 4.68,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n19",
+      "v": "n36",
+      "length_m": 16.03,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n36",
+      "v": "n45",
+      "length_m": 17.68,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n46",
+      "v": "n47",
+      "length_m": 23.35,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n30",
+      "v": "n48",
+      "length_m": 19.14,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n29",
+      "v": "n49",
+      "length_m": 24.28,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n33",
+      "v": "n50",
+      "length_m": 15.39,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n51",
+      "v": "n52",
+      "length_m": 9.06,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n52",
+      "v": "n53",
+      "length_m": 5.77,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n53",
+      "v": "n28",
+      "length_m": 28.17,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n54",
+      "v": "n17",
+      "length_m": 1.9,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n55",
+      "v": "n43",
+      "length_m": 9.76,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n56",
+      "v": "n57",
+      "length_m": 9.14,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n50",
+      "v": "n58",
+      "length_m": 3.71,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n59",
+      "v": "n60",
+      "length_m": 5.51,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n60",
+      "v": "n61",
+      "length_m": 5.82,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n62",
+      "v": "n45",
+      "length_m": 7.32,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n45",
+      "v": "n63",
+      "length_m": 7.92,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n64",
+      "v": "n10",
+      "length_m": 4.91,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n10",
+      "v": "n65",
+      "length_m": 3.69,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n66",
+      "v": "n25",
+      "length_m": 5.14,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n25",
+      "v": "n67",
+      "length_m": 6.45,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n68",
+      "v": "n41",
+      "length_m": 4.36,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n41",
+      "v": "n69",
+      "length_m": 4.34,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n70",
+      "v": "n71",
+      "length_m": 6.65,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n71",
+      "v": "n72",
+      "length_m": 5.92,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n73",
+      "v": "n74",
+      "length_m": 4.66,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n74",
+      "v": "n75",
+      "length_m": 3.82,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n76",
+      "v": "n13",
+      "length_m": 6.07,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n5",
+      "v": "n77",
+      "length_m": 4.94,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n78",
+      "v": "n19",
+      "length_m": 10.24,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n19",
+      "v": "n79",
+      "length_m": 7.22,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n80",
+      "v": "n49",
+      "length_m": 6.72,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n49",
+      "v": "n81",
+      "length_m": 10.39,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n7",
+      "v": "n82",
+      "length_m": 5.7,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n83",
+      "v": "n84",
+      "length_m": 5.19,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n84",
+      "v": "n85",
+      "length_m": 4.05,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n86",
+      "v": "n87",
+      "length_m": 5.16,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n87",
+      "v": "n88",
+      "length_m": 3.65,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n89",
+      "v": "n9",
+      "length_m": 4.54,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n9",
+      "v": "n90",
+      "length_m": 6.11,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n91",
+      "v": "n27",
+      "length_m": 5.72,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n27",
+      "v": "n92",
+      "length_m": 6.23,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n93",
+      "v": "n94",
+      "length_m": 4.79,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n94",
+      "v": "n95",
+      "length_m": 6.13,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n43",
+      "v": "n96",
+      "length_m": 27.16,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n96",
+      "v": "n97",
+      "length_m": 8.58,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n97",
+      "v": "n98",
+      "length_m": 36.79,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n46",
+      "v": "n99",
+      "length_m": 15.31,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n99",
+      "v": "n100",
+      "length_m": 5.4,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n100",
+      "v": "n101",
+      "length_m": 8.07,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n4",
+      "v": "n102",
+      "length_m": 30.36,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n103",
+      "v": "n104",
+      "length_m": 5.87,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n104",
+      "v": "n105",
+      "length_m": 31.83,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n106",
+      "v": "n107",
+      "length_m": 10.14,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n107",
+      "v": "n108",
+      "length_m": 31.12,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n108",
+      "v": "n109",
+      "length_m": 11.07,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n105",
+      "v": "n110",
+      "length_m": 12.38,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n111",
+      "v": "n112",
+      "length_m": 82.81,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n113",
+      "v": "n112",
+      "length_m": 103.34,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n114",
+      "v": "n115",
+      "length_m": 7.07,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n116",
+      "v": "n117",
+      "length_m": 133.26,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n117",
+      "v": "n112",
+      "length_m": 13.57,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n118",
+      "v": "n119",
+      "length_m": 32.73,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n120",
+      "v": "n119",
+      "length_m": 83.29,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n119",
+      "v": "n112",
+      "length_m": 116.68,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n121",
+      "v": "n122",
+      "length_m": 33.81,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n123",
+      "v": "n124",
+      "length_m": 24.46,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n124",
+      "v": "n125",
+      "length_m": 20.01,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n125",
+      "v": "n126",
+      "length_m": 21.56,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n126",
+      "v": "n127",
+      "length_m": 27.86,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n127",
+      "v": "n121",
+      "length_m": 23.25,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n39",
+      "v": "n123",
+      "length_m": 25.9,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n102",
+      "v": "n130",
+      "length_m": 13.04,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n101",
+      "v": "n131",
+      "length_m": 18.83,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n132",
+      "v": "n133",
+      "length_m": 4.5,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n135",
+      "v": "n136",
+      "length_m": 17.46,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n137",
+      "v": "n138",
+      "length_m": 4.2,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n139",
+      "v": "n140",
+      "length_m": 18.58,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n140",
+      "v": "n71",
+      "length_m": 6.95,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n141",
+      "v": "n94",
+      "length_m": 16.17,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n142",
+      "v": "n143",
+      "length_m": 3.92,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n144",
+      "v": "n145",
+      "length_m": 6.27,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n145",
+      "v": "n146",
+      "length_m": 6.42,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n147",
+      "v": "n148",
+      "length_m": 6.54,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n148",
+      "v": "n149",
+      "length_m": 6.29,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n150",
+      "v": "n126",
+      "length_m": 25.64,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n126",
+      "v": "n151",
+      "length_m": 25.74,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n152",
+      "v": "n153",
+      "length_m": 6.12,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n134",
+      "v": "n1",
+      "length_m": 24.82,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n1",
+      "v": "n137",
+      "length_m": 24.46,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n154",
+      "v": "n155",
+      "length_m": 5.91,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n155",
+      "v": "n156",
+      "length_m": 6.87,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n157",
+      "v": "n0",
+      "length_m": 25.47,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n158",
+      "v": "n150",
+      "length_m": 5.92,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n150",
+      "v": "n159",
+      "length_m": 5.43,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n133",
+      "v": "n121",
+      "length_m": 25.9,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n121",
+      "v": "n143",
+      "length_m": 25.47,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n160",
+      "v": "n157",
+      "length_m": 5.91,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n157",
+      "v": "n161",
+      "length_m": 6.71,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n148",
+      "v": "n127",
+      "length_m": 25.5,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n127",
+      "v": "n155",
+      "length_m": 25.86,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n123",
+      "v": "n162",
+      "length_m": 117.95,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n162",
+      "v": "n163",
+      "length_m": 32.63,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n164",
+      "v": "n165",
+      "length_m": 4.73,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n166",
+      "v": "n151",
+      "length_m": 4.77,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n151",
+      "v": "n167",
+      "length_m": 6.02,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n168",
+      "v": "n136",
+      "length_m": 5.49,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n136",
+      "v": "n169",
+      "length_m": 5.07,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n165",
+      "v": "n125",
+      "length_m": 26.59,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n170",
+      "v": "n171",
+      "length_m": 15.6,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n171",
+      "v": "n172",
+      "length_m": 9.34,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n172",
+      "v": "n133",
+      "length_m": 22.04,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n162",
+      "v": "n135",
+      "length_m": 43.88,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n135",
+      "v": "n173",
+      "length_m": 31.42,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n173",
+      "v": "n174",
+      "length_m": 15.59,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n174",
+      "v": "n175",
+      "length_m": 39.58,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n176",
+      "v": "n177",
+      "length_m": 4.23,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n177",
+      "v": "n178",
+      "length_m": 4.33,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n179",
+      "v": "n180",
+      "length_m": 8.62,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n179",
+      "v": "n124",
+      "length_m": 26.46,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n48",
+      "v": "n181",
+      "length_m": 15.17,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n182",
+      "v": "n183",
+      "length_m": 7.11,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n183",
+      "v": "n184",
+      "length_m": 4.19,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n185",
+      "v": "n186",
+      "length_m": 7.41,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n186",
+      "v": "n187",
+      "length_m": 4.58,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n183",
+      "v": "n35",
+      "length_m": 19.02,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n35",
+      "v": "n186",
+      "length_m": 19.54,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n42",
+      "v": "n84",
+      "length_m": 20.96,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n177",
+      "v": "n124",
+      "length_m": 25.7,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n74",
+      "v": "n11",
+      "length_m": 27.58,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n131",
+      "v": "n175",
+      "length_m": 10.08,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n122",
+      "v": "n188",
+      "length_m": 39.59,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n188",
+      "v": "n189",
+      "length_m": 12.03,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n189",
+      "v": "n190",
+      "length_m": 10.7,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n190",
+      "v": "n191",
+      "length_m": 10.03,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n192",
+      "v": "n188",
+      "length_m": 2.67,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n122",
+      "v": "n193",
+      "length_m": 5.0,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n193",
+      "v": "n192",
+      "length_m": 34.62,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n194",
+      "v": "n195",
+      "length_m": 14.49,
+      "kind": "path",
+      "width_m": 2.5,
+      "capacity_pps": 3.25
+    },
+    {
+      "u": "n195",
+      "v": "n196",
+      "length_m": 11.97,
+      "kind": "path",
+      "width_m": 2.5,
+      "capacity_pps": 3.25
+    },
+    {
+      "u": "n196",
+      "v": "n197",
+      "length_m": 7.44,
+      "kind": "path",
+      "width_m": 2.5,
+      "capacity_pps": 3.25
+    },
+    {
+      "u": "n197",
+      "v": "n198",
+      "length_m": 6.87,
+      "kind": "path",
+      "width_m": 2.5,
+      "capacity_pps": 3.25
+    },
+    {
+      "u": "n198",
+      "v": "n199",
+      "length_m": 5.51,
+      "kind": "path",
+      "width_m": 2.5,
+      "capacity_pps": 3.25
+    },
+    {
+      "u": "n199",
+      "v": "n200",
+      "length_m": 5.44,
+      "kind": "path",
+      "width_m": 2.5,
+      "capacity_pps": 3.25
+    },
+    {
+      "u": "n200",
+      "v": "n201",
+      "length_m": 0.86,
+      "kind": "path",
+      "width_m": 2.5,
+      "capacity_pps": 3.25
+    },
+    {
+      "u": "n201",
+      "v": "n202",
+      "length_m": 4.0,
+      "kind": "path",
+      "width_m": 2.5,
+      "capacity_pps": 3.25
+    },
+    {
+      "u": "n202",
+      "v": "n203",
+      "length_m": 7.37,
+      "kind": "path",
+      "width_m": 2.5,
+      "capacity_pps": 3.25
+    },
+    {
+      "u": "n203",
+      "v": "n204",
+      "length_m": 11.13,
+      "kind": "path",
+      "width_m": 2.5,
+      "capacity_pps": 3.25
+    },
+    {
+      "u": "n204",
+      "v": "n205",
+      "length_m": 4.12,
+      "kind": "path",
+      "width_m": 2.5,
+      "capacity_pps": 3.25
+    },
+    {
+      "u": "n205",
+      "v": "n206",
+      "length_m": 3.34,
+      "kind": "path",
+      "width_m": 2.5,
+      "capacity_pps": 3.25
+    },
+    {
+      "u": "n206",
+      "v": "n207",
+      "length_m": 30.18,
+      "kind": "path",
+      "width_m": 2.5,
+      "capacity_pps": 3.25
+    },
+    {
+      "u": "n47",
+      "v": "n15",
+      "length_m": 24.73,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n15",
+      "v": "n139",
+      "length_m": 27.82,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n139",
+      "v": "n12",
+      "length_m": 20.53,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n87",
+      "v": "n12",
+      "length_m": 23.7,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n12",
+      "v": "n163",
+      "length_m": 23.26,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n163",
+      "v": "n11",
+      "length_m": 27.27,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n11",
+      "v": "n208",
+      "length_m": 19.03,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n60",
+      "v": "n208",
+      "length_m": 23.67,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n208",
+      "v": "n6",
+      "length_m": 20.78,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n6",
+      "v": "n0",
+      "length_m": 26.67,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n0",
+      "v": "n145",
+      "length_m": 23.43,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n4",
+      "v": "n209",
+      "length_m": 51.11,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n209",
+      "v": "n210",
+      "length_m": 3.55,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n210",
+      "v": "n209",
+      "length_m": 3.55,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n209",
+      "v": "n211",
+      "length_m": 48.8,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n211",
+      "v": "n2",
+      "length_m": 27.21,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n2",
+      "v": "n1",
+      "length_m": 7.75,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n210",
+      "v": "n212",
+      "length_m": 24.1,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n213",
+      "v": "n214",
+      "length_m": 21.57,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n215",
+      "v": "n212",
+      "length_m": 22.39,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n216",
+      "v": "n212",
+      "length_m": 22.57,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n212",
+      "v": "n213",
+      "length_m": 1.49,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n217",
+      "v": "n218",
+      "length_m": 9.5,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n218",
+      "v": "n219",
+      "length_m": 9.3,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n219",
+      "v": "n220",
+      "length_m": 25.76,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n163",
+      "v": "n221",
+      "length_m": 5.52,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n95",
+      "v": "n141",
+      "length_m": 17.42,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n221",
+      "v": "n222",
+      "length_m": 2.81,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n222",
+      "v": "n223",
+      "length_m": 5.59,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n223",
+      "v": "n141",
+      "length_m": 1.94,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n141",
+      "v": "n221",
+      "length_m": 5.65,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n224",
+      "v": "n8",
+      "length_m": 5.59,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n8",
+      "v": "n225",
+      "length_m": 3.23,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n225",
+      "v": "n226",
+      "length_m": 5.57,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n226",
+      "v": "n224",
+      "length_m": 2.91,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n208",
+      "v": "n224",
+      "length_m": 5.51,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n224",
+      "v": "n8",
+      "length_m": 5.59,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n227",
+      "v": "n228",
+      "length_m": 14.19,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n229",
+      "v": "n228",
+      "length_m": 3.41,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n228",
+      "v": "n229",
+      "length_m": 3.41,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n230",
+      "v": "n229",
+      "length_m": 21.36,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n210",
+      "v": "n227",
+      "length_m": 53.83,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n227",
+      "v": "n217",
+      "length_m": 6.5,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n217",
+      "v": "n231",
+      "length_m": 78.03,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n229",
+      "v": "n232",
+      "length_m": 21.48,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n114",
+      "v": "n233",
+      "length_m": 14.36,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n234",
+      "v": "n152",
+      "length_m": 18.04,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n215",
+      "v": "n233",
+      "length_m": 2.69,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n115",
+      "v": "n235",
+      "length_m": 12.5,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n235",
+      "v": "n112",
+      "length_m": 77.12,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n236",
+      "v": "n234",
+      "length_m": 1.75,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n233",
+      "v": "n214",
+      "length_m": 4.48,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n153",
+      "v": "n234",
+      "length_m": 17.55,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n125",
+      "v": "n236",
+      "length_m": 6.06,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n236",
+      "v": "n234",
+      "length_m": 1.75,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n233",
+      "v": "n216",
+      "length_m": 2.99,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n237",
+      "v": "n238",
+      "length_m": 3.14,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n238",
+      "v": "n239",
+      "length_m": 18.48,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n3",
+      "v": "n240",
+      "length_m": 39.51,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n240",
+      "v": "n241",
+      "length_m": 19.19,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n242",
+      "v": "n243",
+      "length_m": 7.65,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n243",
+      "v": "n244",
+      "length_m": 8.4,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n244",
+      "v": "n52",
+      "length_m": 72.39,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n245",
+      "v": "n246",
+      "length_m": 127.49,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n246",
+      "v": "n247",
+      "length_m": 308.81,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n247",
+      "v": "n248",
+      "length_m": 70.24,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n249",
+      "v": "n250",
+      "length_m": 123.8,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n250",
+      "v": "n251",
+      "length_m": 27.72,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n251",
+      "v": "n252",
+      "length_m": 337.49,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n253",
+      "v": "n254",
+      "length_m": 37.18,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n254",
+      "v": "n129",
+      "length_m": 10.01,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n129",
+      "v": "n55",
+      "length_m": 59.95,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n55",
+      "v": "n56",
+      "length_m": 25.82,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n56",
+      "v": "n255",
+      "length_m": 28.24,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n255",
+      "v": "n256",
+      "length_m": 34.08,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n257",
+      "v": "n57",
+      "length_m": 4.87,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n44",
+      "v": "n257",
+      "length_m": 6.74,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n58",
+      "v": "n258",
+      "length_m": 19.8,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n37",
+      "v": "n257",
+      "length_m": 6.34,
+      "kind": "steps",
+      "width_m": 2.5,
+      "capacity_pps": 2.27
+    },
+    {
+      "u": "n256",
+      "v": "n259",
+      "length_m": 59.4,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n259",
+      "v": "n260",
+      "length_m": 82.07,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n261",
+      "v": "n259",
+      "length_m": 10.26,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n255",
+      "v": "n262",
+      "length_m": 23.33,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n262",
+      "v": "n263",
+      "length_m": 9.12,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n263",
+      "v": "n264",
+      "length_m": 34.66,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n264",
+      "v": "n265",
+      "length_m": 9.05,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n265",
+      "v": "n256",
+      "length_m": 23.83,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n266",
+      "v": "n267",
+      "length_m": 49.99,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n267",
+      "v": "n268",
+      "length_m": 39.42,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n267",
+      "v": "n269",
+      "length_m": 9.04,
+      "kind": "footway",
+      "width_m": 4.0,
+      "capacity_pps": 5.2
+    },
+    {
+      "u": "n18",
+      "v": "n162",
+      "length_m": 36.86,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n18",
+      "v": "n168",
+      "length_m": 40.8,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n18",
+      "v": "n136",
+      "length_m": 45.58,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n19",
+      "v": "n79",
+      "length_m": 7.22,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n19",
+      "v": "n78",
+      "length_m": 10.24,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n19",
+      "v": "n36",
+      "length_m": 16.03,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n20",
+      "v": "n177",
+      "length_m": 45.85,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n20",
+      "v": "n176",
+      "length_m": 46.06,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n20",
+      "v": "n178",
+      "length_m": 46.26,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n21",
+      "v": "n126",
+      "length_m": 12.44,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n21",
+      "v": "n166",
+      "length_m": 14.75,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n21",
+      "v": "n151",
+      "length_m": 15.57,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n22",
+      "v": "n60",
+      "length_m": 49.81,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n22",
+      "v": "n59",
+      "length_m": 50.23,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n22",
+      "v": "n61",
+      "length_m": 50.82,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n23",
+      "v": "n142",
+      "length_m": 7.35,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n23",
+      "v": "n143",
+      "length_m": 9.36,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n23",
+      "v": "n156",
+      "length_m": 12.22,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n24",
+      "v": "n147",
+      "length_m": 2.77,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n24",
+      "v": "n148",
+      "length_m": 9.28,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n24",
+      "v": "n159",
+      "length_m": 13.13,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n128",
+      "v": "n26",
+      "length_m": 7.71,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n128",
+      "v": "n27",
+      "length_m": 10.63,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n128",
+      "v": "n92",
+      "length_m": 12.18,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n129",
+      "v": "n254",
+      "length_m": 10.01,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n129",
+      "v": "n97",
+      "length_m": 31.44,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n129",
+      "v": "n96",
+      "length_m": 39.57,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n149",
+      "v": "n148",
+      "length_m": 6.29,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n149",
+      "v": "n132",
+      "length_m": 12.41,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n149",
+      "v": "n147",
+      "length_m": 12.83,
+      "kind": "platform_link",
+      "width_m": 3.5,
+      "capacity_pps": 4.55
+    },
+    {
+      "u": "n261",
+      "v": "n17",
+      "length_m": 6.54,
+      "kind": "transfer_link",
+      "width_m": 3.0,
+      "capacity_pps": 3.9
+    },
+    {
+      "u": "n237",
+      "v": "n260",
+      "length_m": 21.2,
+      "kind": "transfer_link",
+      "width_m": 3.0,
+      "capacity_pps": 3.9
+    },
+    {
+      "u": "n104",
+      "v": "n253",
+      "length_m": 27.18,
+      "kind": "transfer_link",
+      "width_m": 3.0,
+      "capacity_pps": 3.9
+    },
+    {
+      "u": "n106",
+      "v": "n103",
+      "length_m": 11.35,
+      "kind": "transfer_link",
+      "width_m": 3.0,
+      "capacity_pps": 3.9
+    },
+    {
+      "u": "n270",
+      "v": "n110",
+      "length_m": 23.54,
+      "kind": "transfer_link",
+      "width_m": 3.0,
+      "capacity_pps": 3.9
+    }
+  ],
+  "platforms": [
+    {
+      "node": "n18",
+      "ref": "6;7",
+      "name": "Platform 6;7"
+    },
+    {
+      "node": "n19",
+      "ref": "4;5",
+      "name": "Platform 4;5"
+    },
+    {
+      "node": "n20",
+      "ref": "8;9",
+      "name": "Platform 8;9"
+    },
+    {
+      "node": "n21",
+      "ref": "12;13",
+      "name": "Platform 12;13"
+    },
+    {
+      "node": "n22",
+      "ref": "10;11",
+      "name": "Platform 10;11"
+    },
+    {
+      "node": "n23",
+      "ref": "16",
+      "name": "Platform 16"
+    },
+    {
+      "node": "n24",
+      "ref": "14;15",
+      "name": "Platform 14;15"
+    },
+    {
+      "node": "n128",
+      "ref": "2;3",
+      "name": "Platform 2;3"
+    },
+    {
+      "node": "n129",
+      "ref": "1",
+      "name": "Platform 1"
+    },
+    {
+      "node": "n149",
+      "ref": "Platform 16",
+      "name": "Platform Platform 16"
+    }
+  ],
+  "entrances": [
+    {
+      "node": "n114",
+      "name": "New Delhi Metro Station Gate No. 1"
+    },
+    {
+      "node": "n96",
+      "name": "Entrance"
+    },
+    {
+      "node": "n113",
+      "name": "New Delhi Metro Station Gate No 2"
+    },
+    {
+      "node": "n111",
+      "name": "New Delhi Metro Station Gate 4"
+    },
+    {
+      "node": "n118",
+      "name": "New Delhi Metro Station Airport Line"
+    },
+    {
+      "node": "n270",
+      "name": "Entrance"
+    },
+    {
+      "node": "n271",
+      "name": "Gate 1"
+    },
+    {
+      "node": "n272",
+      "name": "Entrance"
+    },
+    {
+      "node": "n273",
+      "name": "New Delhi Metro Station"
+    },
+    {
+      "node": "n265",
+      "name": "Entrance"
+    },
+    {
+      "node": "n262",
+      "name": "Entrance"
+    },
+    {
+      "node": "n254",
+      "name": "Entrance"
+    }
+  ]
+}

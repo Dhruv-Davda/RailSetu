@@ -1,0 +1,112 @@
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #0a1420; color: #dce6f0;
+}
+.app { display: flex; flex-direction: column; height: 100vh; }
+
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 18px; background: linear-gradient(90deg, #0d1f33, #0a1420);
+  border-bottom: 1px solid #1c2e42;
+}
+.brand { display: flex; align-items: baseline; gap: 14px; }
+.logo { font-size: 20px; font-weight: 700; color: #fff; }
+.tag { font-size: 12px; color: #6f8aa6; letter-spacing: .3px; }
+.station-name { font-size: 13px; color: #9db4cc; }
+
+.body { display: flex; flex: 1; min-height: 0; }
+
+.sidebar {
+  width: 290px; padding: 14px; overflow-y: auto;
+  background: #0b1726; border-right: 1px solid #1c2e42;
+}
+.panel { margin-bottom: 18px; }
+.panel h3 {
+  margin: 0 0 8px; font-size: 12px; text-transform: uppercase;
+  letter-spacing: .6px; color: #6f8aa6;
+}
+select {
+  width: 100%; padding: 8px; border-radius: 6px;
+  background: #102234; color: #dce6f0; border: 1px solid #244; font-size: 13px;
+}
+.muted { color: #87a0ba; font-size: 12px; line-height: 1.5; margin: 8px 0 0; }
+.small { font-size: 11px; }
+
+.toggle {
+  display: flex; align-items: center; gap: 9px; padding: 7px 0;
+  font-size: 13px; cursor: pointer; color: #cfe0f0;
+}
+.toggle input { accent-color: #4fc3f7; width: 15px; height: 15px; }
+.reset {
+  margin-top: 8px; width: 100%; padding: 7px; cursor: pointer;
+  background: #16293d; color: #9db4cc; border: 1px solid #244; border-radius: 6px;
+}
+.reset:hover { background: #1d3450; }
+
+.legend .legrow { display: flex; align-items: center; gap: 8px; font-size: 12px; padding: 3px 0; }
+.swatch { width: 16px; height: 10px; border-radius: 2px; display: inline-block; }
+
+.stage { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.statusbar {
+  display: flex; align-items: center; gap: 14px; padding: 10px 16px;
+  background: #0b1726; border-bottom: 1px solid #1c2e42; flex-wrap: wrap;
+}
+.status-chip {
+  display: flex; align-items: center; gap: 8px; padding: 6px 14px;
+  border: 1.5px solid; border-radius: 20px; font-weight: 700; font-size: 13px;
+}
+.status-chip .dot { width: 9px; height: 9px; border-radius: 50%; }
+
+.metric { padding: 2px 10px; border-left: 1px solid #1c2e42; }
+.metric-val { font-size: 18px; font-weight: 700; color: #fff; }
+.metric.danger .metric-val { color: #ff6b6b; }
+.metric-lbl { font-size: 11px; color: #6f8aa6; }
+
+.impact-chip {
+  display: flex; align-items: center; gap: 10px; margin-left: auto;
+  padding: 6px 14px; background: rgba(46,204,113,.12);
+  border: 1px solid #2ecc71; border-radius: 8px;
+}
+.impact-num { font-size: 22px; font-weight: 800; color: #2ecc71; }
+.impact-lbl { font-size: 11px; color: #bfe9cf; line-height: 1.4; }
+.loading { color: #4fc3f7; font-size: 12px; }
+
+.map { flex: 1; min-height: 0; background: #0a1420; }
+:global(.leaflet-container) { background: #0a1420; }
+
+.bottom {
+  display: flex; gap: 12px; padding: 10px 14px;
+  background: #0b1726; border-top: 1px solid #1c2e42; height: 190px;
+}
+.chart { flex: 1.4; }
+.alerts { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.chart-title { font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: #6f8aa6; margin-bottom: 6px; }
+.alert-list { overflow-y: auto; display: flex; flex-direction: column; gap: 6px; }
+.alert {
+  font-size: 12px; padding: 7px 9px; border-radius: 6px;
+  background: #102234; border-left: 3px solid #345;
+}
+.alert.crit { border-left-color: #e53935; background: rgba(229,57,53,.1); }
+.alert.warn { border-left-color: #fb8c00; background: rgba(251,140,0,.08); }
+.alert.ok { border-left-color: #2ecc71; color: #aee6c2; }
+.alert b { color: #fff; }
+.action { color: #8aa0b6; margin-top: 3px; font-size: 11px; }
+
+/* crush hotspot pulse */
+@keyframes pulse {
+  0% { transform: scale(1); opacity: .9; }
+  70% { transform: scale(1.5); opacity: 0; }
+  100% { opacity: 0; }
+}
+:global(.crush-pulse) { animation: pulse 1.3s ease-out infinite; transform-origin: center; }
+:global(.crush-marker) {
+  width: 26px; height: 26px; background: #e53935; color: #fff;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 15px; box-shadow: 0 0 12px #e53935; border: 2px solid #fff;
+}
+:global(.crush-label) {
+  background: #e53935 !important; color: #fff !important; border: none !important;
+  font-weight: 700; font-size: 11px;
+}
