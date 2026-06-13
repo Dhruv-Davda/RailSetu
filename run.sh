@@ -6,10 +6,9 @@ ROOT="$(cd "$(dirname "$0")" && pwd)"
 
 echo "▶ Backend  → http://127.0.0.1:8000  (docs at /docs)"
 cd "$ROOT/backend"
-if [ ! -d .venv ]; then
-  python3 -m venv .venv
-  ./.venv/bin/pip install -q -r requirements.txt
-fi
+[ -d .venv ] || python3 -m venv .venv
+./.venv/bin/pip install -q -r requirements.txt   # idempotent; picks up new deps
+[ -f .env ] || cp .env.example .env              # first-run config from template
 ./.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 &
 BACK=$!
 

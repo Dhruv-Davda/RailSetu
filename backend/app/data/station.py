@@ -41,3 +41,14 @@ def load_station():
             {"u": u, "v": v, **G.edges[u, v]} for u, v in G.edges
         ],
     }
+
+
+def refresh_station():
+    """Drop the cached graph so the next load re-reads the fixture from disk.
+
+    The fixture is regenerated out-of-band by scripts/build_station_graph.py
+    (run on a schedule against a fresh OSM/Overpass snapshot). This lets the API
+    pick up a new layout without a restart.
+    """
+    load_station.cache_clear()
+    return load_station()

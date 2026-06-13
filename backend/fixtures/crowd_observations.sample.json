@@ -1,0 +1,10 @@
+{
+  "_comment": "Sample MEASURED crowd density (AGGREGATE only — no individuals). Stands in for a CCTV/WiFi feed. To exercise calibration: set RAILSETU_CROWD_SENSOR=stub, RAILSETU_CROWD_SENSOR_FIXTURE=fixtures/crowd_observations.sample.json, RAILSETU_CALIBRATION_ENABLED=true, then POST /api/calibration/run. Nodes below are the real FOB choke-point junctions the model flags on the kumbh_surge scenario; the densities are illustrative observed values that differ slightly from the model so the correction goes both ways (tighten where the model under-predicts, loosen where it over-predicts).",
+  "station": "NDLS",
+  "observations": [
+    { "node": "n150", "density": 19.0, "source": "cctv-stub", "note": "FOB landing — model under-predicted, tighten" },
+    { "node": "n155", "density": 9.0,  "source": "cctv-stub", "note": "FOB landing — model over-predicted, loosen" },
+    { "node": "n126", "density": 8.5,  "source": "cctv-stub", "note": "stair mouth — slight tighten" },
+    { "node": "n124", "density": 6.6,  "source": "wifi-stub", "note": "approach corridor — in line with model" }
+  ]
+}

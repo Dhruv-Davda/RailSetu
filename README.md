@@ -86,15 +86,21 @@ npm run dev
 railsetu/
 ├── backend/                      FastAPI + the simulation core
 │   ├── app/
-│   │   ├── main.py               API: /station /scenarios /simulate /whatif
-│   │   ├── data/station.py       loads the routable NDLS graph
-│   │   └── m1_crowd/
-│   │       ├── simulation.py     pedestrian O-D flow model + density/LOS + crush detection
-│   │       └── scenarios.py      committed demand scenarios (normal / Kumbh surge / double arrival)
-│   ├── scripts/build_station_graph.py   OSM → connected walk graph (run once)
+│   │   ├── main.py               API surface (see table above)
+│   │   ├── config.py             env-driven settings (RAILSETU_*) + logging
+│   │   ├── data/station.py       loads / hot-reloads the routable NDLS graph
+│   │   ├── m1_crowd/
+│   │   │   ├── simulation.py     pedestrian O-D flow model + density/LOS + crush detection
+│   │   │   └── scenarios.py      committed demand scenarios (normal / Kumbh surge / double arrival)
+│   │   ├── demand/               DemandProvider seam: fixtures | live (third-party rail API)
+│   │   ├── clients/rail_api.py   third-party (RapidAPI) live-arrivals adapter
+│   │   └── ingest/               measured-crowd ingestion (CCTV/WiFi stub) + calibration
+│   ├── scripts/build_station_graph.py   OSM → connected walk graph (run on a schedule)
+│   ├── .env.example              all config knobs, documented
 │   └── fixtures/
 │       ├── ndls_osm_raw.json     raw Overpass snapshot
-│       └── station_graph.json    the M1 fixture (nodes, edges, capacities)
+│       ├── station_graph.json    the M1 fixture (nodes, edges, capacities)
+│       └── crowd_observations.sample.json   sample measured density for calibration
 └── frontend/                     React + Leaflet control room
     └── src/
         ├── App.jsx               control-room layout, scenario + mitigation controls, impact panel
@@ -106,10 +112,40 @@ railsetu/
 
 | Endpoint | Purpose |
 |---|---|
+| `GET /api/health` | Liveness + station counts, demand-provider / crowd-sensor / calibration status |
 | `GET /api/station` | Station geometry (nodes, edges, platforms, exits) for the map |
-| `GET /api/scenarios` | Available demand scenarios |
+| `POST /api/station/refresh` | Hot-reload the graph fixture after a scheduled OSM rebuild (guarded) |
+| `GET /api/scenarios` | Available demand scenarios (fixtures, plus `live_now` when live data is on) |
+| `GET /api/live/demand` | Inspect the demand the live provider currently derives (transparency) |
 | `POST /api/simulate` | Run a scenario (+ optional mitigations); returns per-edge / per-node density, hotspots, timeline |
 | `POST /api/whatif` | Baseline vs. mitigated side by side with the headline impact numbers |
+| `POST /api/calibration/run` | Pull measured crowd density and recompute the model's capacity calibration |
+| `POST /api/calibration/reset` | Revert to textbook (uncalibrated) capacities |
+
+### Going live — real-time data (production)
+
+Everything is fixture-driven by default so the demo is deterministic and
+network-free. Production swaps the two static inputs for live feeds **without
+touching the simulation core**, via env config (see `backend/.env.example`):
+
+- **Live demand.** A pluggable `DemandProvider` ([app/demand/](backend/app/demand/))
+  is the seam between data and physics. `RAILSETU_DEMAND_PROVIDER=live` switches
+  from committed scenarios to a third-party (RapidAPI) Indian-Railways
+  live-arrivals feed: set `RAILSETU_RAIL_API_KEY` + host. The adapter maps each
+  arriving train's platform → graph node and estimates the alighting crowd (these
+  APIs return arrivals, not passenger counts — tune the estimation constants, or
+  feed PRS/UTS later). If the feed is down it falls back to a fixture and flags it.
+- **Measured crowd + calibration.** A `CrowdSensor` ([app/ingest/](backend/app/ingest/))
+  ingests *observed* aggregate density (a real one wraps CCTV crowd-counting CV or
+  anonymised WiFi/AFC counts — **aggregate only, no individuals**). `POST
+  /api/calibration/run` compares observed vs. predicted density and nudges
+  corridor capacities toward reality. A JSON sample
+  (`fixtures/crowd_observations.sample.json`) exercises the path without hardware.
+- **Geometry refresh.** Re-run `scripts/build_station_graph.py` on a schedule
+  against a fresh OSM snapshot, then `POST /api/station/refresh` hot-reloads it.
+
+> The third-party live API is an NTES scraper — fine for a pilot, but a true
+> deployment should use authorised CRIS/RailTel/zonal-railway data access.
 
 ### Rebuild the station graph from OSM (optional)
 

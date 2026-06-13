@@ -121,6 +121,7 @@ export default function App() {
                 {status.label}
               </div>
             )}
+            {sim && <SourceBadge sim={sim} />}
             <Metric label="Peak density" value={cur ? `${cur.peak_density} p/m²` : '—'}
               sub={cur ? `LOS ${cur.peak_los}` : ''} danger={cur && cur.peak_density >= 5} />
             <Metric label="Crush points" value={cur ? cur.crush_count : '—'}
@@ -170,6 +171,40 @@ export default function App() {
           </div>
         </main>
       </div>
+    </div>
+  )
+}
+
+// Makes the data provenance unambiguous: is this run live or a fixture, and what
+// in it is estimated vs. real. Crucial honesty — live runs use a REAL train list
+// but ESTIMATED platform + crowd load (the API provides neither).
+function SourceBadge({ sim }) {
+  const m = sim.demand_meta || {}
+  if (sim.source === 'live') {
+    const when = sim.generated_at ? new Date(sim.generated_at).toLocaleTimeString() : ''
+    const title = `Live ${m.endpoint || ''} · ${m.in_window ?? 0} trains arriving in next ${m.window_hours ?? '?'}h`
+      + (m.capped ? ` (showing ${m.used})` : '')
+      + ' · platform & crowd load are ESTIMATED (API provides neither)'
+    return (
+      <div className="src-chip live" title={title}>
+        <span className="src-dot" />
+        <span>LIVE SCHEDULE</span>
+        <span className="src-sub">{m.used ?? 0} trains · load+platform est.{when ? ` · ${when}` : ''}</span>
+      </div>
+    )
+  }
+  if (sim.source === 'fixture_fallback') {
+    return (
+      <div className="src-chip warn" title={m.live_error || 'Live feed unavailable'}>
+        <span className="src-dot" /><span>FIXTURE</span>
+        <span className="src-sub">live feed unavailable</span>
+      </div>
+    )
+  }
+  return (
+    <div className="src-chip" title="Hand-authored demand scenario (not live data)">
+      <span className="src-dot" /><span>FIXTURE</span>
+      <span className="src-sub">authored scenario</span>
     </div>
   )
 }

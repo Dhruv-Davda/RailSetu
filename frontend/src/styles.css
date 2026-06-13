@@ -59,6 +59,22 @@ select {
 }
 .status-chip .dot { width: 9px; height: 9px; border-radius: 50%; }
 
+/* Data-provenance badge: live vs fixture, with what's estimated. */
+.src-chip {
+  display: flex; align-items: center; gap: 7px; padding: 5px 11px;
+  border: 1px solid #2c3e52; border-radius: 18px; font-size: 12px;
+  font-weight: 700; color: #8aa6c2; background: #0e1c2b;
+}
+.src-chip .src-dot { width: 8px; height: 8px; border-radius: 50%; background: #6f8aa6; }
+.src-chip .src-sub { font-weight: 500; font-size: 11px; color: #6f8aa6; }
+.src-chip.live { border-color: #2ecc71; color: #2ecc71; }
+.src-chip.live .src-dot { background: #2ecc71; box-shadow: 0 0 6px #2ecc71; animation: srcpulse 1.8s infinite; }
+.src-chip.live .src-sub { color: #8fd9ad; }
+.src-chip.warn { border-color: #ffb300; color: #ffb300; }
+.src-chip.warn .src-dot { background: #ffb300; }
+.src-chip.warn .src-sub { color: #d9c08f; }
+@keyframes srcpulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+
 .metric { padding: 2px 10px; border-left: 1px solid #1c2e42; }
 .metric-val { font-size: 18px; font-weight: 700; color: #fff; }
 .metric.danger .metric-val { color: #ff6b6b; }
