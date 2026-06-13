@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import L from 'leaflet'
-import { densityColor } from './los.js'
+import { densityColor } from '../los.js'
 
 // Imperative Leaflet wrapper. Draws the NDLS walk graph as polylines coloured
 // by peak crowd density, overlays platform/exit markers, and pulses the crush
@@ -55,6 +55,14 @@ export default function StationMap({ station, sim }) {
 
     const b = L.latLngBounds(station.nodes.map((n) => [n.lat, n.lon]))
     map.fitBounds(b.pad(0.05))
+
+    // Cleanup so React 18 StrictMode's dev double-mount doesn't try to
+    // re-initialise an already-initialised Leaflet container.
+    return () => {
+      map.remove()
+      mapRef.current = null
+      overlay.current = null
+    }
   }, [station])
 
   // Re-draw the density overlay whenever a new sim result arrives.

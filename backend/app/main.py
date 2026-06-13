@@ -287,3 +287,52 @@ def calibration_reset():
     CAL_STATE.edges_adjusted = 0
     CAL_STATE.note = "reset"
     return {"reset": True, "calibration": CAL_STATE.as_dict()}
+
+
+# ----------------------------------------------------------------------------
+# M2 — Delay Propagation & Smart Rescheduling (Delhi → Kanpur corridor)
+# ----------------------------------------------------------------------------
+from app.m2_delay import service as m2_service  # noqa: E402
+
+
+class M2Request(BaseModel):
+    scenario: str
+    optimize: bool = True
+
+
+@app.get("/api/m2/network")
+def m2_network():
+    """Corridor geometry (stations, sections) + the planned train sheet."""
+    return m2_service.network_payload()
+
+
+@app.get("/api/m2/scenarios")
+def m2_scenarios():
+    return m2_service.scenarios_payload()
+
+
+@app.post("/api/m2/simulate")
+def m2_simulate(req: M2Request):
+    """Propagate the disruption (FCFS) and, if optimize, the rescheduled plan."""
+    out = m2_service.simulate_payload(req.scenario, req.optimize)
+    if out is None:
+        raise HTTPException(404, f"unknown M2 scenario '{req.scenario}'")
+    return out
+
+
+# ----------------------------------------------------------------------------
+# M6 — Kavach Gap Analysis (coverage map + accident correlation)
+# ----------------------------------------------------------------------------
+from app.m6_kavach import service as m6_service  # noqa: E402
+
+
+@app.get("/api/m6/coverage")
+def m6_coverage():
+    """Kavach coverage map: corridors with status, geometry, and risk exposure."""
+    return m6_service.coverage_payload()
+
+
+@app.get("/api/m6/correlation")
+def m6_correlation():
+    """Kavach gap × accident correlation (indicative policy analysis)."""
+    return m6_service.correlation_payload()

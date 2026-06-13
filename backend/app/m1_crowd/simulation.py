@@ -185,7 +185,12 @@ def simulate(G, demands, exits, *, horizon_s=300, mitigations=None):
         weights = [1.0 / max(length, 1.0) for length, _, _ in chosen]
         wsum = sum(weights)
         dur = max(DT, d["duration_s"] / max(stagger, 0.05))
-        n_steps = max(1, int(dur / DT))
+        # Clamp to the simulation horizon: without this, staggering can push the
+        # injection window past `steps`, so the tail of the demand is never
+        # injected and people silently vanish from the count (making "staggered
+        # release" look better merely by losing crowd). Capping keeps every
+        # person injected; staggering still lowers the per-step rate.
+        n_steps = max(1, min(int(dur / DT), steps))
         for (length, ex, r), w in zip(chosen, weights):
             share = float(d["people"]) * w / wsum
             plan.append({

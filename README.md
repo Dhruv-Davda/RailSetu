@@ -1,17 +1,25 @@
 # 🚉 RailSetu — Indian Railway Intelligence Platform
 
-**M1 Flagship: Station Crowd-Flow & Stampede Prevention — New Delhi (NDLS)**
+RailSetu transplants proven Japanese rail solutions, adapted for India's scale and
+crowding. Each module pairs a documented Indian problem with the Japanese method
+that solved it — two real algorithm cores plus a policy layer, on one shared
+backbone, behind one control-room dashboard.
 
-RailSetu transplants proven Japanese rail-safety methods, adapted for India's
-scale and crowding. The flagship module predicts dangerous station crowding and
-shows operators how to prevent stampedes — modelled on Japan's crowd-flow
-engineering at hubs like Shinjuku.
+| Module | What it does | Japan method adapted | Status |
+|---|---|---|---|
+| **M1 · Crowd-Flow** | Predicts dangerous station crowding and prevents stampedes (NDLS) | Shinjuku pedestrian crowd-flow engineering | ✅ Built |
+| **M2 · Delays** | Propagates a disruption across a corridor and reschedules trains to recover delay (Delhi → Kanpur) | Shinkansen systematic rescheduling / ATOS control | ✅ Built |
+| **M6 · Kavach** | Maps where automatic train protection is missing and where the gap is most dangerous | Mature Automatic Train Control (gap analysis) | ✅ Built |
 
-> **The demo in one line:** load the *Festival surge* scenario and the New Delhi
-> station map lights up red — a crush forming on the foot-over-bridge between
-> platforms 14 and 15, exactly where 18 people died in February 2025. Toggle
-> **Metered holding** and the crush disappears: peak density falls **−81%**
-> (17.4 → 3.3 persons/m²) and crush points go **4 → 0**.
+> **The demo in three beats:**
+> 1. **M1** — load *Festival surge* and the NDLS map lights red: a crush on the
+>    platform 14/15 foot-over-bridge, exactly where 18 died in Feb 2025. Toggle
+>    **Metered holding** → peak density **−81%** (17.4 → 3.3 p/m²), crush points **4 → 0**.
+> 2. **M2** — a slow passenger train is pathed ahead of the express fleet; the
+>    running chart shows the cascade (**1106 delay-min**). Run the optimizer → the
+>    lines fan out as expresses overtake: **~1100 delay-minutes saved (≈99%)**.
+> 3. **M6** — the India map shows **8 high-traffic corridors carrying ~65% of
+>    collision-risk exposure at ~7% Kavach coverage** (indicative).
 
 ---
 
