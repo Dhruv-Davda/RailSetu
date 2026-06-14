@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { simulate, runM2, getKavachCorrelation } from '../api.js'
+import { IconStation, IconTrain, IconShield, IconArrow } from '../icons.jsx'
 
 // D2 — Japan vs India benchmark. Cited public figures (representative) kept
 // alongside one live figure from our own M2 corridor run.
@@ -10,10 +11,21 @@ const BENCHMARKS = (corridorDelay) => [
     bars: [{ who: 'Shinkansen', v: 1.6, c: 'var(--good)' }, { who: 'This corridor', v: corridorDelay, c: 'var(--bad)' }] },
 ]
 
+const PROVENANCE = [
+  { tier: 'REAL', c: '#2fa84f', def: 'Exact, sourced facts',
+    eg: 'NDLS station geometry (OpenStreetMap) · the train list · festival dates' },
+  { tier: 'MODELLED', c: '#f0a500', def: 'Computed by our algorithms, against our own baseline — not ground-truth validated',
+    eg: 'Crowd densities · delay cascades · delay-minutes saved' },
+  { tier: 'INDICATIVE', c: '#e07b00', def: 'Directionally sound on coarse public data; specific numbers are soft',
+    eg: 'Kavach coverage % · gap × accident correlation' },
+  { tier: 'ESTIMATED', c: '#8a857e', def: 'Derived where the source gives no number',
+    eg: 'Passenger load and platform from the live arrivals feed' },
+]
+
 const MODULES = [
-  { key: 'm1', id: 'M1', ico: '🚉', title: 'Station Crowd-Flow', desc: 'Predicts dangerous station crowding and prevents stampedes — modelled on Shinjuku crowd-flow engineering.' },
-  { key: 'm2', id: 'M2', ico: '🚆', title: 'Delay & Rescheduling', desc: 'Propagates a disruption across the corridor and reschedules trains to recover delay — Shinkansen-style control.' },
-  { key: 'm6', id: 'M6', ico: '🛡', title: 'Kavach Gap Analysis', desc: 'Maps where automatic train protection is missing and where the gap is most dangerous.' },
+  { key: 'm1', id: 'M1', Ico: IconStation, title: 'Station Crowd-Flow', desc: 'Predicts dangerous station crowding and prevents stampedes — modelled on Shinjuku crowd-flow engineering.' },
+  { key: 'm2', id: 'M2', Ico: IconTrain, title: 'Delay & Rescheduling', desc: 'Propagates a disruption across the corridor and reschedules trains to recover delay — Shinkansen-style control.' },
+  { key: 'm6', id: 'M6', Ico: IconShield, title: 'Kavach Gap Analysis', desc: 'Maps where automatic train protection is missing and where the gap is most dangerous.' },
 ]
 
 export default function Overview({ onOpen }) {
@@ -45,19 +57,19 @@ export default function Overview({ onOpen }) {
           <p>RailSetu transplants the methods that made Japan the global benchmark for rail safety and punctuality — crowd-flow engineering, systematic rescheduling, automatic train protection — and adapts each for India's scale. Two real algorithm cores and a policy layer, on one shared backbone.</p>
         </div>
         <div className="hjapan">
-          <div className="flag">🇯🇵 → 🇮🇳</div>
-          <div className="lbl">Proven in Japan, adapted for India</div>
+          <div className="flag">JPN &rarr; IND</div>
+          <div className="lbl">Proven in Japan<br />adapted for India</div>
         </div>
       </div>
 
-      <div className="grid cards" style={{ marginBottom: 22 }}>
+      <div className="grid cards">
         {MODULES.map((m) => {
           const s = stats[m.key]
           return (
             <div className="modcard" key={m.key} onClick={() => onOpen(m.key)}>
-              <span className="mc-go">→</span>
+              <span className="mc-go"><IconArrow width={16} height={16} /></span>
               <div className="mc-top">
-                <div className="mc-ico">{m.ico}</div>
+                <div className="mc-ico"><m.Ico width={17} height={17} /></div>
                 <div>
                   <div className="mc-id">{m.id}</div>
                   <h3>{m.title}</h3>
@@ -75,9 +87,9 @@ export default function Overview({ onOpen }) {
         })}
       </div>
 
-      <div className="grid two">
+      <div className="grid three">
         {/* D1 — cross-module incident timeline */}
-        <div className="card">
+        <div className="ov-pane">
           <div className="section-label">Cross-module incident timeline</div>
           <div className="timeline">
             {timeline.map((e, i) => (
@@ -95,7 +107,7 @@ export default function Overview({ onOpen }) {
         </div>
 
         {/* D2 — Japan vs India benchmark */}
-        <div className="card">
+        <div className="ov-pane">
           <div className="section-label">Japan vs. India benchmark</div>
           {BENCHMARKS(corridorDelay).map((b, i) => (
             <div className="bench-row" key={i}>
@@ -113,6 +125,29 @@ export default function Overview({ onOpen }) {
           ))}
           <p className="muted small">Japan figures are cited public benchmarks; "this corridor" is from the live M2 model. Keeps the Japan framing on-screen, not just in slides.</p>
         </div>
+
+        {/* Every figure in the platform carries one of four provenance tiers.
+            Kept on screen rather than buried in the README — overclaiming is the
+            fastest way to lose a technical audience. */}
+        <div className="ov-pane">
+          <div className="section-label">Data provenance</div>
+          <div className="prov">
+            {PROVENANCE.map((p) => (
+              <div className="prov-row" key={p.tier}>
+                <span className="prov-tier" style={{ color: p.c, borderColor: p.c }}>{p.tier}</span>
+                <div>
+                  <div className="prov-def">{p.def}</div>
+                  <div className="prov-eg">{p.eg}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="muted small">
+            Aggregate density only — never identifiable individuals. No live signalling
+            integration and no trackside hardware: this is decision support, to be
+            calibrated against site data before any real deployment.
+          </p>
+        </div>
       </div>
     </div>
   )
@@ -121,9 +156,9 @@ export default function Overview({ onOpen }) {
 function buildTimeline(m1, m2, m6) {
   const t = []
   const M = {
-    M1: { bg: 'rgba(56,189,248,.18)', c: '#38bdf8' },
-    M2: { bg: 'rgba(34,211,238,.18)', c: '#22d3ee' },
-    M6: { bg: 'rgba(255,192,46,.18)', c: '#ffc02e' },
+    M1: { bg: 'rgba(240,165,0,.16)', c: '#f0a500' },
+    M2: { bg: 'rgba(47,168,79,.16)', c: '#2fa84f' },
+    M6: { bg: 'rgba(229,72,77,.16)', c: '#e5484d' },
   }
   if (m1) {
     t.push({ time: '18:42', color: 'var(--bad)', mod: 'M1', modBg: M.M1.bg, modColor: M.M1.c,

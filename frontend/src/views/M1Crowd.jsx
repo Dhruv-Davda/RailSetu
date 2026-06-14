@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, ReferenceLine, Tooltip } from 'recharts'
 import StationMap from '../components/StationMap.jsx'
+import StationScene3D from '../three/StationScene3D.jsx'
 import { getStation, getScenarios, simulate } from '../api.js'
 import { statusFor, LOS } from '../los.js'
 
@@ -20,6 +21,7 @@ export default function M1Crowd() {
   const [baseline, setBaseline] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [mode, setMode] = useState('3d')
 
   useEffect(() => {
     getStation().then(setStation).catch((e) => setError(e.message))
@@ -118,21 +120,27 @@ export default function M1Crowd() {
             )}
             {loading && <span className="loading">simulating…</span>}
             {error && <span className="error-chip" title={error}>⚠ {error}</span>}
+            <div className="viewtoggle">
+              <button className={mode === '2d' ? 'on' : ''} onClick={() => setMode('2d')}>2D MAP</button>
+              <button className={mode === '3d' ? 'on' : ''} onClick={() => setMode('3d')}>3D</button>
+            </div>
           </div>
 
-          <StationMap station={station} sim={sim} />
+          {mode === '3d'
+            ? <StationScene3D station={station} sim={sim} />
+            : <StationMap station={station} sim={sim} />}
 
           <div className="bottom">
             <div className="chart">
               <div className="chart-title">Peak density over time {anyMit ? '(mitigated)' : '(no action)'}</div>
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={timeline} margin={{ top: 6, right: 12, left: -18, bottom: 0 }}>
-                  <XAxis dataKey="t" tick={{ fontSize: 10, fill: '#8499b0' }} unit="s" />
-                  <YAxis tick={{ fontSize: 10, fill: '#8499b0' }} domain={[0, 'auto']} />
-                  <Tooltip contentStyle={{ background: '#0e1c2b', border: '1px solid #25384e', borderRadius: 8, fontSize: 12 }} />
-                  <ReferenceLine y={5} stroke="#ef4444" strokeDasharray="4 3" label={{ value: 'crush', fill: '#ef4444', fontSize: 10 }} />
-                  <ReferenceLine y={3.5} stroke="#fb8c00" strokeDasharray="3 3" />
-                  <Line type="monotone" dataKey="density" stroke="#38bdf8" dot={false} strokeWidth={2.2} isAnimationActive={false} />
+                  <XAxis dataKey="t" tick={{ fontSize: 10, fill: '#8a857e' }} unit="s" />
+                  <YAxis tick={{ fontSize: 10, fill: '#8a857e' }} domain={[0, 'auto']} />
+                  <Tooltip contentStyle={{ background: '#15181b', border: '1px solid #333a41', borderRadius: 2, fontSize: 11, fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }} />
+                  <ReferenceLine y={5} stroke="#e5484d" strokeDasharray="4 3" label={{ value: 'CRUSH', fill: '#e5484d', fontSize: 9 }} />
+                  <ReferenceLine y={3.5} stroke="#e07b00" strokeDasharray="3 3" />
+                  <Line type="monotone" dataKey="density" stroke="#f0a500" dot={false} strokeWidth={2} isAnimationActive={false} />
                 </LineChart>
               </ResponsiveContainer>
             </div>
