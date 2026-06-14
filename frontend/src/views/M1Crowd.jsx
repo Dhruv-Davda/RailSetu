@@ -165,6 +165,15 @@ function SourceBadge({ sim }) {
       </div>
     )
   }
+  if (sim.source === 'live_snapshot') {
+    const cap = m.captured_at ? new Date(m.captured_at).toLocaleString() : 'recently'
+    return (
+      <div className="src-chip live" title={`Real arrivals captured ${cap}; served because the live API is rate-limited / unavailable`}>
+        <span className="src-dot" /><span>LIVE SNAPSHOT</span>
+        <span className="src-sub">{m.used ?? 0} real trains · API rate-limited</span>
+      </div>
+    )
+  }
   if (sim.source === 'fixture_fallback') {
     return <div className="src-chip warn" title={m.live_error || 'Live feed unavailable'}>
       <span className="src-dot" /><span>FIXTURE</span><span className="src-sub">live feed unavailable</span></div>

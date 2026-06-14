@@ -17,7 +17,9 @@ replayed (flagged in `meta`) so the control room never goes blank.
 """
 from __future__ import annotations
 
+import json
 import logging
+import os
 from datetime import datetime, timedelta, timezone
 
 from app.clients.rail_api import RailApiClient, RailApiError
@@ -111,6 +113,18 @@ class LiveDemandProvider(DemandProvider):
             return self._build_from_timetable(records)
         except RailApiError as exc:
             log.warning("live demand unavailable: %s", exc)
+            # 1) Prefer a REAL captured snapshot of the feed (looks live).
+            snap = self._load_snapshot()
+            if snap is not None:
+                records, captured_at = snap
+                log.info("serving live snapshot (%d trains, captured %s)", len(records), captured_at)
+                return self._build(
+                    records, endpoint="live_snapshot",
+                    timetable_total=len(records), in_window=len(records),
+                    source="live_snapshot",
+                    extra_meta={"live_error": str(exc), "captured_at": captured_at},
+                )
+            # 2) Otherwise fall back to a synthetic fixture.
             if not self.s.live_fallback_to_fixture:
                 raise
             fb = self.fallback.get_scenario("kumbh_surge")
@@ -118,6 +132,30 @@ class LiveDemandProvider(DemandProvider):
                 fb.source = "fixture_fallback"
                 fb.meta = {"live_error": str(exc), "fellback_to": "kumbh_surge"}
             return fb
+
+    def _snapshot_path(self) -> str | None:
+        path = self.s.live_snapshot_path
+        if not path:
+            return None
+        if not os.path.isabs(path):
+            base = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))  # backend/
+            path = os.path.join(base, path)
+        return path
+
+    def _load_snapshot(self):
+        """Return (records, captured_at) from the committed snapshot, or None."""
+        path = self._snapshot_path()
+        if not path or not os.path.exists(path):
+            return None
+        try:
+            raw = json.load(open(path))
+            records = raw.get("records") or []
+            if not records:
+                return None
+            return records, raw.get("captured_at")
+        except (OSError, ValueError) as exc:
+            log.warning("live snapshot read failed (%s): %s", path, exc)
+            return None
 
     # ---- builders ----
 
@@ -142,32 +180,37 @@ class LiveDemandProvider(DemandProvider):
                            timetable_total=len(records), in_window=in_window)
 
     def _build(self, records: list[dict], *, endpoint: str,
-               timetable_total: int, in_window: int) -> DemandScenario:
+               timetable_total: int, in_window: int,
+               source: str = "live", extra_meta: dict | None = None) -> DemandScenario:
         demands, from_api, estimated = self._make_demands(records)
+        snapshot = source == "live_snapshot"
+        title = (f"LIVE SNAPSHOT — {self.s.station_code} arrivals" if snapshot
+                 else f"LIVE — {self.s.station_code} arrivals (next {self.s.rail_api_window_hours}h)")
+        desc = ("Real arrivals captured from the live feed (served because the live "
+                "API is unavailable / rate-limited). Passenger load + platform are "
+                "ESTIMATED, as with the live feed.") if snapshot else (
+                "Real scheduled arrivals from the live feed. Passenger load is "
+                "ESTIMATED (the API returns no counts) and platform assignment is "
+                "ESTIMATED (the API returns no platform) — calibrate via PRS/UTS or CCTV.")
+        meta = {
+            "endpoint": endpoint,
+            "timetable_total": timetable_total,
+            "in_window": in_window,
+            "used": len(demands),
+            "capped": max(0, in_window - len(demands)),
+            "window_hours": self.s.rail_api_window_hours,
+            "platform_from_api": from_api,
+            "platform_estimated": estimated,
+            "load": "estimated",
+            "platform": "estimated" if estimated and not from_api else "mixed",
+        }
+        if extra_meta:
+            meta.update(extra_meta)
         return DemandScenario(
-            key=LIVE_KEY,
-            title=f"LIVE — {self.s.station_code} arrivals (next {self.s.rail_api_window_hours}h)",
-            description=("Real scheduled arrivals from the live feed. Passenger load "
-                         "is ESTIMATED (the API returns no counts) and platform "
-                         "assignment is ESTIMATED (the API returns no platform) — "
-                         "calibrate via PRS/UTS or CCTV for real numbers."),
-            demands=demands,
-            exits=[e for e in scn.DEFAULT_EXITS],
-            horizon_s=self.s.live_horizon_s,
-            source="live",
-            generated_at=datetime.now(timezone.utc).isoformat(),
-            meta={
-                "endpoint": endpoint,
-                "timetable_total": timetable_total,
-                "in_window": in_window,
-                "used": len(demands),
-                "capped": max(0, in_window - len(demands)),
-                "window_hours": self.s.rail_api_window_hours,
-                "platform_from_api": from_api,
-                "platform_estimated": estimated,
-                "load": "estimated",
-                "platform": "estimated" if estimated and not from_api else "mixed",
-            },
+            key=LIVE_KEY, title=title, description=desc,
+            demands=demands, exits=[e for e in scn.DEFAULT_EXITS],
+            horizon_s=self.s.live_horizon_s, source=source,
+            generated_at=datetime.now(timezone.utc).isoformat(), meta=meta,
         )
 
     def _make_demands(self, records: list[dict]):

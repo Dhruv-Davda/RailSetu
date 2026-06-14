@@ -1,0 +1,8 @@
+# Root requirements for the Vercel Python serverless function (api/index.py).
+# uvicorn is intentionally omitted — Vercel provides the ASGI server.
+# Unpinned so Vercel resolves wheels for its Python 3.12 runtime.
+fastapi
+networkx
+pydantic
+pydantic-settings
+httpx

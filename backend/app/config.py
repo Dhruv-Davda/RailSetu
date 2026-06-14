@@ -70,6 +70,11 @@ class Settings(BaseSettings):
     special_train_multiplier: float = 2.2  # "special"/festival trains run packed
     unload_duration_s: int = 180
     live_horizon_s: int = 420
+    # Real captured snapshot of the live feed, committed to the repo. Used as the
+    # fallback when the live API errors or rate-limits (free tier 429s fast), BEFORE
+    # the synthetic fixture — so a rate-limited "live" run still shows real trains.
+    # Capture it with `python scripts/capture_live_snapshot.py` (needs a valid key).
+    live_snapshot_path: str = "fixtures/live_snapshot.json"
 
     # ---- Crowd sensing / calibration ----
     crowd_sensor: str = "none"      # "none" | "stub"
