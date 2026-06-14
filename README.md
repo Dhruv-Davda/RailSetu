@@ -452,6 +452,14 @@ Deferred for the mvp Round 1, **architected on the same backbone**:
 | **M5** | Waitlist & coach-load intelligence | Waitlist and coach-load intelligence. |
 | **M2.6** | Historical validation | Back-test the optimizer on real NTES delay history. |
 
+<div align="center">
+
+![The RailSetu idea](TheIdea.png)
+
+*The idea behind RailSetu.*
+
+</div>
+
 ---
 
 <div align="center">
