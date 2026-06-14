@@ -70,6 +70,25 @@ def width_for(tags, kind):
     return DEFAULT_WIDTH.get(kind, 3.0)
 
 
+def level_for(tags):
+    """Vertical level from REAL OSM attributes: +1 bridge deck, -1 subway/tunnel.
+
+    NDLS maps its foot-over-bridges as bridge=yes/layer=1 and its cross-station
+    subway passages as tunnel=yes/layer=-1. Carrying this through means the 3D
+    scene draws them at their true level instead of inferring (and previously
+    flattening the subways onto the tracks at grade).
+    """
+    if tags.get("tunnel") in ("yes", "building_passage"):
+        return -1
+    if tags.get("bridge") == "yes":
+        return 1
+    try:
+        layer = int(tags.get("layer", "0"))
+    except ValueError:
+        layer = 0
+    return 1 if layer > 0 else (-1 if layer < 0 else 0)
+
+
 def capacity_pps(width_m, kind):
     cap = width_m * FLOW_PER_M_PER_S
     if kind == "steps":
@@ -131,6 +150,7 @@ def main():
             kind = "steps" if hw == "steps" else (hw if hw in DEFAULT_WIDTH else "footway")
             width = width_for(tags, kind)
             cap = capacity_pps(width, kind)
+            lvl = level_for(tags)
             prev = None
             for g in geom:
                 cur = get_node(g["lat"], g["lon"])
@@ -144,6 +164,7 @@ def main():
                             "kind": kind,
                             "width_m": width,
                             "capacity_pps": cap,
+                            "level": lvl,
                         })
                 prev = cur
 
@@ -179,6 +200,7 @@ def main():
                 "u": p["node"], "v": wn["id"],
                 "length_m": round(max(d, 1.0), 2),
                 "kind": "platform_link",
+            "level": 0,
                 "width_m": DEFAULT_WIDTH["platform_link"],
                 "capacity_pps": capacity_pps(DEFAULT_WIDTH["platform_link"], "platform_link"),
             })
@@ -223,6 +245,7 @@ def main():
             "u": a, "v": b,
             "length_m": round(max(d, 0.5), 2),
             "kind": "transfer_link",
+            "level": 0,
             "width_m": 3.0,
             "capacity_pps": capacity_pps(3.0, "footway"),
         })

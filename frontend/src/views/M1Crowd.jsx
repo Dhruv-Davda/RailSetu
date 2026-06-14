@@ -53,7 +53,20 @@ export default function M1Crowd() {
     return b ? Math.round(((b - m) / b) * 100) : 0
   }, [anyMit, baseSummary, cur])
 
-  const timeline = useMemo(() => (sim ? sim.timeline.map((d, i) => ({ t: i * 2, density: d })) : []), [sim])
+  // Carry BOTH series so the mitigated curve is drawn against the no-action one.
+  const timeline = useMemo(() => {
+    if (!sim) return []
+    const b = baseline?.timeline || []
+    return sim.timeline.map((d, i) => ({ t: i * 2, density: d, noaction: b[i] ?? null }))
+  }, [sim, baseline])
+
+  // Lock the Y scale across both runs. With domain=[0,'auto'] the mitigated run
+  // rescaled to its own peak (~3.4), which pushed the 5.0 CRUSH line off-chart
+  // and made a solved scenario look identical to the crisis it solved.
+  const yMax = useMemo(
+    () => Math.ceil(Math.max(baseSummary?.peak_density || 0, cur?.peak_density || 0, 6)),
+    [baseSummary, cur],
+  )
   const scenarioMeta = scenarios.find((s) => s.key === scenario)
 
   return (
@@ -127,20 +140,28 @@ export default function M1Crowd() {
           </div>
 
           {mode === '3d'
-            ? <StationScene3D station={station} sim={sim} />
+            ? <StationScene3D station={station} sim={sim} baseline={anyMit ? baseline : null} />
             : <StationMap station={station} sim={sim} />}
 
           <div className="bottom">
             <div className="chart">
-              <div className="chart-title">Peak density over time {anyMit ? '(mitigated)' : '(no action)'}</div>
+              <div className="chart-title">
+                Peak density over time {anyMit ? '— mitigated vs. no action' : '(no action)'}
+              </div>
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={timeline} margin={{ top: 6, right: 12, left: -18, bottom: 0 }}>
                   <XAxis dataKey="t" tick={{ fontSize: 10, fill: '#8a857e' }} unit="s" />
-                  <YAxis tick={{ fontSize: 10, fill: '#8a857e' }} domain={[0, 'auto']} />
+                  <YAxis tick={{ fontSize: 10, fill: '#8a857e' }} domain={[0, yMax]} allowDataOverflow />
                   <Tooltip contentStyle={{ background: '#15181b', border: '1px solid #333a41', borderRadius: 2, fontSize: 11, fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }} />
                   <ReferenceLine y={5} stroke="#e5484d" strokeDasharray="4 3" label={{ value: 'CRUSH', fill: '#e5484d', fontSize: 9 }} />
                   <ReferenceLine y={3.5} stroke="#e07b00" strokeDasharray="3 3" />
-                  <Line type="monotone" dataKey="density" stroke="#f0a500" dot={false} strokeWidth={2} isAnimationActive={false} />
+                  {anyMit && (
+                    <Line type="monotone" dataKey="noaction" name="no action" stroke="#e5484d"
+                      dot={false} strokeWidth={1.6} strokeDasharray="4 3" strokeOpacity={0.6}
+                      isAnimationActive={false} />
+                  )}
+                  <Line type="monotone" dataKey="density" name={anyMit ? 'mitigated' : 'no action'}
+                    stroke="#f0a500" dot={false} strokeWidth={2} isAnimationActive={false} />
                 </LineChart>
               </ResponsiveContainer>
             </div>

@@ -17,7 +17,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls, Grid, Html } from '@react-three/drei'
 import * as THREE from 'three'
 import {
-  projectNodes, assignLevels, distanceToExits, principalAxis, centroid, losRgb, LEVEL_HEIGHT,
+  projectNodes, projectLL, assignLevels, distanceToExits, principalAxis, centroid, losRgb, levelY, LEVEL_HEIGHT,
 } from './geo.js'
 
 const PLATFORM_LEN = 340
@@ -36,10 +36,36 @@ function useStationGeometry(station) {
     const level = assignLevels(station.nodes, station.edges, platformIds)
     const dExit = distanceToExits(station.nodes, station.edges, exitIds)
 
-    // Platforms lie across the tracks, so the axis through them + 90 deg is the
-    // track bearing. Derived, not hardcoded.
-    const acrossAngle = principalAxis(platformIds.map((id) => pos[id]))
-    const trackAngle = acrossAngle + Math.PI / 2
+    // Track bearing. Preferred source: the REAL rail alignments — the
+    // length-weighted dominant axis over every OSM rail segment (angle-doubled
+    // so opposite directions reinforce instead of cancelling). Fallback when
+    // the rails fixture is absent: the old platform-PCA inference, which at
+    // NDLS turned out to be ~90° off — visible the moment real rails landed
+    // in the scene beside the schematic beds.
+    let trackAngle
+    if (station.rails?.length) {
+      let sx = 0, sz = 0
+      for (const w of station.rails) {
+        let prev = null
+        for (const [lat, lon] of w.pts) {
+          const p = projectLL(lat, lon, station.meta.center)
+          if (prev) {
+            const dx = p.x - prev.x, dz = p.z - prev.z
+            const L = Math.hypot(dx, dz)
+            if (L > 0.5) {
+              const a2 = 2 * Math.atan2(dz, dx)
+              sx += L * Math.cos(a2)
+              sz += L * Math.sin(a2)
+            }
+          }
+          prev = p
+        }
+      }
+      trackAngle = 0.5 * Math.atan2(sz, sx)
+    } else {
+      trackAngle = principalAxis(platformIds.map((id) => pos[id])) + Math.PI / 2
+    }
+    const acrossAngle = trackAngle + Math.PI / 2
     const trackDir = new THREE.Vector3(Math.cos(trackAngle), 0, Math.sin(trackAngle))
     const acrossDir = new THREE.Vector3(Math.cos(acrossAngle), 0, Math.sin(acrossAngle))
 
@@ -47,7 +73,7 @@ function useStationGeometry(station) {
     const p3 = (id, lift = 0) => {
       const p = pos[id]
       if (!p) return null
-      return new THREE.Vector3(p.x - mid.x, (level[id] || 0) * LEVEL_HEIGHT + lift, p.z - mid.z)
+      return new THREE.Vector3(p.x - mid.x, levelY(level[id]) + lift, p.z - mid.z)
     }
 
     let radius = 0
@@ -78,6 +104,82 @@ function Lights() {
   )
 }
 
+/* ------------------------------------------------------------ real rail yard */
+
+/**
+ * The real NDLS trackage, from OpenStreetMap (`/api/station` -> `rails`;
+ * fetched by scripts/fetch_rail_lines.py). ~160 ways / ~54 km: every platform
+ * road, yard siding and both approach throats. This is why the 2D basemap looks
+ * dense — the tiles draw the true yard — and the schematic 3D used to look
+ * empty. Alignments are REAL; widths are exaggerated so a track reads from
+ * aerial distance (the scene is schematic and says so).
+ *
+ * Everything is merged into four triangle-soup BufferGeometries (ballast,
+ * sleepers, yard rails, mainline rails) => 4 draw calls for the entire yard.
+ */
+const TIE_SPACING = 7.5
+function RailNetwork({ geo, station }) {
+  const geos = useMemo(() => {
+    const ways = station?.rails
+    if (!ways?.length) return null
+    const c = station.meta.center
+    const ballast = [], ties = [], railMain = [], railYard = []
+
+    // Flat ribbon (two triangles) from a->b, half-width hw, at height y.
+    const quad = (arr, ax, az, bx, bz, hw, y) => {
+      let dx = bx - ax, dz = bz - az
+      const L = Math.hypot(dx, dz) || 1
+      dx /= L; dz /= L
+      const px = -dz * hw, pz = dx * hw
+      arr.push(
+        ax + px, y, az + pz, bx + px, y, bz + pz, bx - px, y, bz - pz,
+        ax + px, y, az + pz, bx - px, y, bz - pz, ax - px, y, az - pz,
+      )
+    }
+
+    for (const w of ways) {
+      const pts = w.pts.map(([lat, lon]) => {
+        const p = projectLL(lat, lon, c)
+        return [p.x - geo.mid.x, p.z - geo.mid.z]
+      })
+      const rails = w.t === 'rail' ? railMain : railYard
+      for (let i = 1; i < pts.length; i++) {
+        const [ax, az] = pts[i - 1]
+        const [bx, bz] = pts[i]
+        let dx = bx - ax, dz = bz - az
+        const L = Math.hypot(dx, dz)
+        if (L < 0.3) continue
+        dx /= L; dz /= L
+        const px = -dz, pz = dx
+        quad(ballast, ax, az, bx, bz, 1.8, 0.04)
+        for (const off of [-0.75, 0.75]) {
+          quad(rails, ax + px * off, az + pz * off, bx + px * off, bz + pz * off, 0.2, 0.1)
+        }
+        for (let d = 3; d < L; d += TIE_SPACING) {
+          const cx = ax + dx * d, cz = az + dz * d
+          quad(ties, cx - px * 1.3, cz - pz * 1.3, cx + px * 1.3, cz + pz * 1.3, 0.3, 0.07)
+        }
+      }
+    }
+    const mk = (a) => {
+      const g = new THREE.BufferGeometry()
+      g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(a), 3))
+      return g
+    }
+    return { ballast: mk(ballast), ties: mk(ties), railMain: mk(railMain), railYard: mk(railYard) }
+  }, [station, geo])
+
+  if (!geos) return null
+  return (
+    <group>
+      <mesh geometry={geos.ballast}><meshBasicMaterial color="#1a2432" /></mesh>
+      <mesh geometry={geos.ties}><meshBasicMaterial color="#263449" /></mesh>
+      <mesh geometry={geos.railYard}><meshBasicMaterial color="#55677c" toneMapped={false} /></mesh>
+      <mesh geometry={geos.railMain}><meshBasicMaterial color="#8ba3bd" toneMapped={false} /></mesh>
+    </group>
+  )
+}
+
 /* ------------------------------------------------------------ track + platform */
 
 function TrackBeds({ geo }) {
@@ -99,13 +201,13 @@ function TrackBeds({ geo }) {
         <group key={it.key} position={it.pos} rotation={[0, -trackAngle, 0]}>
           {/* ballast */}
           <mesh receiveShadow position={[0, -0.02, 0]}>
-            <boxGeometry args={[PLATFORM_LEN + 90, 0.35, 9]} />
+            <boxGeometry args={[PLATFORM_LEN + 20, 0.35, 9]} />
             <meshStandardMaterial color="#1a2330" roughness={0.95} />
           </mesh>
           {/* rail pair */}
           {[-0.75, 0.75].map((o) => (
             <mesh key={o} position={[0, 0.26, o]}>
-              <boxGeometry args={[PLATFORM_LEN + 90, 0.22, 0.16]} />
+              <boxGeometry args={[PLATFORM_LEN + 20, 0.22, 0.16]} />
               <meshStandardMaterial color="#8fa4bb" metalness={0.85} roughness={0.3} />
             </mesh>
           ))}
@@ -293,6 +395,8 @@ function WalkNetwork({ geo, station, sim }) {
       if (active) {
         const [r, g, bl] = losRgb(dens)
         _c.setRGB(r, g, bl)
+      } else if ((geo.level[e.u] || 0) < 0 && (geo.level[e.v] || 0) < 0) {
+        _c.setRGB(0.15, 0.20, 0.28)   // subway passage: dimmer than surface paths
       } else {
         _c.setRGB(0.26, 0.35, 0.46)
       }
@@ -471,8 +575,11 @@ function CrushBeacons({ geo, sim }) {
             <pointLight position={[0, 14, 0]} color={col} intensity={crit ? 9 : 4} distance={110} />
             {i === 0 && (
               <Html position={[0, 40, 0]} center distanceFactor={230} zIndexRange={[20, 0]}>
-                <div className="v3-crush">
-                  ⚠ CRUSH · {h.density.toFixed(1)} p/m²
+                {/* LOS F is the crush regime; LOS E is dangerous but NOT a crush
+                    point. Labelling both "CRUSH" contradicted the status bar's
+                    crush count and made a mitigated run read as a failed one. */}
+                <div className={`v3-crush ${crit ? '' : 'warn'}`}>
+                  ⚠ {crit ? 'CRUSH' : 'DANGER'} · {h.density.toFixed(1)} p/m²
                   <span>queue {Math.round(h.queue)} · {h.node}</span>
                 </div>
               </Html>
@@ -480,6 +587,140 @@ function CrushBeacons({ geo, sim }) {
           </group>
         )
       })}
+    </group>
+  )
+}
+
+/* ------------------------------------------------------------------ deck piers */
+
+/** Support columns under every FOB-deck node, so the bridge stands on legs
+ *  instead of floating. Deck membership comes from the real OSM bridge tags. */
+function DeckPiers({ geo, station }) {
+  const piers = useMemo(
+    () => station.nodes
+      .map((n) => n.id ?? n.node)
+      .filter((id) => (geo.level[id] || 0) > 0)
+      .map((id) => geo.p3(id))
+      .filter(Boolean),
+    [station, geo],
+  )
+  if (!piers.length) return null
+  return (
+    <group>
+      {piers.map((v, i) => (
+        <mesh key={i} position={[v.x, v.y / 2 - 0.2, v.z]}>
+          <cylinderGeometry args={[0.5, 0.62, Math.max(v.y - 0.4, 0.1), 8]} />
+          <meshStandardMaterial color="#243447" roughness={0.85} />
+        </mesh>
+      ))}
+    </group>
+  )
+}
+
+/* ------------------------------------------------------- before/after overlay */
+
+/**
+ * Ghost columns for the NO-ACTION run, drawn behind the live (mitigated) ones.
+ *
+ * A percentage chip tells a judge the peak fell; it does not let them *see* it.
+ * This draws the baseline height as a hollow red cage at each node that was
+ * dangerous before mitigation, so the short solid column now standing inside a
+ * tall red cage is the improvement, in place, at the spot it matters.
+ *
+ * Only baseline LOS E/F nodes are ghosted (max 8) — ghosting every node would
+ * double the scene and destroy the read.
+ */
+function BaselineGhosts({ geo, baseline, sim }) {
+  const rows = useMemo(() => {
+    if (!baseline || !sim || baseline === sim) return []
+    const after = Object.fromEntries((sim.nodes || []).map((n) => [n.node, n.density]))
+    return (baseline.nodes || [])
+      .filter((n) => (n.los === 'E' || n.los === 'F') && geo.p3(n.node))
+      .map((n) => ({ ...n, after: after[n.node] ?? 0 }))
+      .sort((a, b) => b.density - a.density)
+      .slice(0, 8)
+  }, [baseline, sim, geo])
+
+  // Same height/radius mapping as DensityColumns, so the cage and the live
+  // column are directly comparable rather than merely suggestive.
+  const dims = (d) => ({
+    h: Math.min(d, 20) * 2.6 + 0.4,
+    r: 2.2 + Math.min(d, 12) * 0.34,
+  })
+
+  if (!rows.length) return null
+  const worst = rows[0]
+
+  // The badge must describe the STATION, not just this node. Relieving n150
+  // while the crush reappears at n126 is a relocation, not a fix — reporting it
+  // as "cleared" next to a live red CRUSH beacon is exactly the contradiction
+  // this overlay exists to remove.
+  const crushNow = sim?.summary?.crush_count ?? 0
+  const nodeCleared = worst.density >= 5 && worst.after < 5
+  const nowWorst = sim?.node_hotspots?.[0]
+  const peakBefore = baseline?.summary?.peak_density ?? 0
+  const peakAfter = sim?.summary?.peak_density ?? 0
+  // Some controls (staggered release, extra gates) leave the peak untouched on
+  // this scenario. Saying "reduced" when nothing moved is the same overclaim in
+  // the opposite direction, so that case gets its own honest state.
+  const improved = peakBefore > 0 && (peakBefore - peakAfter) / peakBefore >= 0.02
+  const state = crushNow === 0 && nodeCleared ? 'cleared'
+    : nodeCleared ? 'moved'
+      : improved ? 'reduced'
+        : 'none'
+
+  return (
+    <group>
+      {rows.map((n) => {
+        const v = geo.p3(n.node)
+        const { h, r } = dims(n.density)
+        return (
+          <group key={`ghost-${n.node}`} position={[v.x, v.y, v.z]}>
+            <mesh position={[0, h / 2, 0]}>
+              <cylinderGeometry args={[r, r, h, 14, 1, true]} />
+              <meshBasicMaterial
+                color="#ff3b30" wireframe transparent opacity={0.22}
+                toneMapped={false} depthWrite={false}
+              />
+            </mesh>
+            {/* cap ring marks the old peak height */}
+            <mesh position={[0, h, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+              <ringGeometry args={[r * 0.92, r, 24]} />
+              <meshBasicMaterial
+                color="#ff3b30" transparent opacity={0.45}
+                side={THREE.DoubleSide} depthWrite={false}
+              />
+            </mesh>
+          </group>
+        )
+      })}
+
+      {/* One badge on the worst former hotspot — the Feb 2025 FOB landing. */}
+      {(() => {
+        const v = geo.p3(worst.node)
+        const { h } = dims(worst.density)
+        return (
+          <Html
+            position={[v.x, v.y + h + 26, v.z]} center
+            distanceFactor={230} zIndexRange={[19, 0]}
+          >
+            <div className={`v3-cleared ${state}`}>
+              {state === 'cleared' && '✓ CRUSH CLEARED'}
+              {state === 'moved' && '⚠ CRUSH RELOCATED'}
+              {state === 'reduced' && '↓ PEAK REDUCED'}
+              {state === 'none' && '— NO IMPROVEMENT'}
+              <span>
+                {state === 'none'
+                  ? `peak still ${peakAfter.toFixed(1)} p/m² · ${crushNow} crush point${crushNow === 1 ? '' : 's'}`
+                  : `${worst.node} ${worst.density.toFixed(1)} → ${worst.after.toFixed(1)} p/m²`}
+                {state === 'moved' && nowWorst
+                  ? ` · now ${nowWorst.node} at ${nowWorst.density.toFixed(1)}`
+                  : ''}
+              </span>
+            </div>
+          </Html>
+        )
+      })()}
     </group>
   )
 }
@@ -514,14 +755,18 @@ const VIEWS = {
   concourse: { label: 'Deck' },
 }
 
-function CameraRig({ view, geo, sim, controls }) {
+function CameraRig({ view, geo, sim, baseline, controls }) {
   const { camera } = useThree()
   const goal = useRef({ pos: new THREE.Vector3(), tgt: new THREE.Vector3() })
   const armed = useRef(null)
 
   useEffect(() => {
     const r = geo.radius
-    const top = sim?.node_hotspots?.[0]
+    // With a mitigation active the current run may have NO hotspot left — the
+    // baseline's worst node is where the outcome badge stands, so views that
+    // frame "the hotspot" fall back to it instead of drifting to a wide shot.
+    const baseTop = baseline?.node_hotspots?.[0]
+    const top = sim?.node_hotspots?.[0] || baseTop
     const hot = top ? geo.p3(top.node) : null
     const td = geo.trackDir, ad = geo.acrossDir
     let pos, tgt
@@ -551,14 +796,35 @@ function CameraRig({ view, geo, sim, controls }) {
       const c = hot || new THREE.Vector3(0, DECK_Y, 0)
       tgt = new THREE.Vector3(c.x, DECK_Y + 6, c.z)
       pos = c.clone().addScaledVector(ad, -r * 0.55).add(new THREE.Vector3(0, r * 0.42, 0))
+    } else if (baseTop && geo.p3(baseTop.node)) {
+      // A mitigation result just landed: fly IN to the outcome badge (the
+      // baseline's worst node) instead of resetting to the wide aerial — the
+      // judge should be looking AT the CLEARED / RELOCATED tag, not searching
+      // for it. If the crush relocated, frame old and new worst together.
+      const a = geo.p3(baseTop.node)
+      const curTop = sim?.node_hotspots?.[0]
+      const b = curTop && curTop.node !== baseTop.node ? geo.p3(curTop.node) : null
+      const c = b ? a.clone().add(b).multiplyScalar(0.5) : a.clone()
+      const spread = b ? a.distanceTo(b) : 0
+      const ghostH = Math.min(baseTop.density, 20) * 2.6
+      const d = Math.max(95, spread * 1.3, ghostH * 2.6)
+      tgt = new THREE.Vector3(c.x, c.y + ghostH * 0.45, c.z)
+      pos = c.clone()
+        .addScaledVector(ad, d * 0.85)
+        .addScaledVector(td, -d * 0.5)
+        .add(new THREE.Vector3(0, d * 0.8, 0))
     } else {
-      pos = new THREE.Vector3(r * 0.3, r * 0.95, r * 0.95)
+      // Aerial: look down the yard along the (rail-derived) track axis — the
+      // classic throat shot — from a three-quarter offset so depth still reads.
       tgt = new THREE.Vector3(0, 4, 0)
+      pos = new THREE.Vector3(0, r * 0.8, 0)
+        .addScaledVector(td, -r * 0.95)
+        .addScaledVector(ad, r * 0.22)
     }
 
     goal.current = { pos, tgt }
     armed.current = performance.now()
-  }, [view, geo, sim])
+  }, [view, geo, sim, baseline])
 
   useFrame(() => {
     if (!armed.current) return
@@ -575,7 +841,7 @@ function CameraRig({ view, geo, sim, controls }) {
 
 /* ------------------------------------------------------------------------ root */
 
-export default function StationScene3D({ station, sim }) {
+export default function StationScene3D({ station, sim, baseline }) {
   const geo = useStationGeometry(station)
   const controls = useRef()
   const [view, setView] = useState('aerial')
@@ -626,19 +892,22 @@ export default function StationScene3D({ station, sim }) {
           fadeDistance={1900} fadeStrength={1.4} followCamera={false} infiniteGrid
           position={[0, -0.4, 0]}
         />
+        <RailNetwork geo={geo} station={station} />
         <TrackBeds geo={geo} />
         <Platforms geo={geo} showLabels={view === 'aerial' || view === 'concourse'} />
         <StationTrains geo={geo} intensity={intensity} />
         <WalkNetwork geo={geo} station={station} sim={sim} />
+        <DeckPiers geo={geo} station={station} />
         <DensityColumns geo={geo} sim={sim} intensity={intensity} />
         <CrowdParticles geo={geo} station={station} sim={sim} intensity={intensity} />
         <CrushBeacons geo={geo} sim={sim} />
+        <BaselineGhosts geo={geo} baseline={baseline} sim={sim} />
         <ExitPads geo={geo} />
         <OrbitControls
           ref={controls} makeDefault enableDamping dampingFactor={0.08}
           maxPolarAngle={Math.PI / 2.06} minDistance={30} maxDistance={2000}
         />
-        <CameraRig view={view} geo={geo} sim={sim} controls={controls} />
+        <CameraRig view={view} geo={geo} sim={sim} baseline={baseline} controls={controls} />
       </Canvas>
 
       <div className="v3-hud">
@@ -653,7 +922,8 @@ export default function StationScene3D({ station, sim }) {
       </div>
 
       <div className="v3-note">
-        Schematic 3D · vertical levels <b>inferred</b> from stair topology (not surveyed) ·
+        Schematic 3D · track alignments <b>real</b> (OpenStreetMap{station.rails?.length ? `, ${station.rails.length} ways` : ''}; widths exaggerated) ·
+        FOB / subway levels <b>real</b> (OSM bridge &amp; tunnel tags; heights schematic) ·
         particles show <b>aggregate modelled flow</b>, not individual passengers ·
         column height = peak density, colour = Fruin LOS
       </div>

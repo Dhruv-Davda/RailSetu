@@ -1944,7 +1944,8 @@
       "length_m": 22.36,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n1",
@@ -1952,7 +1953,8 @@
       "length_m": 7.75,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n2",
@@ -1960,7 +1962,8 @@
       "length_m": 16.46,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n3",
@@ -1968,7 +1971,8 @@
       "length_m": 8.39,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n5",
@@ -1976,7 +1980,8 @@
       "length_m": 26.61,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n6",
@@ -1984,7 +1989,8 @@
       "length_m": 23.99,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n8",
@@ -1992,7 +1998,8 @@
       "length_m": 16.61,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n10",
@@ -2000,7 +2007,8 @@
       "length_m": 23.77,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n12",
@@ -2008,7 +2016,8 @@
       "length_m": 25.47,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n14",
@@ -2016,7 +2025,8 @@
       "length_m": 21.42,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n15",
@@ -2024,7 +2034,8 @@
       "length_m": 6.36,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n16",
@@ -2032,7 +2043,8 @@
       "length_m": 22.46,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n25",
@@ -2040,7 +2052,8 @@
       "length_m": 19.61,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n26",
@@ -2048,7 +2061,8 @@
       "length_m": 18.34,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n28",
@@ -2056,7 +2070,8 @@
       "length_m": 36.29,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n29",
@@ -2064,7 +2079,8 @@
       "length_m": 22.75,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n30",
@@ -2072,7 +2088,8 @@
       "length_m": 21.99,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n31",
@@ -2080,7 +2097,8 @@
       "length_m": 44.38,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n32",
@@ -2088,7 +2106,8 @@
       "length_m": 18.17,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n33",
@@ -2096,7 +2115,8 @@
       "length_m": 18.51,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n34",
@@ -2104,7 +2124,8 @@
       "length_m": 25.96,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n35",
@@ -2112,7 +2133,8 @@
       "length_m": 28.13,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n36",
@@ -2120,7 +2142,8 @@
       "length_m": 24.13,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n26",
@@ -2128,7 +2151,8 @@
       "length_m": 24.21,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n38",
@@ -2136,7 +2160,8 @@
       "length_m": 5.89,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n39",
@@ -2144,7 +2169,8 @@
       "length_m": 7.86,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n31",
@@ -2152,7 +2178,8 @@
       "length_m": 19.08,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n34",
@@ -2160,7 +2187,8 @@
       "length_m": 35.75,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n43",
@@ -2168,7 +2196,8 @@
       "length_m": 4.68,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n19",
@@ -2176,7 +2205,8 @@
       "length_m": 16.03,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n36",
@@ -2184,7 +2214,8 @@
       "length_m": 17.68,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n46",
@@ -2192,7 +2223,8 @@
       "length_m": 23.35,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 0
     },
     {
       "u": "n30",
@@ -2200,7 +2232,8 @@
       "length_m": 19.14,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n29",
@@ -2208,7 +2241,8 @@
       "length_m": 24.28,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n33",
@@ -2216,7 +2250,8 @@
       "length_m": 15.39,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n51",
@@ -2224,7 +2259,8 @@
       "length_m": 9.06,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n52",
@@ -2232,7 +2268,8 @@
       "length_m": 5.77,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n53",
@@ -2240,7 +2277,8 @@
       "length_m": 28.17,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n54",
@@ -2248,7 +2286,8 @@
       "length_m": 1.9,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n55",
@@ -2256,7 +2295,8 @@
       "length_m": 9.76,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n56",
@@ -2264,7 +2304,8 @@
       "length_m": 9.14,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n50",
@@ -2272,7 +2313,8 @@
       "length_m": 3.71,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n59",
@@ -2280,7 +2322,8 @@
       "length_m": 5.51,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n60",
@@ -2288,7 +2331,8 @@
       "length_m": 5.82,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n62",
@@ -2296,7 +2340,8 @@
       "length_m": 7.32,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n45",
@@ -2304,7 +2349,8 @@
       "length_m": 7.92,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n64",
@@ -2312,7 +2358,8 @@
       "length_m": 4.91,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n10",
@@ -2320,7 +2367,8 @@
       "length_m": 3.69,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n66",
@@ -2328,7 +2376,8 @@
       "length_m": 5.14,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n25",
@@ -2336,7 +2385,8 @@
       "length_m": 6.45,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n68",
@@ -2344,7 +2394,8 @@
       "length_m": 4.36,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n41",
@@ -2352,7 +2403,8 @@
       "length_m": 4.34,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n70",
@@ -2360,7 +2412,8 @@
       "length_m": 6.65,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n71",
@@ -2368,7 +2421,8 @@
       "length_m": 5.92,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n73",
@@ -2376,7 +2430,8 @@
       "length_m": 4.66,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n74",
@@ -2384,7 +2439,8 @@
       "length_m": 3.82,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n76",
@@ -2392,7 +2448,8 @@
       "length_m": 6.07,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n5",
@@ -2400,7 +2457,8 @@
       "length_m": 4.94,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n78",
@@ -2408,7 +2466,8 @@
       "length_m": 10.24,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n19",
@@ -2416,7 +2475,8 @@
       "length_m": 7.22,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n80",
@@ -2424,7 +2484,8 @@
       "length_m": 6.72,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n49",
@@ -2432,7 +2493,8 @@
       "length_m": 10.39,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n7",
@@ -2440,7 +2502,8 @@
       "length_m": 5.7,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n83",
@@ -2448,7 +2511,8 @@
       "length_m": 5.19,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n84",
@@ -2456,7 +2520,8 @@
       "length_m": 4.05,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n86",
@@ -2464,7 +2529,8 @@
       "length_m": 5.16,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n87",
@@ -2472,7 +2538,8 @@
       "length_m": 3.65,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n89",
@@ -2480,7 +2547,8 @@
       "length_m": 4.54,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n9",
@@ -2488,7 +2556,8 @@
       "length_m": 6.11,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n91",
@@ -2496,7 +2565,8 @@
       "length_m": 5.72,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n27",
@@ -2504,7 +2574,8 @@
       "length_m": 6.23,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n93",
@@ -2512,7 +2583,8 @@
       "length_m": 4.79,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n94",
@@ -2520,7 +2592,8 @@
       "length_m": 6.13,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n43",
@@ -2528,7 +2601,8 @@
       "length_m": 27.16,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n96",
@@ -2536,7 +2610,8 @@
       "length_m": 8.58,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n97",
@@ -2544,7 +2619,8 @@
       "length_m": 36.79,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n46",
@@ -2552,7 +2628,8 @@
       "length_m": 15.31,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n99",
@@ -2560,7 +2637,8 @@
       "length_m": 5.4,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n100",
@@ -2568,7 +2646,8 @@
       "length_m": 8.07,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n4",
@@ -2576,7 +2655,8 @@
       "length_m": 30.36,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n103",
@@ -2584,7 +2664,8 @@
       "length_m": 5.87,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 0
     },
     {
       "u": "n104",
@@ -2592,7 +2673,8 @@
       "length_m": 31.83,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 0
     },
     {
       "u": "n106",
@@ -2600,7 +2682,8 @@
       "length_m": 10.14,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 0
     },
     {
       "u": "n107",
@@ -2608,7 +2691,8 @@
       "length_m": 31.12,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 0
     },
     {
       "u": "n108",
@@ -2616,7 +2700,8 @@
       "length_m": 11.07,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n105",
@@ -2624,7 +2709,8 @@
       "length_m": 12.38,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n111",
@@ -2632,7 +2718,8 @@
       "length_m": 82.81,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": -1
     },
     {
       "u": "n113",
@@ -2640,7 +2727,8 @@
       "length_m": 103.34,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": -1
     },
     {
       "u": "n114",
@@ -2648,7 +2736,8 @@
       "length_m": 7.07,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": -1
     },
     {
       "u": "n116",
@@ -2656,7 +2745,8 @@
       "length_m": 133.26,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": -1
     },
     {
       "u": "n117",
@@ -2664,7 +2754,8 @@
       "length_m": 13.57,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": -1
     },
     {
       "u": "n118",
@@ -2672,7 +2763,8 @@
       "length_m": 32.73,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": -1
     },
     {
       "u": "n120",
@@ -2680,7 +2772,8 @@
       "length_m": 83.29,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": -1
     },
     {
       "u": "n119",
@@ -2688,7 +2781,8 @@
       "length_m": 116.68,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": -1
     },
     {
       "u": "n121",
@@ -2696,7 +2790,8 @@
       "length_m": 33.81,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n123",
@@ -2704,7 +2799,8 @@
       "length_m": 24.46,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n124",
@@ -2712,7 +2808,8 @@
       "length_m": 20.01,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n125",
@@ -2720,7 +2817,8 @@
       "length_m": 21.56,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n126",
@@ -2728,7 +2826,8 @@
       "length_m": 27.86,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n127",
@@ -2736,7 +2835,8 @@
       "length_m": 23.25,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n39",
@@ -2744,7 +2844,8 @@
       "length_m": 25.9,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n102",
@@ -2752,7 +2853,8 @@
       "length_m": 13.04,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n101",
@@ -2760,7 +2862,8 @@
       "length_m": 18.83,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n132",
@@ -2768,7 +2871,8 @@
       "length_m": 4.5,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n135",
@@ -2776,7 +2880,8 @@
       "length_m": 17.46,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n137",
@@ -2784,7 +2889,8 @@
       "length_m": 4.2,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n139",
@@ -2792,7 +2898,8 @@
       "length_m": 18.58,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n140",
@@ -2800,7 +2907,8 @@
       "length_m": 6.95,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n141",
@@ -2808,7 +2916,8 @@
       "length_m": 16.17,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n142",
@@ -2816,7 +2925,8 @@
       "length_m": 3.92,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n144",
@@ -2824,7 +2934,8 @@
       "length_m": 6.27,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n145",
@@ -2832,7 +2943,8 @@
       "length_m": 6.42,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n147",
@@ -2840,7 +2952,8 @@
       "length_m": 6.54,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n148",
@@ -2848,7 +2961,8 @@
       "length_m": 6.29,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n150",
@@ -2856,7 +2970,8 @@
       "length_m": 25.64,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n126",
@@ -2864,7 +2979,8 @@
       "length_m": 25.74,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n152",
@@ -2872,7 +2988,8 @@
       "length_m": 6.12,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n134",
@@ -2880,7 +2997,8 @@
       "length_m": 24.82,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n1",
@@ -2888,7 +3006,8 @@
       "length_m": 24.46,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n154",
@@ -2896,7 +3015,8 @@
       "length_m": 5.91,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n155",
@@ -2904,7 +3024,8 @@
       "length_m": 6.87,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n157",
@@ -2912,7 +3033,8 @@
       "length_m": 25.47,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n158",
@@ -2920,7 +3042,8 @@
       "length_m": 5.92,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n150",
@@ -2928,7 +3051,8 @@
       "length_m": 5.43,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n133",
@@ -2936,7 +3060,8 @@
       "length_m": 25.9,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n121",
@@ -2944,7 +3069,8 @@
       "length_m": 25.47,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n160",
@@ -2952,7 +3078,8 @@
       "length_m": 5.91,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n157",
@@ -2960,7 +3087,8 @@
       "length_m": 6.71,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n148",
@@ -2968,7 +3096,8 @@
       "length_m": 25.5,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n127",
@@ -2976,7 +3105,8 @@
       "length_m": 25.86,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n123",
@@ -2984,7 +3114,8 @@
       "length_m": 117.95,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n162",
@@ -2992,7 +3123,8 @@
       "length_m": 32.63,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n164",
@@ -3000,7 +3132,8 @@
       "length_m": 4.73,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n166",
@@ -3008,7 +3141,8 @@
       "length_m": 4.77,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n151",
@@ -3016,7 +3150,8 @@
       "length_m": 6.02,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n168",
@@ -3024,7 +3159,8 @@
       "length_m": 5.49,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n136",
@@ -3032,7 +3168,8 @@
       "length_m": 5.07,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n165",
@@ -3040,7 +3177,8 @@
       "length_m": 26.59,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n170",
@@ -3048,7 +3186,8 @@
       "length_m": 15.6,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n171",
@@ -3056,7 +3195,8 @@
       "length_m": 9.34,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n172",
@@ -3064,7 +3204,8 @@
       "length_m": 22.04,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n162",
@@ -3072,7 +3213,8 @@
       "length_m": 43.88,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n135",
@@ -3080,7 +3222,8 @@
       "length_m": 31.42,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n173",
@@ -3088,7 +3231,8 @@
       "length_m": 15.59,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n174",
@@ -3096,7 +3240,8 @@
       "length_m": 39.58,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n176",
@@ -3104,7 +3249,8 @@
       "length_m": 4.23,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n177",
@@ -3112,7 +3258,8 @@
       "length_m": 4.33,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n179",
@@ -3120,7 +3267,8 @@
       "length_m": 8.62,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n179",
@@ -3128,7 +3276,8 @@
       "length_m": 26.46,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n48",
@@ -3136,7 +3285,8 @@
       "length_m": 15.17,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n182",
@@ -3144,7 +3294,8 @@
       "length_m": 7.11,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n183",
@@ -3152,7 +3303,8 @@
       "length_m": 4.19,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n185",
@@ -3160,7 +3312,8 @@
       "length_m": 7.41,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n186",
@@ -3168,7 +3321,8 @@
       "length_m": 4.58,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n183",
@@ -3176,7 +3330,8 @@
       "length_m": 19.02,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n35",
@@ -3184,7 +3339,8 @@
       "length_m": 19.54,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n42",
@@ -3192,7 +3348,8 @@
       "length_m": 20.96,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n177",
@@ -3200,7 +3357,8 @@
       "length_m": 25.7,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n74",
@@ -3208,7 +3366,8 @@
       "length_m": 27.58,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n131",
@@ -3216,7 +3375,8 @@
       "length_m": 10.08,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n122",
@@ -3224,7 +3384,8 @@
       "length_m": 39.59,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n188",
@@ -3232,7 +3393,8 @@
       "length_m": 12.03,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n189",
@@ -3240,7 +3402,8 @@
       "length_m": 10.7,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n190",
@@ -3248,7 +3411,8 @@
       "length_m": 10.03,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n192",
@@ -3256,7 +3420,8 @@
       "length_m": 2.67,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n122",
@@ -3264,7 +3429,8 @@
       "length_m": 5.0,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n193",
@@ -3272,7 +3438,8 @@
       "length_m": 34.62,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 0
     },
     {
       "u": "n194",
@@ -3280,7 +3447,8 @@
       "length_m": 14.49,
       "kind": "path",
       "width_m": 2.5,
-      "capacity_pps": 3.25
+      "capacity_pps": 3.25,
+      "level": 0
     },
     {
       "u": "n195",
@@ -3288,7 +3456,8 @@
       "length_m": 11.97,
       "kind": "path",
       "width_m": 2.5,
-      "capacity_pps": 3.25
+      "capacity_pps": 3.25,
+      "level": 0
     },
     {
       "u": "n196",
@@ -3296,7 +3465,8 @@
       "length_m": 7.44,
       "kind": "path",
       "width_m": 2.5,
-      "capacity_pps": 3.25
+      "capacity_pps": 3.25,
+      "level": 0
     },
     {
       "u": "n197",
@@ -3304,7 +3474,8 @@
       "length_m": 6.87,
       "kind": "path",
       "width_m": 2.5,
-      "capacity_pps": 3.25
+      "capacity_pps": 3.25,
+      "level": 0
     },
     {
       "u": "n198",
@@ -3312,7 +3483,8 @@
       "length_m": 5.51,
       "kind": "path",
       "width_m": 2.5,
-      "capacity_pps": 3.25
+      "capacity_pps": 3.25,
+      "level": 0
     },
     {
       "u": "n199",
@@ -3320,7 +3492,8 @@
       "length_m": 5.44,
       "kind": "path",
       "width_m": 2.5,
-      "capacity_pps": 3.25
+      "capacity_pps": 3.25,
+      "level": 0
     },
     {
       "u": "n200",
@@ -3328,7 +3501,8 @@
       "length_m": 0.86,
       "kind": "path",
       "width_m": 2.5,
-      "capacity_pps": 3.25
+      "capacity_pps": 3.25,
+      "level": 0
     },
     {
       "u": "n201",
@@ -3336,7 +3510,8 @@
       "length_m": 4.0,
       "kind": "path",
       "width_m": 2.5,
-      "capacity_pps": 3.25
+      "capacity_pps": 3.25,
+      "level": 0
     },
     {
       "u": "n202",
@@ -3344,7 +3519,8 @@
       "length_m": 7.37,
       "kind": "path",
       "width_m": 2.5,
-      "capacity_pps": 3.25
+      "capacity_pps": 3.25,
+      "level": 0
     },
     {
       "u": "n203",
@@ -3352,7 +3528,8 @@
       "length_m": 11.13,
       "kind": "path",
       "width_m": 2.5,
-      "capacity_pps": 3.25
+      "capacity_pps": 3.25,
+      "level": 0
     },
     {
       "u": "n204",
@@ -3360,7 +3537,8 @@
       "length_m": 4.12,
       "kind": "path",
       "width_m": 2.5,
-      "capacity_pps": 3.25
+      "capacity_pps": 3.25,
+      "level": 0
     },
     {
       "u": "n205",
@@ -3368,7 +3546,8 @@
       "length_m": 3.34,
       "kind": "path",
       "width_m": 2.5,
-      "capacity_pps": 3.25
+      "capacity_pps": 3.25,
+      "level": 0
     },
     {
       "u": "n206",
@@ -3376,7 +3555,8 @@
       "length_m": 30.18,
       "kind": "path",
       "width_m": 2.5,
-      "capacity_pps": 3.25
+      "capacity_pps": 3.25,
+      "level": 0
     },
     {
       "u": "n47",
@@ -3384,7 +3564,8 @@
       "length_m": 24.73,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n15",
@@ -3392,7 +3573,8 @@
       "length_m": 27.82,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n139",
@@ -3400,7 +3582,8 @@
       "length_m": 20.53,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n87",
@@ -3408,7 +3591,8 @@
       "length_m": 23.7,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n12",
@@ -3416,7 +3600,8 @@
       "length_m": 23.26,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n163",
@@ -3424,7 +3609,8 @@
       "length_m": 27.27,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n11",
@@ -3432,7 +3618,8 @@
       "length_m": 19.03,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n60",
@@ -3440,7 +3627,8 @@
       "length_m": 23.67,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n208",
@@ -3448,7 +3636,8 @@
       "length_m": 20.78,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n6",
@@ -3456,7 +3645,8 @@
       "length_m": 26.67,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n0",
@@ -3464,7 +3654,8 @@
       "length_m": 23.43,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n4",
@@ -3472,7 +3663,8 @@
       "length_m": 51.11,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n209",
@@ -3480,7 +3672,8 @@
       "length_m": 3.55,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n210",
@@ -3488,7 +3681,8 @@
       "length_m": 3.55,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n209",
@@ -3496,7 +3690,8 @@
       "length_m": 48.8,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n211",
@@ -3504,7 +3699,8 @@
       "length_m": 27.21,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n2",
@@ -3512,7 +3708,8 @@
       "length_m": 7.75,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n210",
@@ -3520,7 +3717,8 @@
       "length_m": 24.1,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n213",
@@ -3528,7 +3726,8 @@
       "length_m": 21.57,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 0
     },
     {
       "u": "n215",
@@ -3536,7 +3735,8 @@
       "length_m": 22.39,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 0
     },
     {
       "u": "n216",
@@ -3544,7 +3744,8 @@
       "length_m": 22.57,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 0
     },
     {
       "u": "n212",
@@ -3552,7 +3753,8 @@
       "length_m": 1.49,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n217",
@@ -3560,7 +3762,8 @@
       "length_m": 9.5,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n218",
@@ -3568,7 +3771,8 @@
       "length_m": 9.3,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n219",
@@ -3576,7 +3780,8 @@
       "length_m": 25.76,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 0
     },
     {
       "u": "n163",
@@ -3584,7 +3789,8 @@
       "length_m": 5.52,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n95",
@@ -3592,7 +3798,8 @@
       "length_m": 17.42,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n221",
@@ -3600,7 +3807,8 @@
       "length_m": 2.81,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n222",
@@ -3608,7 +3816,8 @@
       "length_m": 5.59,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n223",
@@ -3616,7 +3825,8 @@
       "length_m": 1.94,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n141",
@@ -3624,7 +3834,8 @@
       "length_m": 5.65,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n224",
@@ -3632,7 +3843,8 @@
       "length_m": 5.59,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n8",
@@ -3640,7 +3852,8 @@
       "length_m": 3.23,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n225",
@@ -3648,7 +3861,8 @@
       "length_m": 5.57,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n226",
@@ -3656,7 +3870,8 @@
       "length_m": 2.91,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n208",
@@ -3664,7 +3879,8 @@
       "length_m": 5.51,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n224",
@@ -3672,7 +3888,8 @@
       "length_m": 5.59,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n227",
@@ -3680,7 +3897,8 @@
       "length_m": 14.19,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n229",
@@ -3688,7 +3906,8 @@
       "length_m": 3.41,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n228",
@@ -3696,7 +3915,8 @@
       "length_m": 3.41,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n230",
@@ -3704,7 +3924,8 @@
       "length_m": 21.36,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 0
     },
     {
       "u": "n210",
@@ -3712,7 +3933,8 @@
       "length_m": 53.83,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n227",
@@ -3720,7 +3942,8 @@
       "length_m": 6.5,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n217",
@@ -3728,7 +3951,8 @@
       "length_m": 78.03,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n229",
@@ -3736,7 +3960,8 @@
       "length_m": 21.48,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 0
     },
     {
       "u": "n114",
@@ -3744,7 +3969,8 @@
       "length_m": 14.36,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n234",
@@ -3752,7 +3978,8 @@
       "length_m": 18.04,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n215",
@@ -3760,7 +3987,8 @@
       "length_m": 2.69,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n115",
@@ -3768,7 +3996,8 @@
       "length_m": 12.5,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": -1
     },
     {
       "u": "n235",
@@ -3776,7 +4005,8 @@
       "length_m": 77.12,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": -1
     },
     {
       "u": "n236",
@@ -3784,7 +4014,8 @@
       "length_m": 1.75,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n233",
@@ -3792,7 +4023,8 @@
       "length_m": 4.48,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n153",
@@ -3800,7 +4032,8 @@
       "length_m": 17.55,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n125",
@@ -3808,7 +4041,8 @@
       "length_m": 6.06,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n236",
@@ -3816,7 +4050,8 @@
       "length_m": 1.75,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n233",
@@ -3824,7 +4059,8 @@
       "length_m": 2.99,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n237",
@@ -3832,7 +4068,8 @@
       "length_m": 3.14,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n238",
@@ -3840,7 +4077,8 @@
       "length_m": 18.48,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n3",
@@ -3848,7 +4086,8 @@
       "length_m": 39.51,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 0
     },
     {
       "u": "n240",
@@ -3856,7 +4095,8 @@
       "length_m": 19.19,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n242",
@@ -3864,7 +4104,8 @@
       "length_m": 7.65,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n243",
@@ -3872,7 +4113,8 @@
       "length_m": 8.4,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n244",
@@ -3880,7 +4122,8 @@
       "length_m": 72.39,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n245",
@@ -3888,7 +4131,8 @@
       "length_m": 127.49,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n246",
@@ -3896,7 +4140,8 @@
       "length_m": 308.81,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n247",
@@ -3904,7 +4149,8 @@
       "length_m": 70.24,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n249",
@@ -3912,7 +4158,8 @@
       "length_m": 123.8,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n250",
@@ -3920,7 +4167,8 @@
       "length_m": 27.72,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n251",
@@ -3928,7 +4176,8 @@
       "length_m": 337.49,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n253",
@@ -3936,7 +4185,8 @@
       "length_m": 37.18,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n254",
@@ -3944,7 +4194,8 @@
       "length_m": 10.01,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n129",
@@ -3952,7 +4203,8 @@
       "length_m": 59.95,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n55",
@@ -3960,7 +4212,8 @@
       "length_m": 25.82,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n56",
@@ -3968,7 +4221,8 @@
       "length_m": 28.24,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n255",
@@ -3976,7 +4230,8 @@
       "length_m": 34.08,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n257",
@@ -3984,7 +4239,8 @@
       "length_m": 4.87,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n44",
@@ -3992,7 +4248,8 @@
       "length_m": 6.74,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 1
     },
     {
       "u": "n58",
@@ -4000,7 +4257,8 @@
       "length_m": 19.8,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n37",
@@ -4008,7 +4266,8 @@
       "length_m": 6.34,
       "kind": "steps",
       "width_m": 2.5,
-      "capacity_pps": 2.27
+      "capacity_pps": 2.27,
+      "level": 1
     },
     {
       "u": "n256",
@@ -4016,7 +4275,8 @@
       "length_m": 59.4,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n259",
@@ -4024,7 +4284,8 @@
       "length_m": 82.07,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n261",
@@ -4032,7 +4293,8 @@
       "length_m": 10.26,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n255",
@@ -4040,7 +4302,8 @@
       "length_m": 23.33,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n262",
@@ -4048,7 +4311,8 @@
       "length_m": 9.12,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n263",
@@ -4056,7 +4320,8 @@
       "length_m": 34.66,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n264",
@@ -4064,7 +4329,8 @@
       "length_m": 9.05,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n265",
@@ -4072,7 +4338,8 @@
       "length_m": 23.83,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n266",
@@ -4080,7 +4347,8 @@
       "length_m": 49.99,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n267",
@@ -4088,7 +4356,8 @@
       "length_m": 39.42,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n267",
@@ -4096,13 +4365,15 @@
       "length_m": 9.04,
       "kind": "footway",
       "width_m": 4.0,
-      "capacity_pps": 5.2
+      "capacity_pps": 5.2,
+      "level": 0
     },
     {
       "u": "n18",
       "v": "n162",
       "length_m": 36.86,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4111,6 +4382,7 @@
       "v": "n168",
       "length_m": 40.8,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4119,6 +4391,7 @@
       "v": "n136",
       "length_m": 45.58,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4127,6 +4400,7 @@
       "v": "n79",
       "length_m": 7.22,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4135,6 +4409,7 @@
       "v": "n78",
       "length_m": 10.24,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4143,6 +4418,7 @@
       "v": "n36",
       "length_m": 16.03,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4151,6 +4427,7 @@
       "v": "n177",
       "length_m": 45.85,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4159,6 +4436,7 @@
       "v": "n176",
       "length_m": 46.06,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4167,6 +4445,7 @@
       "v": "n178",
       "length_m": 46.26,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4175,6 +4454,7 @@
       "v": "n126",
       "length_m": 12.44,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4183,6 +4463,7 @@
       "v": "n166",
       "length_m": 14.75,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4191,6 +4472,7 @@
       "v": "n151",
       "length_m": 15.57,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4199,6 +4481,7 @@
       "v": "n60",
       "length_m": 49.81,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4207,6 +4490,7 @@
       "v": "n59",
       "length_m": 50.23,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4215,6 +4499,7 @@
       "v": "n61",
       "length_m": 50.82,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4223,6 +4508,7 @@
       "v": "n142",
       "length_m": 7.35,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4231,6 +4517,7 @@
       "v": "n143",
       "length_m": 9.36,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4239,6 +4526,7 @@
       "v": "n156",
       "length_m": 12.22,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4247,6 +4535,7 @@
       "v": "n147",
       "length_m": 2.77,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4255,6 +4544,7 @@
       "v": "n148",
       "length_m": 9.28,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4263,6 +4553,7 @@
       "v": "n159",
       "length_m": 13.13,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4271,6 +4562,7 @@
       "v": "n26",
       "length_m": 7.71,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4279,6 +4571,7 @@
       "v": "n27",
       "length_m": 10.63,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4287,6 +4580,7 @@
       "v": "n92",
       "length_m": 12.18,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4295,6 +4589,7 @@
       "v": "n254",
       "length_m": 10.01,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4303,6 +4598,7 @@
       "v": "n97",
       "length_m": 31.44,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4311,6 +4607,7 @@
       "v": "n96",
       "length_m": 39.57,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4319,6 +4616,7 @@
       "v": "n148",
       "length_m": 6.29,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4327,6 +4625,7 @@
       "v": "n132",
       "length_m": 12.41,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4335,6 +4634,7 @@
       "v": "n147",
       "length_m": 12.83,
       "kind": "platform_link",
+      "level": 0,
       "width_m": 3.5,
       "capacity_pps": 4.55
     },
@@ -4343,6 +4643,7 @@
       "v": "n17",
       "length_m": 6.54,
       "kind": "transfer_link",
+      "level": 0,
       "width_m": 3.0,
       "capacity_pps": 3.9
     },
@@ -4351,6 +4652,7 @@
       "v": "n260",
       "length_m": 21.2,
       "kind": "transfer_link",
+      "level": 0,
       "width_m": 3.0,
       "capacity_pps": 3.9
     },
@@ -4359,6 +4661,7 @@
       "v": "n253",
       "length_m": 27.18,
       "kind": "transfer_link",
+      "level": 0,
       "width_m": 3.0,
       "capacity_pps": 3.9
     },
@@ -4367,6 +4670,7 @@
       "v": "n103",
       "length_m": 11.35,
       "kind": "transfer_link",
+      "level": 0,
       "width_m": 3.0,
       "capacity_pps": 3.9
     },
@@ -4375,6 +4679,7 @@
       "v": "n110",
       "length_m": 23.54,
       "kind": "transfer_link",
+      "level": 0,
       "width_m": 3.0,
       "capacity_pps": 3.9
     }

@@ -15,15 +15,14 @@ const R_LAT = 110540 // metres per degree latitude
 const R_LON = 111320 // metres per degree longitude at the equator
 
 /** lat/lon -> local metres, x = east, z = south (so -z is north / "up" on screen). */
-export function projectNodes(nodes, center) {
+export function projectLL(lat, lon, center) {
   const kx = R_LON * Math.cos((center.lat * Math.PI) / 180)
+  return { x: (lon - center.lon) * kx, z: -(lat - center.lat) * R_LAT }
+}
+
+export function projectNodes(nodes, center) {
   const out = {}
-  for (const n of nodes) {
-    out[n.id ?? n.node] = {
-      x: (n.lon - center.lon) * kx,
-      z: -(n.lat - center.lat) * R_LAT,
-    }
-  }
+  for (const n of nodes) out[n.id ?? n.node] = projectLL(n.lat, n.lon, center)
   return out
 }
 
@@ -40,14 +39,71 @@ export function buildAdjacency(nodes, edges) {
 }
 
 /**
- * Level per node = minimum number of `steps` edges crossed to reach it from any
- * platform node, capped at `maxLevel`. 0-1 BFS (deque) so the result is the true
- * minimum and is deterministic regardless of input order.
+ * Level per node. Two sources, in order of trust:
  *
- * Platforms and anything step-free from them land on level 0 (ground); anything
- * you must climb a staircase to reach lands on level 1 (the FOB deck).
+ * 1. REAL OSM attributes — the graph builder carries bridge=yes / tunnel=yes /
+ *    layer per edge as `level` (+1 FOB deck, -1 subway, 0 grade). A node's
+ *    level comes from the non-stair edges that touch it; stairs are the
+ *    transitions and vote only for nodes nothing else touches (mid-flight
+ *    landings). Ground beats deck/tunnel so portals and stair feet stay at
+ *    grade and the connecting span slopes.
+ * 2. Fallback (fixtures without `level`): the old stair-count BFS inference.
  */
 export function assignLevels(nodes, edges, platformIds, maxLevel = 1) {
+  if (edges.some((e) => (e.level || 0) !== 0)) {
+    const vote = {}
+    const stairVote = {}
+    for (const e of edges) {
+      const lv = e.level || 0
+      for (const id of [e.u, e.v]) {
+        if (e.kind === 'steps') { (stairVote[id] ??= []).push(lv); continue }
+        const v = (vote[id] ??= { deck: false, tunnel: false, ground: false })
+        if (lv > 0) v.deck = true
+        else if (lv < 0) v.tunnel = true
+        else v.ground = true
+      }
+    }
+    const level = {}
+    const stairOnly = []
+    for (const n of nodes) {
+      const id = n.id ?? n.node
+      const v = vote[id]
+      if (v) level[id] = v.ground ? 0 : v.deck ? 1 : -1
+      else {
+        // Only stairs touch this node. Seed from the stair tags, then resolve
+        // below — OSM tags a whole flight bridge=yes, so seeding alone leaves
+        // the flight's loose end floating at deck height.
+        const sv = stairVote[id] || [0]
+        level[id] = sv.every((x) => x > 0) ? 1 : sv.every((x) => x < 0) ? -1 : 0
+        stairOnly.push(id)
+      }
+    }
+
+    // Resolve stair-only nodes so every flight actually descends:
+    //  · a dead-end stair node is a stair FOOT — pin it to grade, else the
+    //    whole flight renders flat at 13 m and the bridge looks unreachable;
+    //  · interior landings relax to the mean of their neighbours (a mid-flight
+    //    landing settles around half-height).
+    if (stairOnly.length) {
+      const adj = buildAdjacency(nodes, edges)
+      for (const id of stairOnly) {
+        if ((adj[id] || []).length <= 1) level[id] = 0
+      }
+      const pinned = new Set(stairOnly.filter((id) => (adj[id] || []).length <= 1))
+      for (let pass = 0; pass < 4; pass++) {
+        for (const id of stairOnly) {
+          if (pinned.has(id)) continue
+          const nb = adj[id] || []
+          if (nb.length) level[id] = nb.reduce((a, x) => a + level[x.to], 0) / nb.length
+        }
+      }
+    }
+    return level
+  }
+  return assignLevelsByStairs(nodes, edges, platformIds, maxLevel)
+}
+
+function assignLevelsByStairs(nodes, edges, platformIds, maxLevel = 1) {
   const adj = buildAdjacency(nodes, edges)
   const level = {}
   for (const n of nodes) level[n.id ?? n.node] = Infinity
@@ -152,4 +208,11 @@ export function losRgb(density) {
   return LOS_RGB.F
 }
 
-export const LEVEL_HEIGHT = 7.5 // metres between ground and the FOB deck
+export const LEVEL_HEIGHT = 13  // FOB deck height — clears the platform canopies (7.4)
+export const TUNNEL_DEPTH = 5   // subway passages sit this far below grade
+
+/** Vertical position for a level: +1 deck, 0 grade, -1 subway. */
+export function levelY(level) {
+  if (!level) return 0
+  return level > 0 ? level * LEVEL_HEIGHT : level * TUNNEL_DEPTH
+}

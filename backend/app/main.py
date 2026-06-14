@@ -16,7 +16,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from app.config import configure_logging, get_settings
-from app.data.station import load_station, refresh_station
+from app.data.station import load_rails, load_station, refresh_station
 from app.demand.factory import get_demand_provider
 from app.ingest.calibration import CalibrationState, compute_capacity_scale
 from app.ingest.crowd_sensing import get_crowd_sensor
@@ -173,12 +173,16 @@ def health():
 def station():
     """Geometry for the map: nodes, edges, platforms, exits."""
     s = load_station()
+    rails = load_rails()
     return {
         "meta": s["meta"],
         "nodes": s["nodes"],
         "edges": s["edges"],
         "platforms": s["platforms"],
         "entrances": s["entrances"],
+        # Real OSM track alignments (decorative, for the 3D yard). Optional.
+        "rails": rails["ways"],
+        "rails_meta": rails["meta"],
     }
 
 
