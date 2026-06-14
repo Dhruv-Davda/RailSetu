@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, ReferenceLine, Tooltip } from 'recharts'
 import StationMap from '../components/StationMap.jsx'
 import StationScene3D from '../three/StationScene3D.jsx'
-import { getStation, getScenarios, simulate } from '../api.js'
+import { getStation, getScenarios, simulate, optimizeCrowd } from '../api.js'
 import { statusFor, LOS } from '../los.js'
 
 const MITIGATIONS = [
@@ -22,6 +22,8 @@ export default function M1Crowd() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [mode, setMode] = useState('3d')
+  const [opt, setOpt] = useState(null)
+  const [optRunning, setOptRunning] = useState(false)
 
   useEffect(() => {
     getStation().then(setStation).catch((e) => setError(e.message))
@@ -54,6 +56,21 @@ export default function M1Crowd() {
   }, [anyMit, baseSummary, cur])
 
   // Carry BOTH series so the mitigated curve is drawn against the no-action one.
+  async function runOptimizer() {
+    setOptRunning(true); setError(null)
+    try {
+      const r = await optimizeCrowd(scenario)
+      setOpt(r)
+      // Apply the winning plan to the toggles so the map, the 3D ghosts and
+      // the before/after badge all reflect what the optimizer chose.
+      setMit(r.recommended.mitigations)
+    } catch (e) {
+      setError(e.message)
+    } finally {
+      setOptRunning(false)
+    }
+  }
+
   const timeline = useMemo(() => {
     if (!sim) return []
     const b = baseline?.timeline || []
@@ -75,12 +92,50 @@ export default function M1Crowd() {
         <aside className="sidebar">
           <section className="panel">
             <h3>Scenario</h3>
-            <select value={scenario} onChange={(e) => { setScenario(e.target.value); setMit({}) }}>
+            <select value={scenario} onChange={(e) => { setScenario(e.target.value); setMit({}); setOpt(null) }}>
               {scenarios.map((s) => <option key={s.key} value={s.key}>{s.title}</option>)}
             </select>
             {scenarioMeta && <p className="muted">{scenarioMeta.description}</p>}
             {scenarioMeta?.total_people > 0 && (
               <p className="muted small">Crowd in scenario: <b>{scenarioMeta.total_people.toLocaleString()}</b> people</p>
+            )}
+          </section>
+
+          <section className="panel">
+            <h3>AI optimizer</h3>
+            <button className="btn primary full" disabled={optRunning} onClick={runOptimizer}>
+              {optRunning ? 'Evaluating 16 plans…' : 'Run AI optimizer'}
+            </button>
+            <p className="muted small" style={{ marginTop: 8 }}>
+              Runs the flow model on every combination of the four measures, ranks
+              them by crush points then peak density, and applies the winner.
+            </p>
+            {optRunning && (
+              <div className="ai-working">
+                <span className="dots"><i /><i /><i /></span>
+                Running the flow model on all 16 plans, then writing the brief…
+              </div>
+            )}
+            {opt && !optRunning && (
+              <div className="ai-result">
+                <div className="ai-head">
+                  <span className={`ai-src ${opt.brief.source}`}>
+                    {opt.brief.source === 'gemini' ? 'GEMINI BRIEF' : 'COMPUTED BRIEF'}
+                  </span>
+                  <span className="ai-meta">{opt.evaluated} plans evaluated</span>
+                </div>
+                <div className="ai-plan">
+                  {opt.recommended.labels.length
+                    ? opt.recommended.labels.map((l) => <span key={l} className="ai-chip">{l}</span>)
+                    : <span className="ai-chip none">No intervention needed</span>}
+                </div>
+                <p className="ai-brief">{opt.brief.text}</p>
+                {opt.brief.error && (
+                  <p className="ai-err" title={opt.brief.error}>
+                    Gemini unavailable — showing the computed summary.
+                  </p>
+                )}
+              </div>
             )}
           </section>
 
@@ -96,7 +151,7 @@ export default function M1Crowd() {
                 </div>
               </label>
             ))}
-            {anyMit && <button className="btn ghost full" style={{ marginTop: 8 }} onClick={() => setMit({})}>Reset to baseline</button>}
+            {anyMit && <button className="btn ghost full" style={{ marginTop: 8 }} onClick={() => { setMit({}); setOpt(null) }}>Reset to baseline</button>}
           </section>
 
           <section className="panel legend">
@@ -140,7 +195,7 @@ export default function M1Crowd() {
           </div>
 
           {mode === '3d'
-            ? <StationScene3D station={station} sim={sim} baseline={anyMit ? baseline : null} />
+            ? <StationScene3D station={station} sim={sim} baseline={anyMit ? baseline : null} analyzing={optRunning} />
             : <StationMap station={station} sim={sim} />}
 
           <div className="bottom">

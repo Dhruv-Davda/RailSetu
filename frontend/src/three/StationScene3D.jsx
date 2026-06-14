@@ -591,6 +591,94 @@ function CrushBeacons({ geo, sim }) {
   )
 }
 
+/* --------------------------------------------------------- analyser overlay */
+
+// Phases mirror what the backend is actually doing, with the dwell times taken
+// from measured cost: 16 sims ~1.7 s, then the Gemini brief (~6-10 s).
+const ANALYSIS_PHASES = [
+  [0, 'SIMULATING MITIGATION PLANS'],
+  [1900, 'RANKING BY CRUSH RISK'],
+  [2900, 'GENERATING CONTROL BRIEF'],
+]
+
+/**
+ * "Working" overlay pinned to the danger zone while the optimizer runs.
+ *
+ * A spinner in the sidebar tells you something is happening; this tells you
+ * WHERE and on WHAT. Scan rings climb the crush column, a sweep line rotates
+ * over it, and the caption names the stage — so the wait reads as the system
+ * examining the hotspot rather than as latency.
+ */
+function AnalyzerOverlay({ geo, sim, baseline, active }) {
+  // Prefer the no-action hotspot: on a re-run the current sim may already be
+  // mitigated, and the overlay should sit on the danger zone being solved.
+  const node = baseline?.node_hotspots?.[0] || sim?.node_hotspots?.[0]
+  const ringRefs = useRef([])
+  const sweepRef = useRef()
+  const t0 = useRef(0)
+  const [phase, setPhase] = useState(ANALYSIS_PHASES[0][1])
+
+  useEffect(() => {
+    if (!active) return
+    setPhase(ANALYSIS_PHASES[0][1])
+    const timers = ANALYSIS_PHASES.slice(1).map(([at, label]) =>
+      setTimeout(() => setPhase(label), at))
+    return () => timers.forEach(clearTimeout)
+  }, [active])
+
+  useFrame(({ clock }) => {
+    if (!active) return
+    if (!t0.current) t0.current = clock.elapsedTime
+    const t = clock.elapsedTime - t0.current
+    ringRefs.current.forEach((m, i) => {
+      if (!m) return
+      const f = ((t * 0.55 + i / 3) % 1)          // 0->1 climb
+      m.position.y = f * 46
+      const sc = 0.55 + f * 1.5
+      m.scale.set(sc, sc, sc)
+      m.material.opacity = 0.5 * (1 - f)
+    })
+    if (sweepRef.current) sweepRef.current.rotation.y = t * 2.1
+  })
+  useEffect(() => { if (!active) t0.current = 0 }, [active])
+
+  if (!active || !node) return null
+  const v = geo.p3(node.node)
+  if (!v) return null
+
+  return (
+    <group position={[v.x, v.y, v.z]}>
+      {[0, 1, 2].map((i) => (
+        <mesh key={i} ref={(el) => (ringRefs.current[i] = el)} rotation={[-Math.PI / 2, 0, 0]}>
+          <ringGeometry args={[8, 10.5, 40]} />
+          <meshBasicMaterial
+            color="#8ab4f8" transparent opacity={0.5}
+            side={THREE.DoubleSide} depthWrite={false} toneMapped={false}
+          />
+        </mesh>
+      ))}
+      {/* rotating sweep line */}
+      <group ref={sweepRef}>
+        <mesh position={[9, 1.2, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+          <planeGeometry args={[19, 1.1]} />
+          <meshBasicMaterial
+            color="#8ab4f8" transparent opacity={0.6}
+            side={THREE.DoubleSide} depthWrite={false} toneMapped={false}
+          />
+        </mesh>
+      </group>
+      <pointLight position={[0, 16, 0]} color="#8ab4f8" intensity={5} distance={130} />
+      <Html position={[0, 58, 0]} center distanceFactor={230} zIndexRange={[21, 0]}>
+        <div className="v3-analyse">
+          <span className="dots"><i /><i /><i /></span>
+          {phase}
+          <span>optimising at {node.node} · {node.density.toFixed(1)} p/m²</span>
+        </div>
+      </Html>
+    </group>
+  )
+}
+
 /* ------------------------------------------------------------------ deck piers */
 
 /** Support columns under every FOB-deck node, so the bridge stands on legs
@@ -843,7 +931,7 @@ function CameraRig({ view, geo, sim, baseline, controls }) {
 
 /* ------------------------------------------------------------------------ root */
 
-export default function StationScene3D({ station, sim, baseline }) {
+export default function StationScene3D({ station, sim, baseline, analyzing = false }) {
   const geo = useStationGeometry(station)
   const controls = useRef()
   const [view, setView] = useState('aerial')
@@ -903,6 +991,7 @@ export default function StationScene3D({ station, sim, baseline }) {
         <DensityColumns geo={geo} sim={sim} intensity={intensity} />
         <CrowdParticles geo={geo} station={station} sim={sim} intensity={intensity} />
         <CrushBeacons geo={geo} sim={sim} />
+        {analyzing && <AnalyzerOverlay geo={geo} sim={sim} baseline={baseline} active />}
         <BaselineGhosts geo={geo} baseline={baseline} sim={sim} />
         <ExitPads geo={geo} />
         <OrbitControls

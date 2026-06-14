@@ -31,6 +31,9 @@ export const getStation = () => getJSON('/station')
 export const getScenarios = () => getJSON('/scenarios').then((d) => d.scenarios)
 export const simulate = (scenario, mitigations) => postJSON('/simulate', { scenario, mitigations })
 export const whatif = (scenario, mitigations) => postJSON('/whatif', { scenario, mitigations })
+// M1.4 — exhaustive mitigation search + AI-written operator brief
+export const optimizeCrowd = (scenario, explain = true) =>
+  postJSON('/optimize', { scenario, explain })
 
 // M2 — Delay propagation & rescheduling
 export const getCorridor = () => getJSON('/m2/network')

@@ -76,6 +76,20 @@ class Settings(BaseSettings):
     # Capture it with `python scripts/capture_live_snapshot.py` (needs a valid key).
     live_snapshot_path: str = "fixtures/live_snapshot.json"
 
+    # ---- Gemini (optimizer BRIEF only — never the decision) ----
+    # The mitigation plan is chosen by exhaustive simulation in
+    # app/m1_crowd/optimizer.py. Gemini only narrates the finished result, so
+    # an absent key degrades the wording, never the recommendation.
+    gemini_api_key: str = ""        # set in env, never commit
+    gemini_model: str = "gemini-3.6-flash"
+    gemini_base_url: str = "https://generativelanguage.googleapis.com"
+    gemini_timeout_s: float = 20.0
+    # Gemini 3.x models always reason, and thinking tokens count against
+    # maxOutputTokens (a 400 cap left ~15 tokens for prose and truncated it
+    # mid-sentence). thinkingBudget:0 is rejected by this model, so the ceiling
+    # is simply set well above observed thinking usage (~1.3k).
+    gemini_max_tokens: int = 2500
+
     # ---- Crowd sensing / calibration ----
     crowd_sensor: str = "none"      # "none" | "stub"
     crowd_sensor_fixture: str = ""  # optional JSON of measured observations

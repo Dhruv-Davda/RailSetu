@@ -20,6 +20,10 @@ from app.data.station import load_rails, load_station, refresh_station
 from app.demand.factory import get_demand_provider
 from app.ingest.calibration import CalibrationState, compute_capacity_scale
 from app.ingest.crowd_sensing import get_crowd_sensor
+from app.m1_crowd.optimizer import search as optimizer_search
+from app.clients.gemini import (
+    GeminiClient, GeminiError, build_prompt, fallback_brief,
+)
 from app.m1_crowd.simulation import los_for, simulate
 
 settings = get_settings()
@@ -37,6 +41,7 @@ app.add_middleware(
 # Process-wide singletons (cheap, stateless except the calibration store).
 CROWD_SENSOR = get_crowd_sensor(settings)
 CAL_STATE = CalibrationState()
+GEMINI = GeminiClient(settings)
 
 METER_DENSITY = 2.5      # hold at mid LOS C (comfortably safe) before the FOB
 FOB_EGRESS_MULT = 2.5
@@ -166,6 +171,7 @@ def health():
         "demand_provider": provider.health(),
         "crowd_sensor": CROWD_SENSOR.health(),
         "calibration": CAL_STATE.as_dict(),
+        "gemini": GEMINI.health(),
     }
 
 
@@ -246,6 +252,53 @@ def whatif(req: SimRequest):
             "cleared_after": mit["summary"]["total_cleared"],
         },
     }
+
+
+class OptimizeRequest(BaseModel):
+    scenario: str
+    explain: bool = True     # ask Gemini for the operator brief
+
+
+@app.post("/api/optimize")
+def optimize(req: OptimizeRequest):
+    """M1.4 — pick the best mitigation plan, then explain it.
+
+    The PLAN is computed: every one of the 16 mitigation combinations is run
+    through the real pedestrian-flow simulation and ranked (crush points, then
+    peak density, then throughput, then how many measures it takes). Gemini is
+    asked only to write the control-room brief for the winning plan, and if it
+    is unconfigured or unreachable we fall back to a deterministic summary — so
+    the recommendation itself never depends on a network call or an LLM.
+    """
+    provider = get_demand_provider()
+    ds = provider.get_scenario(req.scenario)
+    if not ds:
+        raise HTTPException(404, f"unknown scenario '{req.scenario}'")
+
+    result = optimizer_search(_run, req.scenario, Mitigations)
+
+    brief, source, error = fallback_brief(result), "fallback", None
+    if req.explain and GEMINI.configured:
+        try:
+            brief = GEMINI.brief(build_prompt(result, ds.title))
+            source = "gemini"
+        except GeminiError as e:
+            error = str(e)
+            log.warning("gemini brief failed, using fallback: %s", e)
+
+    result["brief"] = {
+        "text": brief,
+        "source": source,               # "gemini" | "fallback"
+        "model": settings.gemini_model if source == "gemini" else None,
+        "error": error,
+    }
+    log.info(
+        "optimizer: %s -> %s (peak %.2f -> %.2f, crush %d -> %d) brief=%s",
+        req.scenario, result["recommended"]["active"] or ["none"],
+        result["impact"]["peak_before"], result["impact"]["peak_after"],
+        result["impact"]["crush_before"], result["impact"]["crush_after"], source,
+    )
+    return result
 
 
 @app.post("/api/calibration/run")
