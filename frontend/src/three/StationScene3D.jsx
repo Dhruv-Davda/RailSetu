@@ -807,12 +807,14 @@ function CameraRig({ view, geo, sim, baseline, controls }) {
       const c = b ? a.clone().add(b).multiplyScalar(0.5) : a.clone()
       const spread = b ? a.distanceTo(b) : 0
       const ghostH = Math.min(baseTop.density, 20) * 2.6
-      const d = Math.max(95, spread * 1.3, ghostH * 2.6)
-      tgt = new THREE.Vector3(c.x, c.y + ghostH * 0.45, c.z)
+      const d = Math.max(110, spread * 1.3, ghostH * 2.8)
+      // Aim above the ghost cage so the floating outcome badge (cage top + 26)
+      // sits inside the frame instead of clipping at the canvas edge.
+      tgt = new THREE.Vector3(c.x, c.y + ghostH * 0.75, c.z)
       pos = c.clone()
         .addScaledVector(ad, d * 0.85)
         .addScaledVector(td, -d * 0.5)
-        .add(new THREE.Vector3(0, d * 0.8, 0))
+        .add(new THREE.Vector3(0, d * 0.85, 0))
     } else {
       // Aerial: look down the yard along the (rail-derived) track axis — the
       // classic throat shot — from a three-quarter offset so depth still reads.
