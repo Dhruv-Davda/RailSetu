@@ -20,6 +20,10 @@ India's scale and crowding.
 
 *Real pedestrian-flow modelling and constraint-based rescheduling on a shared data backbone — **not** an LLM wrapper.*
 
+### ▶️ Watch the demo
+
+[![RailSetu demo video](https://img.youtube.com/vi/1xAeFJn1vCQ/maxresdefault.jpg)](https://youtu.be/1xAeFJn1vCQ)
+
 </div>
 
 ---
@@ -437,23 +441,22 @@ against site data before any real deployment.
 
 ## Roadmap
 
-Deferred for the hackathon, **architected on the same backbone**:
+Deferred for the mvp Round 1, **architected on the same backbone**:
 
-- **M1.8 — Public Crowd Status App (PWA):** passenger-facing live crowd level per
-  gate with directional guidance.
-- **M1.9 — Festival Surge Calendar:** forward-looking "festival in 3 days" forecasting.
-- **M3 — Predictive Track Maintenance:** CV defect detection from cab-camera / drone footage.
-- **M4 — Level-Crossing Safety:** CV obstacle detection + emergency dispatch.
-- **M5 — Waitlist & coach-load intelligence.**
-- **M2.6 — Historical validation:** back-test the optimizer on real NTES delay history.
+| Milestone | Feature | Description |
+| --- | --- | --- |
+| **M1.8** | Public Crowd Status App (PWA) | Passenger-facing live crowd level per gate with directional guidance. |
+| **M1.9** | Festival Surge Calendar | Forward-looking "festival in 3 days" forecasting. |
+| **M3** | Predictive Track Maintenance | CV defect detection from cab-camera / drone footage. |
+| **M4** | Level-Crossing Safety | CV obstacle detection + emergency dispatch. |
+| **M5** | Waitlist & coach-load intelligence | Waitlist and coach-load intelligence. |
+| **M2.6** | Historical validation | Back-test the optimizer on real NTES delay history. |
 
 ---
 
-## Team
+<div align="center">
 
 Built by **Saswata · Mahir · Dhruv** for **FAR AWAY 2026** (Railways track).
-
-<div align="center">
 
 *Framed preventively, in memory of those lost — the goal is to save lives.*
 
