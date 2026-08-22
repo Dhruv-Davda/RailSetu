@@ -1,0 +1,21 @@
+{
+  "id": "7d75a0a45c51",
+  "seq": 1,
+  "title": "Initial text",
+  "description": "The text this document shipped with. Recorded so every later amendment has a baseline to be compared against.",
+  "author_name": "RailSetu",
+  "author_email": "system@railsetu",
+  "created_at": "2026-08-22T20:25:50+00:00",
+  "yaml": "# \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n#  Demand assumptions\n#\n#  The live arrivals feed returns trains, never passenger counts. These are the\n#  planning assumptions used to turn an arrival into a crowd. Replace them with\n#  PRS/UTS or gate counts once those are available.\n# \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n\ndemand_assumptions:\n  default_alighting_per_train: 1200\n  special_train_multiplier: 2.2\n  unload_duration_s: 180\n",
+  "parent_id": null,
+  "diff_stats": {
+    "added": 12,
+    "removed": 0,
+    "changed": 12
+  },
+  "changes": [],
+  "impact": {},
+  "rollback_of": null,
+  "reverts": null,
+  "location": {}
+}

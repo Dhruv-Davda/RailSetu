@@ -1,0 +1,502 @@
+{
+  "versions": [
+    {
+      "id": "d00bc1dda873",
+      "seq": 1,
+      "title": "Initial text",
+      "description": "The text this document shipped with. Recorded so every later amendment has a baseline to be compared against.",
+      "author_name": "RailSetu",
+      "author_email": "system@railsetu",
+      "created_at": "2026-08-22T21:01:54+00:00",
+      "parent_id": null,
+      "diff_stats": {
+        "added": 25,
+        "removed": 0,
+        "changed": 25
+      },
+      "changes": [],
+      "impact": {},
+      "rollback_of": null,
+      "reverts": null,
+      "location": {}
+    },
+    {
+      "id": "0f90a6fd459b",
+      "seq": 2,
+      "title": "Located change",
+      "description": "",
+      "author_name": "Asha Rao",
+      "author_email": "asha.rao@ir.gov.in",
+      "created_at": "2026-08-22T21:02:04+00:00",
+      "parent_id": "d00bc1dda873",
+      "diff_stats": {
+        "added": 1,
+        "removed": 1,
+        "changed": 2
+      },
+      "changes": [
+        {
+          "path": "crowd_safety.density_bands.crush_above",
+          "kind": "changed",
+          "before": 5.0,
+          "after": 4.4,
+          "text": "crowd_safety.density_bands.crush_above: 5.0 \u2192 4.4"
+        }
+      ],
+      "impact": {
+        "before": {
+          "crowd": {
+            "scenario": "Festival surge \u2014 Prayagraj specials (Feb 2025 pattern)",
+            "peak_density": 17.39,
+            "peak_los": "F",
+            "crush_count": 4,
+            "danger_count": 5,
+            "cleared": 128.6
+          },
+          "corridor": {
+            "scenario": "Slow passenger train pathed ahead of the express fleet",
+            "delay_before_min": 1106.4,
+            "delay_after_min": 1.4,
+            "saved_min": 1105.0,
+            "saved_pct": 99.9,
+            "affected": 1,
+            "moves": 7
+          },
+          "protection": {
+            "weighted_coverage_pct": 24.4,
+            "equipped": 2,
+            "partial": 3,
+            "none": 9,
+            "risk_share_pct": 64.8,
+            "corridors_at_risk": 8
+          },
+          "recommendation": {
+            "measures": [
+              "Metered holding",
+              "Staggered release"
+            ],
+            "peak_after": 3.21,
+            "crush_after": 0,
+            "objective": [
+              "crush_points",
+              "peak_density",
+              "throughput",
+              "measure_count"
+            ]
+          }
+        },
+        "after": {
+          "crowd": {
+            "scenario": "Festival surge \u2014 Prayagraj specials (Feb 2025 pattern)",
+            "peak_density": 17.39,
+            "peak_los": "F",
+            "crush_count": 4,
+            "danger_count": 5,
+            "cleared": 128.6
+          },
+          "corridor": {
+            "scenario": "Slow passenger train pathed ahead of the express fleet",
+            "delay_before_min": 1106.4,
+            "delay_after_min": 1.4,
+            "saved_min": 1105.0,
+            "saved_pct": 99.9,
+            "affected": 1,
+            "moves": 7
+          },
+          "protection": {
+            "weighted_coverage_pct": 24.4,
+            "equipped": 2,
+            "partial": 3,
+            "none": 9,
+            "risk_share_pct": 64.8,
+            "corridors_at_risk": 8
+          },
+          "recommendation": {
+            "measures": [
+              "Metered holding",
+              "Staggered release"
+            ],
+            "peak_after": 3.21,
+            "crush_after": 0,
+            "objective": [
+              "crush_points",
+              "peak_density",
+              "throughput",
+              "measure_count"
+            ]
+          }
+        },
+        "deltas": {
+          "crowd": {
+            "peak_density": {
+              "before": 17.39,
+              "after": 17.39,
+              "delta": 0.0,
+              "changed": false
+            },
+            "peak_los": {
+              "before": "F",
+              "after": "F",
+              "delta": null,
+              "changed": false
+            },
+            "crush_count": {
+              "before": 4,
+              "after": 4,
+              "delta": 0,
+              "changed": false
+            },
+            "danger_count": {
+              "before": 5,
+              "after": 5,
+              "delta": 0,
+              "changed": false
+            },
+            "cleared": {
+              "before": 128.6,
+              "after": 128.6,
+              "delta": 0.0,
+              "changed": false
+            }
+          },
+          "corridor": {
+            "delay_before_min": {
+              "before": 1106.4,
+              "after": 1106.4,
+              "delta": 0.0,
+              "changed": false
+            },
+            "delay_after_min": {
+              "before": 1.4,
+              "after": 1.4,
+              "delta": 0.0,
+              "changed": false
+            },
+            "saved_min": {
+              "before": 1105.0,
+              "after": 1105.0,
+              "delta": 0.0,
+              "changed": false
+            },
+            "saved_pct": {
+              "before": 99.9,
+              "after": 99.9,
+              "delta": 0.0,
+              "changed": false
+            },
+            "affected": {
+              "before": 1,
+              "after": 1,
+              "delta": 0,
+              "changed": false
+            },
+            "moves": {
+              "before": 7,
+              "after": 7,
+              "delta": 0,
+              "changed": false
+            }
+          },
+          "protection": {
+            "weighted_coverage_pct": {
+              "before": 24.4,
+              "after": 24.4,
+              "delta": 0.0,
+              "changed": false
+            },
+            "equipped": {
+              "before": 2,
+              "after": 2,
+              "delta": 0,
+              "changed": false
+            },
+            "partial": {
+              "before": 3,
+              "after": 3,
+              "delta": 0,
+              "changed": false
+            },
+            "none": {
+              "before": 9,
+              "after": 9,
+              "delta": 0,
+              "changed": false
+            },
+            "risk_share_pct": {
+              "before": 64.8,
+              "after": 64.8,
+              "delta": 0.0,
+              "changed": false
+            },
+            "corridors_at_risk": {
+              "before": 8,
+              "after": 8,
+              "delta": 0,
+              "changed": false
+            }
+          },
+          "recommendation": {
+            "before": [
+              "Metered holding",
+              "Staggered release"
+            ],
+            "after": [
+              "Metered holding",
+              "Staggered release"
+            ],
+            "changed": false
+          }
+        }
+      },
+      "rollback_of": null,
+      "reverts": null,
+      "location": {
+        "client_ip": "127.0.0.1",
+        "recorded_at": "2026-08-22T21:02:04+00:00",
+        "available": true,
+        "latitude": 28.6428,
+        "longitude": 77.2191,
+        "accuracy_m": 18,
+        "source": "browser geolocation",
+        "captured_at": "2026-08-22T21:01:54.990Z"
+      }
+    },
+    {
+      "id": "3e1c796c3e1b",
+      "seq": 3,
+      "title": "Change without a position",
+      "description": "",
+      "author_name": "Asha Rao",
+      "author_email": "asha.rao@ir.gov.in",
+      "created_at": "2026-08-22T21:02:15+00:00",
+      "parent_id": "0f90a6fd459b",
+      "diff_stats": {
+        "added": 1,
+        "removed": 1,
+        "changed": 2
+      },
+      "changes": [
+        {
+          "path": "crowd_safety.density_bands.crush_above",
+          "kind": "changed",
+          "before": 4.4,
+          "after": 4.2,
+          "text": "crowd_safety.density_bands.crush_above: 4.4 \u2192 4.2"
+        }
+      ],
+      "impact": {
+        "before": {
+          "crowd": {
+            "scenario": "Festival surge \u2014 Prayagraj specials (Feb 2025 pattern)",
+            "peak_density": 17.39,
+            "peak_los": "F",
+            "crush_count": 4,
+            "danger_count": 5,
+            "cleared": 128.6
+          },
+          "corridor": {
+            "scenario": "Slow passenger train pathed ahead of the express fleet",
+            "delay_before_min": 1106.4,
+            "delay_after_min": 1.4,
+            "saved_min": 1105.0,
+            "saved_pct": 99.9,
+            "affected": 1,
+            "moves": 7
+          },
+          "protection": {
+            "weighted_coverage_pct": 24.4,
+            "equipped": 2,
+            "partial": 3,
+            "none": 9,
+            "risk_share_pct": 64.8,
+            "corridors_at_risk": 8
+          },
+          "recommendation": {
+            "measures": [
+              "Metered holding",
+              "Staggered release"
+            ],
+            "peak_after": 3.21,
+            "crush_after": 0,
+            "objective": [
+              "crush_points",
+              "peak_density",
+              "throughput",
+              "measure_count"
+            ]
+          }
+        },
+        "after": {
+          "crowd": {
+            "scenario": "Festival surge \u2014 Prayagraj specials (Feb 2025 pattern)",
+            "peak_density": 17.39,
+            "peak_los": "F",
+            "crush_count": 4,
+            "danger_count": 5,
+            "cleared": 128.6
+          },
+          "corridor": {
+            "scenario": "Slow passenger train pathed ahead of the express fleet",
+            "delay_before_min": 1106.4,
+            "delay_after_min": 1.4,
+            "saved_min": 1105.0,
+            "saved_pct": 99.9,
+            "affected": 1,
+            "moves": 7
+          },
+          "protection": {
+            "weighted_coverage_pct": 24.4,
+            "equipped": 2,
+            "partial": 3,
+            "none": 9,
+            "risk_share_pct": 64.8,
+            "corridors_at_risk": 8
+          },
+          "recommendation": {
+            "measures": [
+              "Metered holding",
+              "Staggered release"
+            ],
+            "peak_after": 3.21,
+            "crush_after": 0,
+            "objective": [
+              "crush_points",
+              "peak_density",
+              "throughput",
+              "measure_count"
+            ]
+          }
+        },
+        "deltas": {
+          "crowd": {
+            "peak_density": {
+              "before": 17.39,
+              "after": 17.39,
+              "delta": 0.0,
+              "changed": false
+            },
+            "peak_los": {
+              "before": "F",
+              "after": "F",
+              "delta": null,
+              "changed": false
+            },
+            "crush_count": {
+              "before": 4,
+              "after": 4,
+              "delta": 0,
+              "changed": false
+            },
+            "danger_count": {
+              "before": 5,
+              "after": 5,
+              "delta": 0,
+              "changed": false
+            },
+            "cleared": {
+              "before": 128.6,
+              "after": 128.6,
+              "delta": 0.0,
+              "changed": false
+            }
+          },
+          "corridor": {
+            "delay_before_min": {
+              "before": 1106.4,
+              "after": 1106.4,
+              "delta": 0.0,
+              "changed": false
+            },
+            "delay_after_min": {
+              "before": 1.4,
+              "after": 1.4,
+              "delta": 0.0,
+              "changed": false
+            },
+            "saved_min": {
+              "before": 1105.0,
+              "after": 1105.0,
+              "delta": 0.0,
+              "changed": false
+            },
+            "saved_pct": {
+              "before": 99.9,
+              "after": 99.9,
+              "delta": 0.0,
+              "changed": false
+            },
+            "affected": {
+              "before": 1,
+              "after": 1,
+              "delta": 0,
+              "changed": false
+            },
+            "moves": {
+              "before": 7,
+              "after": 7,
+              "delta": 0,
+              "changed": false
+            }
+          },
+          "protection": {
+            "weighted_coverage_pct": {
+              "before": 24.4,
+              "after": 24.4,
+              "delta": 0.0,
+              "changed": false
+            },
+            "equipped": {
+              "before": 2,
+              "after": 2,
+              "delta": 0,
+              "changed": false
+            },
+            "partial": {
+              "before": 3,
+              "after": 3,
+              "delta": 0,
+              "changed": false
+            },
+            "none": {
+              "before": 9,
+              "after": 9,
+              "delta": 0,
+              "changed": false
+            },
+            "risk_share_pct": {
+              "before": 64.8,
+              "after": 64.8,
+              "delta": 0.0,
+              "changed": false
+            },
+            "corridors_at_risk": {
+              "before": 8,
+              "after": 8,
+              "delta": 0,
+              "changed": false
+            }
+          },
+          "recommendation": {
+            "before": [
+              "Metered holding",
+              "Staggered release"
+            ],
+            "after": [
+              "Metered holding",
+              "Staggered release"
+            ],
+            "changed": false
+          }
+        }
+      },
+      "rollback_of": null,
+      "reverts": null,
+      "location": {
+        "client_ip": "127.0.0.1",
+        "recorded_at": "2026-08-22T21:02:15+00:00",
+        "available": false,
+        "reason": "permission denied"
+      }
+    }
+  ]
+}

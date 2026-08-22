@@ -1,0 +1,21 @@
+{
+  "id": "d00bc1dda873",
+  "seq": 1,
+  "title": "Initial text",
+  "description": "The text this document shipped with. Recorded so every later amendment has a baseline to be compared against.",
+  "author_name": "RailSetu",
+  "author_email": "system@railsetu",
+  "created_at": "2026-08-22T21:00:39+00:00",
+  "yaml": "# \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n#  Crowd safety thresholds\n#\n#  Fruin Level-of-Service bands, in persons per square metre. These define\n#  when a location is reported as restricted, dangerous, or a crush point.\n#\n#  crush_above is the consequential one: it is the line between \"very crowded\"\n#  and \"lethal\". Lowering it does not change the crowd \u2014 it changes how many\n#  locations the platform is obliged to report and act on.\n# \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n\ncrowd_safety:\n  density_bands:\n    restricted_above: 1.0\n    constrained_above: 2.0\n    dangerous_above: 3.5\n    crush_above: 5.0\n\n  # When metered holding is in force, passengers are held upstream until the\n  # space ahead falls below this density before more are released into it.\n  metered_holding_release_density: 2.5\n\n  # Assumed egress gain from converting a foot-over-bridge to one-way working\n  # and opening reserve lanes. 2.5 = two and a half times normal throughput.\n  one_way_fob_egress_multiplier: 2.5\n",
+  "parent_id": null,
+  "diff_stats": {
+    "added": 25,
+    "removed": 0,
+    "changed": 25
+  },
+  "changes": [],
+  "impact": {},
+  "rollback_of": null,
+  "reverts": null,
+  "location": {}
+}

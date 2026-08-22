@@ -1,0 +1,14 @@
+{
+  "documents": [
+    {
+      "key": "platform-announcement-standards",
+      "title": "Platform announcement standards",
+      "summary": "What is announced, in what order and in which languages.",
+      "department": "Station Operations & Safety",
+      "format": "markdown",
+      "initial_text": "# Platform Announcement Standards\n\nSafety instruction first, always.\n\n1. Hindi\n2. English\n3. Regional language\n",
+      "created_by": "ops@ir.gov.in",
+      "created_at": "2026-08-22T21:01:08+00:00"
+    }
+  ]
+}

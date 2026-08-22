@@ -1,0 +1,30 @@
+{
+  "id": "295c27e01e4d",
+  "seq": 1,
+  "title": "Initial text",
+  "description": "'Platform announcement standards' added to the policy library by Ops.",
+  "author_name": "Ops",
+  "author_email": "ops@ir.gov.in",
+  "created_at": "2026-08-22T21:01:08+00:00",
+  "yaml": "# Platform Announcement Standards\n\nSafety instruction first, always.\n\n1. Hindi\n2. English\n3. Regional language\n",
+  "parent_id": null,
+  "diff_stats": {
+    "added": 7,
+    "removed": 0,
+    "changed": 7
+  },
+  "changes": [],
+  "impact": {},
+  "rollback_of": null,
+  "reverts": null,
+  "location": {
+    "client_ip": "127.0.0.1",
+    "recorded_at": "2026-08-22T21:01:08+00:00",
+    "available": true,
+    "latitude": 28.6428,
+    "longitude": 77.2191,
+    "accuracy_m": 15,
+    "source": "browser geolocation",
+    "captured_at": "2026-08-22T21:01:04.397Z"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "versions": [
+    {
+      "id": "7d75a0a45c51",
+      "seq": 1,
+      "title": "Initial text",
+      "description": "The text this document shipped with. Recorded so every later amendment has a baseline to be compared against.",
+      "author_name": "RailSetu",
+      "author_email": "system@railsetu",
+      "created_at": "2026-08-22T20:59:16+00:00",
+      "parent_id": null,
+      "diff_stats": {
+        "added": 12,
+        "removed": 0,
+        "changed": 12
+      },
+      "changes": [],
+      "impact": {},
+      "rollback_of": null,
+      "reverts": null,
+      "location": {}
+    }
+  ]
+}

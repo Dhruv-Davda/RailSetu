@@ -1024,11 +1024,19 @@ on first import and otherwise warns and falls back to `/tmp` on every start.
 
 ## Testing
 
+**755 checks across 14 suites, all passing.**
+
 ```bash
 ./tests/run.sh          # everything — provisions its own stack, prints one total
 ./tests/run.sh api      # the Python suites (no browser, no server, no network)
 ./tests/run.sh ui       # the browser suites
 ```
+
+| | Checks |
+|---|---:|
+| API, in-process — crowd 62 · corridor 74 · platform 94 · policy-units 114 · protection 55 · revert 51 | **450** |
+| API over HTTP — the two networks | **82** |
+| Browser — three 46 · policy 61 · signin 38 · defects 31 · add-policy 20 · location 14 · revert 13 | **223** |
 
 ```
 tests/

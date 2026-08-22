@@ -1,0 +1,238 @@
+{
+  "id": "e5f7159c93b6",
+  "seq": 6,
+  "title": "Revert v2 \u2014 v2 crush 4.0",
+  "description": "Backs out the change introduced by v2 (309e9d41091e), keeping every later amendment in place.",
+  "author_name": "Edge",
+  "author_email": "edge@ir.gov.in",
+  "created_at": "2026-08-22T21:00:11+00:00",
+  "yaml": "# \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n#  Crowd safety thresholds\n#\n#  Fruin Level-of-Service bands, in persons per square metre. These define\n#  when a location is reported as restricted, dangerous, or a crush point.\n#\n#  crush_above is the consequential one: it is the line between \"very crowded\"\n#  and \"lethal\". Lowering it does not change the crowd \u2014 it changes how many\n#  locations the platform is obliged to report and act on.\n# \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n\ncrowd_safety:\n  density_bands:\n    restricted_above: 1.0\n    constrained_above: 2.0\n    dangerous_above: 3.5\n    crush_above: 5.0\n\n  # When metered holding is in force, passengers are held upstream until the\n  # space ahead falls below this density before more are released into it.\n  metered_holding_release_density: 3.0\n\n  # Assumed egress gain from converting a foot-over-bridge to one-way working\n  # and opening reserve lanes. 2.5 = two and a half times normal throughput.\n  one_way_fob_egress_multiplier: 2.5\n",
+  "parent_id": "54a07ee38e97",
+  "diff_stats": {
+    "added": 1,
+    "removed": 1,
+    "changed": 2
+  },
+  "changes": [
+    {
+      "path": "crowd_safety.density_bands.crush_above",
+      "kind": "changed",
+      "before": 4.0,
+      "after": 5.0,
+      "text": "crowd_safety.density_bands.crush_above: 4.0 \u2192 5.0"
+    }
+  ],
+  "impact": {
+    "before": {
+      "crowd": {
+        "scenario": "Festival surge \u2014 Prayagraj specials (Feb 2025 pattern)",
+        "peak_density": 17.39,
+        "peak_los": "F",
+        "crush_count": 4,
+        "danger_count": 5,
+        "cleared": 128.6
+      },
+      "corridor": {
+        "scenario": "Slow passenger train pathed ahead of the express fleet",
+        "delay_before_min": 1106.4,
+        "delay_after_min": 1.4,
+        "saved_min": 1105.0,
+        "saved_pct": 99.9,
+        "affected": 1,
+        "moves": 7
+      },
+      "protection": {
+        "weighted_coverage_pct": 24.4,
+        "equipped": 2,
+        "partial": 3,
+        "none": 9,
+        "risk_share_pct": 64.8,
+        "corridors_at_risk": 8
+      },
+      "recommendation": {
+        "measures": [
+          "Metered holding",
+          "Staggered release"
+        ],
+        "peak_after": 3.69,
+        "crush_after": 0,
+        "objective": [
+          "crush_points",
+          "peak_density",
+          "throughput",
+          "measure_count"
+        ]
+      }
+    },
+    "after": {
+      "crowd": {
+        "scenario": "Festival surge \u2014 Prayagraj specials (Feb 2025 pattern)",
+        "peak_density": 17.39,
+        "peak_los": "F",
+        "crush_count": 4,
+        "danger_count": 5,
+        "cleared": 128.6
+      },
+      "corridor": {
+        "scenario": "Slow passenger train pathed ahead of the express fleet",
+        "delay_before_min": 1106.4,
+        "delay_after_min": 1.4,
+        "saved_min": 1105.0,
+        "saved_pct": 99.9,
+        "affected": 1,
+        "moves": 7
+      },
+      "protection": {
+        "weighted_coverage_pct": 24.4,
+        "equipped": 2,
+        "partial": 3,
+        "none": 9,
+        "risk_share_pct": 64.8,
+        "corridors_at_risk": 8
+      },
+      "recommendation": {
+        "measures": [
+          "Metered holding",
+          "Staggered release"
+        ],
+        "peak_after": 3.69,
+        "crush_after": 0,
+        "objective": [
+          "crush_points",
+          "peak_density",
+          "throughput",
+          "measure_count"
+        ]
+      }
+    },
+    "deltas": {
+      "crowd": {
+        "peak_density": {
+          "before": 17.39,
+          "after": 17.39,
+          "delta": 0.0,
+          "changed": false
+        },
+        "peak_los": {
+          "before": "F",
+          "after": "F",
+          "delta": null,
+          "changed": false
+        },
+        "crush_count": {
+          "before": 4,
+          "after": 4,
+          "delta": 0,
+          "changed": false
+        },
+        "danger_count": {
+          "before": 5,
+          "after": 5,
+          "delta": 0,
+          "changed": false
+        },
+        "cleared": {
+          "before": 128.6,
+          "after": 128.6,
+          "delta": 0.0,
+          "changed": false
+        }
+      },
+      "corridor": {
+        "delay_before_min": {
+          "before": 1106.4,
+          "after": 1106.4,
+          "delta": 0.0,
+          "changed": false
+        },
+        "delay_after_min": {
+          "before": 1.4,
+          "after": 1.4,
+          "delta": 0.0,
+          "changed": false
+        },
+        "saved_min": {
+          "before": 1105.0,
+          "after": 1105.0,
+          "delta": 0.0,
+          "changed": false
+        },
+        "saved_pct": {
+          "before": 99.9,
+          "after": 99.9,
+          "delta": 0.0,
+          "changed": false
+        },
+        "affected": {
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "changed": false
+        },
+        "moves": {
+          "before": 7,
+          "after": 7,
+          "delta": 0,
+          "changed": false
+        }
+      },
+      "protection": {
+        "weighted_coverage_pct": {
+          "before": 24.4,
+          "after": 24.4,
+          "delta": 0.0,
+          "changed": false
+        },
+        "equipped": {
+          "before": 2,
+          "after": 2,
+          "delta": 0,
+          "changed": false
+        },
+        "partial": {
+          "before": 3,
+          "after": 3,
+          "delta": 0,
+          "changed": false
+        },
+        "none": {
+          "before": 9,
+          "after": 9,
+          "delta": 0,
+          "changed": false
+        },
+        "risk_share_pct": {
+          "before": 64.8,
+          "after": 64.8,
+          "delta": 0.0,
+          "changed": false
+        },
+        "corridors_at_risk": {
+          "before": 8,
+          "after": 8,
+          "delta": 0,
+          "changed": false
+        }
+      },
+      "recommendation": {
+        "before": [
+          "Metered holding",
+          "Staggered release"
+        ],
+        "after": [
+          "Metered holding",
+          "Staggered release"
+        ],
+        "changed": false
+      }
+    }
+  },
+  "rollback_of": null,
+  "reverts": "309e9d41091e",
+  "location": {
+    "client_ip": "testclient",
+    "recorded_at": "2026-08-22T21:00:11+00:00",
+    "available": false,
+    "reason": "not provided"
+  }
+}
