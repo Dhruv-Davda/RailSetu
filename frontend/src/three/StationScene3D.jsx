@@ -845,8 +845,22 @@ const VIEWS = {
 
 function CameraRig({ view, geo, sim, baseline, controls }) {
   const { camera } = useThree()
+  const defaultControls = useThree((s) => s.controls)
   const goal = useRef({ pos: new THREE.Vector3(), tgt: new THREE.Vector3() })
   const armed = useRef(null)
+  // Set once the user grabs the camera. The fly-in must never fight a hand on
+  // the mouse, and data landing later must not yank the view back.
+  const userTook = useRef(false)
+
+  useEffect(() => {
+    if (!defaultControls) return
+    const yieldToUser = () => { armed.current = null; userTook.current = true }
+    defaultControls.addEventListener('start', yieldToUser)
+    return () => defaultControls.removeEventListener('start', yieldToUser)
+  }, [defaultControls])
+
+  // Picking a view button is an explicit request to move the camera again.
+  useEffect(() => { userTook.current = false }, [view])
 
   useEffect(() => {
     const r = geo.radius
@@ -913,18 +927,26 @@ function CameraRig({ view, geo, sim, baseline, controls }) {
     }
 
     goal.current = { pos, tgt }
-    armed.current = performance.now()
+    if (!userTook.current) armed.current = performance.now()
   }, [view, geo, sim, baseline])
 
-  useFrame(() => {
+  useFrame((_, dt) => {
     if (!armed.current) return
-    const k = 0.055
+    // Time-based, not per-frame: a fixed 0.055 step meant the fly-in took ~110
+    // frames, and the FIRST frames are the slowest (shader compile, particle
+    // and rail-mesh build). At ~15fps that locked the controls for seconds.
+    const k = 1 - Math.pow(0.05, Math.min(dt, 0.1))
     camera.position.lerp(goal.current.pos, k)
     if (controls.current) {
       controls.current.target.lerp(goal.current.tgt, k)
       controls.current.update()
     }
-    if (camera.position.distanceTo(goal.current.pos) < 1.5) armed.current = null
+    // Release on arrival OR on a hard deadline, so a slow first paint can never
+    // hold the camera hostage.
+    if (camera.position.distanceTo(goal.current.pos) < 1.5
+        || performance.now() - armed.current > 1600) {
+      armed.current = null
+    }
   })
   return null
 }

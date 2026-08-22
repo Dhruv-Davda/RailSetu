@@ -280,43 +280,103 @@ const VIEWS = {
 
 function CameraRig({ view, stations, timeRef, profiles, focusRef, controls, platformStation }) {
   const { camera } = useThree()
+  const defaultControls = useThree((s) => s.controls)
   const total = stations[stations.length - 1].km
+  const armed = useRef(0)        // timestamp while the initial fly-in runs
+  const prevTgt = useRef(null)   // last tracked point, for delta-follow
 
-  useFrame(() => {
-    const c = controls.current
-    if (!c) return
-    let pos, tgt
+  // 'corridor' drifts with the fleet and 'follow' chases one train, so their
+  // goal MOVES every frame; 'chart' is a fixed vantage.
+  const tracking = view === 'corridor' || view === 'follow'
 
+  /** Where the camera wants to be this frame. */
+  const goalFor = () => {
     if (view === 'platform' && platformStation) {
       const s = platformStation
       // stand on the platform deck, eye height, looking along the main line so
       // through trains sweep across frame
-      pos = new THREE.Vector3(s.km - 7, 1.9, LOOP_Z / 2 + 0.75)
-      tgt = new THREE.Vector3(s.km + 11, 0.85, MAIN_Z)
-    } else if (view === 'follow') {
-      const f = focusRef.current
-      pos = new THREE.Vector3((f?.x ?? 0) - 7, 3.2, (f?.z ?? 0) + 6)
-      tgt = new THREE.Vector3(f?.x ?? 0, 0.7, f?.z ?? 0)
-    } else if (view === 'chart') {
-      // high and slightly oblique so the whole 440 km fits and trains keep some form
-      pos = new THREE.Vector3(total / 2, 300, 46)
-      tgt = new THREE.Vector3(total / 2, 0, 0)
-    } else {
-      // corridor: drift along with the fleet centroid
-      let sum = 0, n = 0
-      for (const prof of profiles) {
-        const loc = locate(prof, timeRef.current, 1)
-        if (loc) { sum += loc.km; n++ }
+      return {
+        pos: new THREE.Vector3(s.km - 7, 1.9, LOOP_Z / 2 + 0.75),
+        tgt: new THREE.Vector3(s.km + 11, 0.85, MAIN_Z),
       }
-      const cx = n ? sum / n : total / 2
-      pos = new THREE.Vector3(cx - 27, 14, 23)
-      tgt = new THREE.Vector3(cx + 6, 0, 0)
+    }
+    if (view === 'follow') {
+      const f = focusRef.current
+      return {
+        pos: new THREE.Vector3((f?.x ?? 0) - 7, 3.2, (f?.z ?? 0) + 6),
+        tgt: new THREE.Vector3(f?.x ?? 0, 0.7, f?.z ?? 0),
+      }
+    }
+    if (view === 'chart') {
+      // high and slightly oblique so the whole 440 km fits and trains keep some form
+      return {
+        pos: new THREE.Vector3(total / 2, 300, 46),
+        tgt: new THREE.Vector3(total / 2, 0, 0),
+      }
+    }
+    // corridor: drift along with the fleet centroid
+    let sum = 0, n = 0
+    for (const prof of profiles) {
+      const loc = locate(prof, timeRef.current, 1)
+      if (loc) { sum += loc.km; n++ }
+    }
+    const cx = n ? sum / n : total / 2
+    return {
+      pos: new THREE.Vector3(cx - 27, 14, 23),
+      tgt: new THREE.Vector3(cx + 6, 0, 0),
+    }
+  }
+
+  // A view button is an explicit request to reframe: fly in again.
+  useEffect(() => {
+    armed.current = performance.now()
+    prevTgt.current = null
+  }, [view])
+
+  // Touching the camera cancels the fly-in immediately — it must never fight
+  // a hand on the mouse.
+  useEffect(() => {
+    if (!defaultControls) return
+    const yieldToUser = () => { armed.current = 0 }
+    defaultControls.addEventListener('start', yieldToUser)
+    return () => defaultControls.removeEventListener('start', yieldToUser)
+  }, [defaultControls])
+
+  useFrame((_, dt) => {
+    const c = controls.current
+    if (!c) return
+    const { pos, tgt } = goalFor()
+
+    if (armed.current) {
+      // Time-based so the fly-in takes the same wall-clock time at 15fps as at
+      // 60 — a per-frame constant made a slow first paint lock the controls.
+      const k = 1 - Math.pow(0.05, Math.min(dt, 0.1))
+      camera.position.lerp(pos, k)
+      c.target.lerp(tgt, k)
+      c.update()
+      if (camera.position.distanceTo(pos) < 1.0
+          || performance.now() - armed.current > 1600) {
+        armed.current = 0
+        prevTgt.current = tgt.clone()
+      }
+      return
     }
 
-    const k = view === 'follow' || view === 'corridor' ? 0.06 : 0.05
-    camera.position.lerp(pos, k)
-    c.target.lerp(tgt, k)
-    c.update()
+    if (!tracking) return          // fixed vantage: hands off, orbit freely
+
+    // Tracking views: translate the whole rig by how far the subject moved.
+    // Previously this lerped to an ABSOLUTE position every frame, which
+    // silently overwrote the user's orbit and zoom and made the camera
+    // impossible to move. Applying the delta keeps the train framed while
+    // leaving the viewer's angle and distance untouched.
+    if (!prevTgt.current) { prevTgt.current = tgt.clone(); return }
+    const delta = tgt.clone().sub(prevTgt.current)
+    if (delta.lengthSq() > 1e-8) {
+      camera.position.add(delta)
+      c.target.add(delta)
+      c.update()
+      prevTgt.current.copy(tgt)
+    }
   })
   return null
 }
