@@ -24,6 +24,11 @@ attributed, revertible document** you can amend from the browser.
 networks and a git-shaped policy register — on one shared backbone. **Not** an
 LLM wrapper.*
 
+### 🌐 Try it live — **[3.108.70.96.nip.io](https://3.108.70.96.nip.io)**
+
+Running on AWS. The Policy tab needs a sign-in: any email address will do — it
+becomes the identity every change you make is recorded against.
+
 ### ▶️ Watch the demo
 
 [![RailSetu demo video](https://img.youtube.com/vi/1xAeFJn1vCQ/maxresdefault.jpg)](https://youtu.be/1xAeFJn1vCQ)
@@ -1005,8 +1010,10 @@ Production swaps the static inputs for live ones through env config alone (see
 
 ## Deployment
 
-Live on AWS: an EC2 `t3.medium` behind nginx with TLS, the API under systemd, and
-S3 for the policy register and accounts.
+**Live at [https://3.108.70.96.nip.io](https://3.108.70.96.nip.io)** — an EC2
+`t3.medium` behind nginx with TLS, the API under systemd, and S3 for the policy
+register and accounts. (`nip.io` resolves the instance's own address, so the
+certificate is valid without registering a domain.)
 
 ```
 nginx  ──  /            →  the built SPA
