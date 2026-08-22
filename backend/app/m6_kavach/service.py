@@ -16,9 +16,14 @@ DISCLAIMER = ("Indicative analysis on representative public data — Kavach figu
 
 
 def _status(kavach_pct: float) -> str:
-    if kavach_pct >= 75:
+    """Classify a corridor. The two thresholds are POLICY, not facts about the
+    track — raising the bar reclassifies corridors and lowers reported national
+    coverage without a metre of Kavach changing."""
+    from app.policy.context import current
+    pol = current()
+    if kavach_pct >= pol.kavach_equipped_pct:
         return "equipped"
-    if kavach_pct >= 25:
+    if kavach_pct >= pol.kavach_partial_pct:
         return "partial"
     return "none"
 
@@ -73,7 +78,7 @@ def correlation_payload() -> dict:
     enriched.sort(key=lambda x: x["risk_exposure"], reverse=True)
 
     total_risk = sum(c["risk_exposure"] for c in enriched) or 1.0
-    unequipped = [c for c in enriched if c["kavach_pct"] < 25]
+    unequipped = [c for c in enriched if c["status"] == "none"]
     unequipped.sort(key=lambda x: x["risk_exposure"], reverse=True)
 
     # Headline: the top unequipped corridors and their share of total risk exposure.
@@ -84,8 +89,8 @@ def correlation_payload() -> dict:
     # Indicative correlation: more Kavach ↔ fewer incidents.
     r = _pearson([c["kavach_pct"] for c in enriched],
                  [c["incidents_5yr"] for c in enriched])
-    low = [c for c in enriched if c["kavach_pct"] < 25]
-    high = [c for c in enriched if c["kavach_pct"] >= 75]
+    low = [c for c in enriched if c["status"] == "none"]
+    high = [c for c in enriched if c["status"] == "equipped"]
     avg_inc_low = round(sum(c["incidents_5yr"] for c in low) / len(low), 1) if low else 0
     avg_inc_high = round(sum(c["incidents_5yr"] for c in high) / len(high), 1) if high else 0
 

@@ -6,6 +6,21 @@ from functools import lru_cache
 import networkx as nx
 
 FIXTURE = os.path.join(os.path.dirname(__file__), "..", "..", "fixtures", "station_graph.json")
+RAILS_FIXTURE = os.path.join(os.path.dirname(__file__), "..", "..", "fixtures", "ndls_rails.json")
+
+
+@lru_cache(maxsize=1)
+def load_rails():
+    """Real OSM track alignments around the station (scripts/fetch_rail_lines.py).
+
+    Decorative: the 3D scene draws them so the schematic view carries the real
+    yard density the 2D basemap shows. The simulation never touches them, and
+    the payload stays optional — an empty dict of ways if the fixture is absent.
+    """
+    try:
+        return json.load(open(RAILS_FIXTURE))
+    except FileNotFoundError:
+        return {"meta": None, "ways": []}
 
 
 @lru_cache(maxsize=1)
@@ -21,7 +36,9 @@ def load_station():
                    length_m=e["length_m"],
                    kind=e["kind"],
                    width_m=e["width_m"],
-                   capacity_pps=e["capacity_pps"])
+                   capacity_pps=e["capacity_pps"],
+                   # real OSM vertical level: +1 FOB deck, -1 subway, 0 grade
+                   level=e.get("level", 0))
 
     # Keep only the largest connected component for routing sanity.
     comps = sorted(nx.connected_components(G), key=len, reverse=True)
@@ -51,4 +68,5 @@ def refresh_station():
     pick up a new layout without a restart.
     """
     load_station.cache_clear()
+    load_rails.cache_clear()
     return load_station()

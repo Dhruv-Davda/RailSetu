@@ -76,12 +76,67 @@ class Settings(BaseSettings):
     # Capture it with `python scripts/capture_live_snapshot.py` (needs a valid key).
     live_snapshot_path: str = "fixtures/live_snapshot.json"
 
+    # ---- Gemini (optimizer BRIEF only — never the decision) ----
+    # The mitigation plan is chosen by exhaustive simulation in
+    # app/m1_crowd/optimizer.py. Gemini only narrates the finished result, so
+    # an absent key degrades the wording, never the recommendation.
+    gemini_api_key: str = ""        # set in env, never commit
+    gemini_model: str = "gemini-3.6-flash"
+    gemini_base_url: str = "https://generativelanguage.googleapis.com"
+    gemini_timeout_s: float = 20.0
+    # Gemini 3.x models always reason, and thinking tokens count against
+    # maxOutputTokens (a 400 cap left ~15 tokens for prose and truncated it
+    # mid-sentence). thinkingBudget:0 is rejected by this model, so the ceiling
+    # is simply set well above observed thinking usage (~1.3k).
+    gemini_max_tokens: int = 2500
+
+    # ---- Policy register (rule changes: preview, activate, history) ----
+    # "s3"    -> versions as objects under policy_s3_prefix in policy_s3_bucket.
+    # "local" -> JSON under policy_local_root (no credentials needed).
+    # S3 is the default because the register is meant to outlive any one host.
+    # If S3 cannot be reached (no credentials, wrong region, network) the store
+    # degrades to local rather than taking the platform down — a change register
+    # that refuses to start is worse than one that is temporarily host-local.
+    policy_store: str = "s3"
+    policy_local_root: str = "fixtures/policy"
+    policy_s3_bucket: str = "railsetu-deploy-043848616679"
+    policy_s3_prefix: str = "policy"
+    policy_s3_region: str = "ap-south-1"
+    # Preview runs the real simulators twice (active vs draft). These are the
+    # scenarios it measures impact on — keep the list short, it is on the
+    # critical path of every preview request.
+    policy_preview_crowd_scenario: str = "kumbh_surge"
+    policy_preview_corridor_scenario: str = "passenger_ahead"
+
+    # ---- Accounts (sign-in identity behind every recorded change) ----
+    # Same seam as the policy register: "s3" by default so an identity outlives
+    # any one host; degrades to local if S3 cannot be reached.
+    accounts_store: str = "s3"
+    accounts_local_root: str = "fixtures/accounts"
+    accounts_s3_bucket: str = "railsetu-deploy-043848616679"
+    accounts_s3_prefix: str = "accounts"
+    accounts_s3_region: str = "ap-south-1"
+
     # ---- Crowd sensing / calibration ----
     crowd_sensor: str = "none"      # "none" | "stub"
     crowd_sensor_fixture: str = ""  # optional JSON of measured observations
     calibration_enabled: bool = False
     calibration_min_scale: float = 0.3
     calibration_max_scale: float = 2.5
+
+    # ---- M3 · Rail surface defect inspection ----
+    # Torch + ultralytics are heavy and are imported lazily, so a deployment
+    # without them still serves every other module; the M3 page reports itself
+    # unavailable instead of taking the API down.
+    m3_artifacts_dir: str = ""   # default: <repo>/railsetu-m3/artifacts
+    m3_device: str = "cpu"       # "cpu" | "mps" | "cuda" | "auto"
+    # Model B box confidence floor. Measured on the held-out photos: every
+    # false box on a wide track frame scored <=0.49, while real detections on
+    # railhead close-ups run 0.71-0.81. 0.40 keeps 12/12 close-ups detected and
+    # cuts wide-frame false boxes from 3 images to 1. Going to 0.50 clears the
+    # last one but costs two real detections -- a bad trade for an inspection
+    # tool, where a missed defect is worse than a box on gravel.
+    m3_conf: float = 0.40
 
     @field_validator("cors_origins", mode="before")
     @classmethod

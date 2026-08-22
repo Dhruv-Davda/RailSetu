@@ -25,13 +25,41 @@ STATIONS = [
     {"code": "CNB",  "name": "Kanpur Central", "km": 440, "platforms": 10, "loop": True},
 ]
 
+# Operating rules. These constants are the FALLBACK shape only — the values
+# actually applied come from the active operating policy (app/policy), because
+# headway, dwell and precedence are rules a railway sets, not properties of the
+# track. See DEFAULT_POLICY_YAML: corridor_operations / train_precedence.
 HEADWAY_MIN = 5.0          # minimum separation between trains on one section
 STOP_DWELL_MIN = 2.0       # time a stopping train holds a platform
 TERMINAL_DWELL_MIN = 4.0   # at the final station
 
-# Train-type → priority weight. Higher = more important to keep on time; the
-# optimizer minimises priority-weighted total delay, so it protects a Rajdhani
-# over a passenger.
+
+def _pol():
+    from app.policy.context import current
+    return current()
+
+
+def headway_min() -> float:
+    return _pol().headway_min
+
+
+def stop_dwell_min() -> float:
+    return _pol().stop_dwell_min
+
+
+def terminal_dwell_min() -> float:
+    return _pol().terminal_dwell_min
+
+
+def overtake_window_min() -> float:
+    return _pol().max_overtake_hold_min
+
+
+def overtake_speed_margin() -> float:
+    return _pol().overtake_speed_margin
+
+# Train-type → priority weight. FALLBACK only; the live table is policy
+# (train_precedence). Higher = more important to keep on time.
 TYPE_PRIORITY = {
     "RAJDHANI": 10, "SHATABDI": 9, "DURONTO": 9, "SUPERFAST": 7,
     "MAIL": 6, "EXPRESS": 5, "PASSENGER": 2, "MEMU": 2, "GOODS": 1,
@@ -75,7 +103,7 @@ def sections() -> list[dict]:
         out.append({
             "from": a["code"], "to": b["code"],
             "km": b["km"] - a["km"],
-            "headway_min": HEADWAY_MIN,
+            "headway_min": headway_min(),
             "line": "double",
         })
     return out
@@ -90,7 +118,7 @@ def running_time_min(km: float, speed_kmph: float) -> float:
 
 
 def train_priority(t: dict) -> int:
-    return TYPE_PRIORITY.get(t["type"], 5)
+    return _pol().train_precedence.get(t["type"], TYPE_PRIORITY.get(t["type"], 5))
 
 
 def stops_at(t: dict, code: str) -> bool:
@@ -104,7 +132,7 @@ def corridor_meta() -> dict:
         "length_km": STATIONS[-1]["km"],
         "n_stations": len(STATIONS),
         "n_trains": len(TRAINS),
-        "headway_min": HEADWAY_MIN,
+        "headway_min": headway_min(),
         "source": "Representative timetable snapshot (real trains; representative timings)",
     }
 

@@ -88,18 +88,18 @@ export default function StringLineChart({ stations, baseline, optimized, progres
       </defs>
       {stations.map((s, i) => i < stations.length - 1 && (
         <rect key={'band' + s.code} x={padL} y={y(s.km)} width={W - padL - padR}
-          height={y(stations[i + 1].km) - y(s.km)} fill={i % 2 ? '#0d1b2a' : '#0b1726'} opacity="0.6" />
+          height={y(stations[i + 1].km) - y(s.km)} fill={i % 2 ? '#101214' : '#0d0f11'} opacity="0.6" />
       ))}
       {ticks.map((t) => (
         <g key={'t' + t}>
-          <line x1={x(t)} y1={padT} x2={x(t)} y2={H - padB} stroke="#16273a" strokeWidth="1" />
-          <text x={x(t)} y={H - padB + 17} fill="#6f879f" fontSize="11" textAnchor="middle">{hhmm(t)}</text>
+          <line x1={x(t)} y1={padT} x2={x(t)} y2={H - padB} stroke="#1d2226" strokeWidth="1" />
+          <text x={x(t)} y={H - padB + 17} fill="#8a857e" fontSize="10" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace" textAnchor="middle">{hhmm(t)}</text>
         </g>
       ))}
       {stations.map((s) => (
         <g key={s.code}>
-          <line x1={padL} y1={y(s.km)} x2={W - padR} y2={y(s.km)} stroke="#21344a" strokeWidth="1" />
-          <text x={padL - 12} y={y(s.km) + 4} fill="#c2d2e4" fontSize="12" textAnchor="end" fontWeight="800">{s.code}</text>
+          <line x1={padL} y1={y(s.km)} x2={W - padR} y2={y(s.km)} stroke="#24292e" strokeWidth="1" />
+          <text x={padL - 12} y={y(s.km) + 4} fill="#ecebe8" fontSize="11" textAnchor="end" fontWeight="600" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace">{s.code}</text>
         </g>
       ))}
       {/* trains */}
@@ -113,9 +113,9 @@ export default function StringLineChart({ stations, baseline, optimized, progres
       {/* playhead */}
       {playhead != null && (
         <g>
-          <line x1={x(playhead)} y1={padT} x2={x(playhead)} y2={H - padB} stroke="#eaf2fb" strokeWidth="1.5" strokeOpacity="0.55" />
-          <rect x={x(playhead) - 22} y={padT - 16} width="44" height="15" rx="3" fill="#eaf2fb" />
-          <text x={x(playhead)} y={padT - 5} fill="#06121f" fontSize="10" fontWeight="800" textAnchor="middle">{hhmm(playhead)}</text>
+          <line x1={x(playhead)} y1={padT} x2={x(playhead)} y2={H - padB} stroke="#f0a500" strokeWidth="1.5" strokeOpacity="0.55" />
+          <rect x={x(playhead) - 22} y={padT - 16} width="44" height="15" rx="1" fill="#f0a500" />
+          <text x={x(playhead)} y={padT - 5} fill="#17130a" fontSize="9.5" fontWeight="700" fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace" textAnchor="middle">{hhmm(playhead)}</text>
           {trains.map((tr) => {
             const p = dot(tr.pts, playhead)
             if (!p) return null
@@ -124,7 +124,7 @@ export default function StringLineChart({ stations, baseline, optimized, progres
           })}
         </g>
       )}
-      <text x={padL} y={13} fill="#5d728b" fontSize="10">distance ↓ · time →</text>
+      <text x={padL} y={13} fill="#635f5a" fontSize="9">distance ↓ · time →</text>
     </svg>
   )
 }

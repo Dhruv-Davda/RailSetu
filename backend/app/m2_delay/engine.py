@@ -9,9 +9,11 @@ dispatching them in an order set by the *policy*:
   * "fcfs"     — first-come-first-served (what happens with no active control):
                  a slow train scheduled ahead blocks every faster train behind it,
                  because they cannot overtake mid-section. Delays cascade.
-  * "priority" — the optimizer: when a higher-priority train is ready close behind,
-                 dispatch it first and HOLD the slower train at the station (a loop
-                 move = an overtake). This is the rescheduling decision.
+  * "priority" — the optimizer: when a train with higher PRECEDENCE is ready close
+                 behind, dispatch it first and HOLD the other at the station (a loop
+                 move = an overtake). This is the rescheduling decision. Precedence
+                 comes from the operating policy, so which trains get protected is a
+                 recorded decision, not a constant.
 
 A disruption adds delay to one train at one station; the simulation propagates the
 knock-on. Comparing fcfs-vs-priority on the SAME disruption gives the headline:
@@ -24,7 +26,21 @@ from dataclasses import dataclass, field
 
 from . import network as net
 
+# Fallback only — the live value is policy (corridor_operations).
 OVERTAKE_WINDOW = 12.0   # max minutes we'll hold a slow train for a not-yet-ready faster one
+
+
+def _outranks(a: dict, b: dict, speed_margin: float) -> bool:
+    """Is it worth holding ready train `b` to let not-yet-ready `a` go first?
+
+    Precedence decides; speed only breaks a tie within the same class. Using
+    speed here regardless of precedence was the bug that made the precedence
+    policy inert — a faster train would jump a higher-precedence one, so
+    editing the precedence table changed nothing the dispatcher did.
+    """
+    if a["priority"] != b["priority"]:
+        return a["priority"] > b["priority"]
+    return a["speed"] > b["speed"] + speed_margin
 
 
 @dataclass
@@ -57,7 +73,7 @@ def _free_run(trains, stations, secs):
             clock += net.running_time_min(sec["km"], t["speed"])
             code = stations[i + 1]["code"]
             if i + 1 < len(stations) - 1 and net.stops_at(t, code):
-                clock += net.STOP_DWELL_MIN
+                clock += net.stop_dwell_min()
         out[t["no"]] = clock
     return out
 
@@ -66,6 +82,10 @@ def simulate(policy: str, disruption: dict | None = None) -> SimResult:
     stations = net.STATIONS
     secs = net.sections()
     trains = net.trains_with_priority()
+    # Resolve the policy rules once for the whole run.
+    headway = net.headway_min()
+    overtake_window = net.overtake_window_min()
+    speed_margin = net.overtake_speed_margin()
     n = len(stations)
     by_no = {t["no"]: t for t in trains}
 
@@ -102,7 +122,7 @@ def simulate(policy: str, disruption: dict | None = None) -> SimResult:
             no = t["no"]
             if s > 0:
                 code = stations[s]["code"]
-                dwell = net.STOP_DWELL_MIN if net.stops_at(t, code) else 0.0
+                dwell = net.stop_dwell_min() if net.stops_at(t, code) else 0.0
                 ready[no][s] = arrive[no][s] + dwell + disruption_extra(no, s)
 
         queue = sorted((t for t in trains), key=lambda t: ready[t["no"]][s])
@@ -110,23 +130,31 @@ def simulate(policy: str, disruption: dict | None = None) -> SimResult:
         prev_enter = prev_exit = float("-inf")
 
         while remaining:
-            gate = max(ready[remaining[0]["no"]][s], prev_enter + net.HEADWAY_MIN)
+            gate = max(ready[remaining[0]["no"]][s], prev_enter + headway)
             if policy == "priority":
-                # Dispatch fastest-first (priority breaks ties). On a no-overtake
-                # section this is the SPT rule: letting the faster train go first
-                # minimises total downstream delay (it would otherwise be throttled
-                # behind a slower train it cannot pass). We only hold ready trains
-                # to wait for a not-yet-ready train if that train is meaningfully
-                # FASTER — otherwise the hold costs more than the overtake saves,
-                # so the optimizer never inflates total delay.
+                # Dispatch by PRECEDENCE first, speed breaking ties.
+                #
+                # Precedence is the policy (train_precedence): it is the rule
+                # that says which class of train is protected when the corridor
+                # is congested. Because the default table already ranks the fast
+                # premium services highest, this reproduces the SPT/fastest-first
+                # result on a normal day — letting the quicker train go first
+                # minimises total downstream delay, since it would otherwise be
+                # throttled behind a train it cannot pass.
+                #
+                # But the two come apart the moment someone edits the policy. Lift
+                # PASSENGER above the expresses and the dispatcher will genuinely
+                # protect the commuter service, and total delay will rise. That
+                # trade is the point: it should be visible, and it should be a
+                # recorded decision rather than a property of the code.
                 def val(t):
-                    return (t["speed"], t["priority"])
+                    return (t["priority"], t["speed"])
                 cands = [t for t in remaining if ready[t["no"]][s] <= gate + 1e-6]
                 soon = [t for t in remaining
-                        if gate < ready[t["no"]][s] <= gate + OVERTAKE_WINDOW]
+                        if gate < ready[t["no"]][s] <= gate + overtake_window]
                 best_cand = max(cands, key=val) if cands else None
                 best_soon = max(soon, key=val) if soon else None
-                if best_soon and (not best_cand or best_soon["speed"] > best_cand["speed"] + 5):
+                if best_soon and (not best_cand or _outranks(best_soon, best_cand, speed_margin)):
                     chosen = best_soon
                     entry = ready[chosen["no"]][s]
                 else:
@@ -137,9 +165,9 @@ def simulate(policy: str, disruption: dict | None = None) -> SimResult:
                 entry = gate
 
             no = chosen["no"]
-            entry = max(entry, ready[no][s], prev_enter + net.HEADWAY_MIN)
+            entry = max(entry, ready[no][s], prev_enter + headway)
             runtime = net.running_time_min(sec["km"], chosen["speed"])
-            exit_t = max(entry + runtime, prev_exit + net.HEADWAY_MIN)  # no overtaking mid-section
+            exit_t = max(entry + runtime, prev_exit + headway)  # no overtaking mid-section
 
             # Record an overtake: trains still waiting that were ready earlier than `chosen`.
             jumped = [t for t in remaining

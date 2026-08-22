@@ -1,0 +1,18 @@
+{
+  "id": "abidimahir/railsetu-m3-model-a-condition",
+  "title": "RailSetu M3 Model A Condition",
+  "code_file": "train_model_a.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "abidimahir/railsetu-m3-condition"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": [],
+  "machine_shape": "NvidiaTeslaT4"
+}

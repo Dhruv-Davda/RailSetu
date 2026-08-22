@@ -228,13 +228,17 @@ class LiveDemandProvider(DemandProvider):
                 estimated += 1
             else:
                 continue
+            # Crowd-load assumptions are POLICY (demand_assumptions), not
+            # settings — they are planning figures a railway revises.
+            from app.policy.context import current
+            pol = current()
             mult = _type_multiplier(a.get("train_type") or a.get("train_name", ""))
-            load = self.s.default_alighting_per_train * mult
+            load = pol.default_alighting * mult
             if a.get("special"):
-                load *= self.s.special_train_multiplier
+                load *= pol.special_multiplier
             label = f"{a.get('train_no', '')} {a.get('train_name', '')}".strip()
             demands.append(Demand(platform=node, people=round(load, 1),
-                                  duration_s=float(self.s.unload_duration_s), label=label))
+                                  duration_s=float(pol.unload_duration_s), label=label))
         return demands, from_api, estimated
 
     def health(self) -> dict:

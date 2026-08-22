@@ -1,4 +1,5 @@
 # Python
+.venv/
 backend/.venv/
 __pycache__/
 *.pyc
@@ -15,3 +16,29 @@ frontend/dist/
 .DS_Store
 *.log
 .vercel
+
+# SSH / cloud keys — never commit
+sshkey.txt
+*.pem
+*_rsa
+*_ed25519
+
+# Policy register + account runtime state (these are stored records, not source)
+backend/fixtures/policy/
+backend/fixtures/accounts/
+Shaswat_accessKeys.csv
+# Datasets (large binaries — never commit)
+*.zip
+Railway Track Surface Faults Dataset/
+data/
+datasets/
+
+# M3 model weights — 34 MB of binaries that change rarely and version badly in
+# git. They ship through the S3 deploy bucket instead; see railsetu-m3/README.
+*.pt
+
+# M3 build outputs: the shareable demo bundle and rendered prediction images,
+# all reproducible from predict.py.
+railsetu-m3/bundle/
+railsetu-m3/artifacts/predictions_*/
+railsetu-m3/__pycache__/

@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, ReferenceLine, Tooltip } from 'recharts'
 import StationMap from '../components/StationMap.jsx'
-import { getStation, getScenarios, simulate } from '../api.js'
+import StationScene3D from '../three/StationScene3D.jsx'
+import { getStation, getScenarios, simulate, optimizeCrowd } from '../api.js'
 import { statusFor, LOS } from '../los.js'
 
 const MITIGATIONS = [
@@ -20,6 +21,9 @@ export default function M1Crowd() {
   const [baseline, setBaseline] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [mode, setMode] = useState('3d')
+  const [opt, setOpt] = useState(null)
+  const [optRunning, setOptRunning] = useState(false)
 
   useEffect(() => {
     getStation().then(setStation).catch((e) => setError(e.message))
@@ -51,7 +55,35 @@ export default function M1Crowd() {
     return b ? Math.round(((b - m) / b) * 100) : 0
   }, [anyMit, baseSummary, cur])
 
-  const timeline = useMemo(() => (sim ? sim.timeline.map((d, i) => ({ t: i * 2, density: d })) : []), [sim])
+  // Carry BOTH series so the mitigated curve is drawn against the no-action one.
+  async function runOptimizer() {
+    setOptRunning(true); setError(null)
+    try {
+      const r = await optimizeCrowd(scenario)
+      setOpt(r)
+      // Apply the winning plan to the toggles so the map, the 3D ghosts and
+      // the before/after badge all reflect what the optimizer chose.
+      setMit(r.recommended.mitigations)
+    } catch (e) {
+      setError(e.message)
+    } finally {
+      setOptRunning(false)
+    }
+  }
+
+  const timeline = useMemo(() => {
+    if (!sim) return []
+    const b = baseline?.timeline || []
+    return sim.timeline.map((d, i) => ({ t: i * 2, density: d, noaction: b[i] ?? null }))
+  }, [sim, baseline])
+
+  // Lock the Y scale across both runs. With domain=[0,'auto'] the mitigated run
+  // rescaled to its own peak (~3.4), which pushed the 5.0 CRUSH line off-chart
+  // and made a solved scenario look identical to the crisis it solved.
+  const yMax = useMemo(
+    () => Math.ceil(Math.max(baseSummary?.peak_density || 0, cur?.peak_density || 0, 6)),
+    [baseSummary, cur],
+  )
   const scenarioMeta = scenarios.find((s) => s.key === scenario)
 
   return (
@@ -60,12 +92,50 @@ export default function M1Crowd() {
         <aside className="sidebar">
           <section className="panel">
             <h3>Scenario</h3>
-            <select value={scenario} onChange={(e) => { setScenario(e.target.value); setMit({}) }}>
+            <select value={scenario} onChange={(e) => { setScenario(e.target.value); setMit({}); setOpt(null) }}>
               {scenarios.map((s) => <option key={s.key} value={s.key}>{s.title}</option>)}
             </select>
             {scenarioMeta && <p className="muted">{scenarioMeta.description}</p>}
             {scenarioMeta?.total_people > 0 && (
               <p className="muted small">Crowd in scenario: <b>{scenarioMeta.total_people.toLocaleString()}</b> people</p>
+            )}
+          </section>
+
+          <section className="panel">
+            <h3>AI optimizer</h3>
+            <button className="btn primary full" disabled={optRunning} onClick={runOptimizer}>
+              {optRunning ? 'Evaluating 16 plans…' : 'Run Nova Optimizer'}
+            </button>
+            <p className="muted small" style={{ marginTop: 8 }}>
+              Runs the flow model on every combination of the four measures, ranks
+              them by crush points then peak density, and applies the winner.
+            </p>
+            {optRunning && (
+              <div className="ai-working">
+                <span className="dots"><i /><i /><i /></span>
+                Running the flow model on all 16 plans, then writing the brief…
+              </div>
+            )}
+            {opt && !optRunning && (
+              <div className="ai-result">
+                <div className="ai-head">
+                  <span className={`ai-src ${opt.brief.source}`}>
+                    {opt.brief.source === 'gemini' ? 'GEMINI BRIEF' : 'COMPUTED BRIEF'}
+                  </span>
+                  <span className="ai-meta">{opt.evaluated} plans evaluated</span>
+                </div>
+                <div className="ai-plan">
+                  {opt.recommended.labels.length
+                    ? opt.recommended.labels.map((l) => <span key={l} className="ai-chip">{l}</span>)
+                    : <span className="ai-chip none">No intervention needed</span>}
+                </div>
+                <p className="ai-brief">{opt.brief.text}</p>
+                {opt.brief.error && (
+                  <p className="ai-err" title={opt.brief.error}>
+                    Gemini unavailable — showing the computed summary.
+                  </p>
+                )}
+              </div>
             )}
           </section>
 
@@ -81,7 +151,7 @@ export default function M1Crowd() {
                 </div>
               </label>
             ))}
-            {anyMit && <button className="btn ghost full" style={{ marginTop: 8 }} onClick={() => setMit({})}>Reset to baseline</button>}
+            {anyMit && <button className="btn ghost full" style={{ marginTop: 8 }} onClick={() => { setMit({}); setOpt(null) }}>Reset to baseline</button>}
           </section>
 
           <section className="panel legend">
@@ -118,21 +188,35 @@ export default function M1Crowd() {
             )}
             {loading && <span className="loading">simulating…</span>}
             {error && <span className="error-chip" title={error}>⚠ {error}</span>}
+            <div className="viewtoggle">
+              <button className={mode === '2d' ? 'on' : ''} onClick={() => setMode('2d')}>2D MAP</button>
+              <button className={mode === '3d' ? 'on' : ''} onClick={() => setMode('3d')}>3D</button>
+            </div>
           </div>
 
-          <StationMap station={station} sim={sim} />
+          {mode === '3d'
+            ? <StationScene3D station={station} sim={sim} baseline={anyMit ? baseline : null} analyzing={optRunning} />
+            : <StationMap station={station} sim={sim} />}
 
           <div className="bottom">
             <div className="chart">
-              <div className="chart-title">Peak density over time {anyMit ? '(mitigated)' : '(no action)'}</div>
+              <div className="chart-title">
+                Peak density over time {anyMit ? '— mitigated vs. no action' : '(no action)'}
+              </div>
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={timeline} margin={{ top: 6, right: 12, left: -18, bottom: 0 }}>
-                  <XAxis dataKey="t" tick={{ fontSize: 10, fill: '#8499b0' }} unit="s" />
-                  <YAxis tick={{ fontSize: 10, fill: '#8499b0' }} domain={[0, 'auto']} />
-                  <Tooltip contentStyle={{ background: '#0e1c2b', border: '1px solid #25384e', borderRadius: 8, fontSize: 12 }} />
-                  <ReferenceLine y={5} stroke="#ef4444" strokeDasharray="4 3" label={{ value: 'crush', fill: '#ef4444', fontSize: 10 }} />
-                  <ReferenceLine y={3.5} stroke="#fb8c00" strokeDasharray="3 3" />
-                  <Line type="monotone" dataKey="density" stroke="#38bdf8" dot={false} strokeWidth={2.2} isAnimationActive={false} />
+                  <XAxis dataKey="t" tick={{ fontSize: 10, fill: '#8a857e' }} unit="s" />
+                  <YAxis tick={{ fontSize: 10, fill: '#8a857e' }} domain={[0, yMax]} allowDataOverflow />
+                  <Tooltip contentStyle={{ background: '#15181b', border: '1px solid #333a41', borderRadius: 2, fontSize: 11, fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }} />
+                  <ReferenceLine y={5} stroke="#e5484d" strokeDasharray="4 3" label={{ value: 'CRUSH', fill: '#e5484d', fontSize: 9 }} />
+                  <ReferenceLine y={3.5} stroke="#e07b00" strokeDasharray="3 3" />
+                  {anyMit && (
+                    <Line type="monotone" dataKey="noaction" name="no action" stroke="#e5484d"
+                      dot={false} strokeWidth={1.6} strokeDasharray="4 3" strokeOpacity={0.6}
+                      isAnimationActive={false} />
+                  )}
+                  <Line type="monotone" dataKey="density" name={anyMit ? 'mitigated' : 'no action'}
+                    stroke="#f0a500" dot={false} strokeWidth={2} isAnimationActive={false} />
                 </LineChart>
               </ResponsiveContainer>
             </div>

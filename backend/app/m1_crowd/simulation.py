@@ -30,7 +30,9 @@ WALK_SPEED_MPS = 1.30          # mean walking speed on the flat
 STEP_SPEED_FACTOR = 0.65       # stairs are slower
 DT = 2.0                       # simulation timestep (seconds)
 
-# Fruin-style density bands (persons / m^2).
+# Fruin-style density bands (persons / m^2). These are the FALLBACK only —
+# the bands actually applied are a matter of policy and come from the active
+# operating policy (app/policy). See DEFAULT_POLICY_YAML: crowd_safety.
 LOS_BANDS = [
     (1.0, "A", "free"),
     (2.0, "C", "restricted"),
@@ -40,8 +42,17 @@ LOS_BANDS = [
 ]
 
 
-def los_for(density: float):
-    for thresh, grade, label in LOS_BANDS:
+def los_for(density: float, bands=None):
+    """Grade a density. Uses the policy in force unless bands are given.
+
+    Reading the bands from policy here (rather than threading them through
+    every caller) is what lets a policy preview re-grade an entire run without
+    the simulation code knowing a preview is happening.
+    """
+    if bands is None:
+        from app.policy.context import current
+        bands = current().density_bands
+    for thresh, grade, label in bands:
         if density < thresh:
             return grade, label
     return "F", "crush"

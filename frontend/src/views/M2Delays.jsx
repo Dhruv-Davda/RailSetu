@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import StringLineChart, { TYPE_COLOR, timeRange } from '../components/StringLineChart.jsx'
+import CorridorScene3D from '../three/CorridorScene3D.jsx'
 import { getCorridor, getM2Scenarios, runM2 } from '../api.js'
 
 const lerp = (a, b, p) => a + (b - a) * p
@@ -16,6 +17,7 @@ export default function M2Delays() {
   const [morph, setMorph] = useState(0)        // 0 = no action, 1 = rescheduled
   const [playhead, setPlayhead] = useState(null)
   const [playing, setPlaying] = useState(false)
+  const [mode, setMode] = useState('3d')
   const raf = useRef(0)
   const playRaf = useRef(0)
   const morphRef = useRef(0)
@@ -115,10 +117,10 @@ export default function M2Delays() {
           <section className="panel">
             <h3>Rescheduling</h3>
             <button className={`btn full ${optimize ? '' : 'primary'}`} onClick={() => setOptimize((v) => !v)}>
-              {optimize ? '↺ Revert to no-action' : '⚡ Run rescheduling optimizer'}
+              {optimize ? 'Revert to no-action' : 'Run rescheduling optimizer'}
             </button>
             <button className="btn ghost full" style={{ marginTop: 8 }} onClick={play} disabled={playing}>
-              {playing ? '▶ running…' : '▶ Play trains through corridor'}
+              {playing ? 'Running…' : 'Play trains through corridor'}
             </button>
             {impact && (
               <div className="impact-chip" style={{ marginTop: 12, marginLeft: 0, opacity: morph > 0.05 ? 1 : 0.4, transition: 'opacity .3s' }}>
@@ -155,21 +157,33 @@ export default function M2Delays() {
               </div>
             )}
             {error && <span className="error-chip" title={error}>⚠ {error}</span>}
+            <div className="viewtoggle">
+              <button className={mode === '2d' ? 'on' : ''} onClick={() => setMode('2d')}>CHART</button>
+              <button className={mode === '3d' ? 'on' : ''} onClick={() => setMode('3d')}>3D</button>
+            </div>
           </div>
 
           <div className="m2wrap">
             <div className="chart-title" style={{ padding: '2px 4px 8px' }}>
-              Time–distance running chart
+              {mode === '3d' ? 'Corridor — 3D' : 'Time–distance running chart'}
               <span style={{ color: reschedeled ? 'var(--good)' : 'var(--elev)', marginLeft: 8, fontWeight: 700 }}>
-                {reschedeled ? '— rescheduled: overtakes fan the lines out' : '— no action: lines bunch behind the slow train (cascade)'}
+                {reschedeled
+                  ? (mode === '3d'
+                    ? '— rescheduled: held trains sit on the loop line while expresses overtake'
+                    : '— rescheduled: overtakes fan the lines out')
+                  : '— no action: lines bunch behind the slow train (cascade)'}
               </span>
             </div>
-            <div className="stringchart">
-              {b && network && (
-                <StringLineChart stations={network.stations} baseline={b.trains}
-                  optimized={o?.trains} progress={morph} playhead={playhead} />
-              )}
-            </div>
+            {mode === '3d' ? (
+              <CorridorScene3D network={network} result={result} progress={morph} boxed />
+            ) : (
+              <div className="stringchart">
+                {b && network && (
+                  <StringLineChart stations={network.stations} baseline={b.trains}
+                    optimized={o?.trains} progress={morph} playhead={playhead} />
+                )}
+              </div>
+            )}
 
             <div className="grid two" style={{ marginTop: 16 }}>
               <div>

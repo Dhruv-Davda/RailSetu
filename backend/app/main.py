@@ -11,16 +11,26 @@ from __future__ import annotations
 
 import logging
 
-from fastapi import FastAPI, HTTPException, Query
+from pathlib import Path
+
+from fastapi import (
+    Depends, FastAPI, File, Form, HTTPException, Query, Request, UploadFile,
+)
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 from app.config import configure_logging, get_settings
-from app.data.station import load_station, refresh_station
+from app.data.station import load_rails, load_station, refresh_station
 from app.demand.factory import get_demand_provider
 from app.ingest.calibration import CalibrationState, compute_capacity_scale
 from app.ingest.crowd_sensing import get_crowd_sensor
+from app.m1_crowd.optimizer import search as optimizer_search
+from app.clients.gemini import (
+    GeminiClient, GeminiError, build_prompt, fallback_brief,
+)
 from app.m1_crowd.simulation import los_for, simulate
+from app.policy import context as policy_context
 
 settings = get_settings()
 configure_logging(settings)
@@ -37,9 +47,12 @@ app.add_middleware(
 # Process-wide singletons (cheap, stateless except the calibration store).
 CROWD_SENSOR = get_crowd_sensor(settings)
 CAL_STATE = CalibrationState()
+GEMINI = GeminiClient(settings)
 
-METER_DENSITY = 2.5      # hold at mid LOS C (comfortably safe) before the FOB
-FOB_EGRESS_MULT = 2.5
+# Both of these are POLICY, not physics — they now come from the active
+# operating policy (app/policy). The constants remain only as the shape of the
+# defaults; see DEFAULT_POLICY_YAML: crowd_safety.
+
 
 
 class Mitigations(BaseModel):
@@ -75,6 +88,7 @@ def _run(scenario_key, mitigations: Mitigations | None):
                for d in ds.demands if d.platform in G]
     exits = [e for e in ds.exits if e in G]
 
+    pol = policy_context.current()
     mit = {}
     cap_scale: dict = {}
 
@@ -84,13 +98,13 @@ def _run(scenario_key, mitigations: Mitigations | None):
 
     if mitigations:
         if mitigations.metered_holding:
-            mit["meter_density"] = METER_DENSITY
+            mit["meter_density"] = pol.meter_density
         if mitigations.stagger_release:
             mit["stagger"] = 0.5
         if mitigations.open_fob:
             for u, v in G.edges:
                 if G.edges[u, v]["kind"] == "steps":
-                    cap_scale[(u, v)] = cap_scale.get((u, v), 1.0) * FOB_EGRESS_MULT
+                    cap_scale[(u, v)] = cap_scale.get((u, v), 1.0) * pol.fob_egress_multiplier
         if mitigations.extra_exits:
             extra = [n for n in G.nodes
                      if G.nodes[n].get("kind") == "entrance" and n not in exits]
@@ -166,19 +180,36 @@ def health():
         "demand_provider": provider.health(),
         "crowd_sensor": CROWD_SENSOR.health(),
         "calibration": CAL_STATE.as_dict(),
+        "gemini": GEMINI.health(),
+        "policy": _policy_health(),
+        "accounts": ACCOUNTS.store.health() if "ACCOUNTS" in globals() else None,
     }
+
+
+def _policy_health() -> dict:
+    """Defined below the register is built; called lazily so import order is free."""
+    try:
+        lib = POLICY.library_payload()
+        return {"store": lib["store"], "documents": lib["count"],
+                "amended": sum(1 for d in lib["documents"] if (d["versions"] or 0) > 1)}
+    except Exception as exc:  # noqa: BLE001
+        return {"status": "error", "error": str(exc)}
 
 
 @app.get("/api/station")
 def station():
     """Geometry for the map: nodes, edges, platforms, exits."""
     s = load_station()
+    rails = load_rails()
     return {
         "meta": s["meta"],
         "nodes": s["nodes"],
         "edges": s["edges"],
         "platforms": s["platforms"],
         "entrances": s["entrances"],
+        # Real OSM track alignments (decorative, for the 3D yard). Optional.
+        "rails": rails["ways"],
+        "rails_meta": rails["meta"],
     }
 
 
@@ -242,6 +273,53 @@ def whatif(req: SimRequest):
             "cleared_after": mit["summary"]["total_cleared"],
         },
     }
+
+
+class OptimizeRequest(BaseModel):
+    scenario: str
+    explain: bool = True     # ask Gemini for the operator brief
+
+
+@app.post("/api/optimize")
+def optimize(req: OptimizeRequest):
+    """M1.4 — pick the best mitigation plan, then explain it.
+
+    The PLAN is computed: every one of the 16 mitigation combinations is run
+    through the real pedestrian-flow simulation and ranked (crush points, then
+    peak density, then throughput, then how many measures it takes). Gemini is
+    asked only to write the control-room brief for the winning plan, and if it
+    is unconfigured or unreachable we fall back to a deterministic summary — so
+    the recommendation itself never depends on a network call or an LLM.
+    """
+    provider = get_demand_provider()
+    ds = provider.get_scenario(req.scenario)
+    if not ds:
+        raise HTTPException(404, f"unknown scenario '{req.scenario}'")
+
+    result = optimizer_search(_run, req.scenario, Mitigations)
+
+    brief, source, error = fallback_brief(result), "fallback", None
+    if req.explain and GEMINI.configured:
+        try:
+            brief = GEMINI.brief(build_prompt(result, ds.title))
+            source = "gemini"
+        except GeminiError as e:
+            error = str(e)
+            log.warning("gemini brief failed, using fallback: %s", e)
+
+    result["brief"] = {
+        "text": brief,
+        "source": source,               # "gemini" | "fallback"
+        "model": settings.gemini_model if source == "gemini" else None,
+        "error": error,
+    }
+    log.info(
+        "optimizer: %s -> %s (peak %.2f -> %.2f, crush %d -> %d) brief=%s",
+        req.scenario, result["recommended"]["active"] or ["none"],
+        result["impact"]["peak_before"], result["impact"]["peak_after"],
+        result["impact"]["crush_before"], result["impact"]["crush_after"], source,
+    )
+    return result
 
 
 @app.post("/api/calibration/run")
@@ -336,3 +414,321 @@ def m6_coverage():
 def m6_correlation():
     """Kavach gap × accident correlation (indicative policy analysis)."""
     return m6_service.correlation_payload()
+
+
+# ----------------------------------------------------------------------------
+# Policy register — preview a rule change, activate it, inspect the history
+# ----------------------------------------------------------------------------
+from fastapi import Header  # noqa: E402
+from app.accounts.service import AccountError, AccountService  # noqa: E402
+from app.accounts.store import build_account_store  # noqa: E402
+from app.policy.schema import PolicyError  # noqa: E402
+from app.policy.service import PolicyConflict, PolicyService  # noqa: E402
+from app.policy.store import build_policy_store  # noqa: E402
+
+POLICY = PolicyService(build_policy_store(settings), settings)
+POLICY.bootstrap()   # restore the policy in force (or seed the genesis version)
+ACCOUNTS = AccountService(build_account_store(settings))
+
+USER_HEADER = "x-railsetu-user"
+
+
+def require_user(x_railsetu_user: str | None = Header(default=None)):
+    """Resolve the signed-in account, or refuse the request.
+
+    The policy surface is gated here rather than only in the UI: hiding a tab
+    is a presentation choice, and a change register whose writes can be made
+    without an identity is not a register at all.
+    """
+    account = ACCOUNTS.resolve(x_railsetu_user)
+    if account is None:
+        raise HTTPException(401, "sign in to view or change the operating policy")
+    return account
+
+
+class SignInRequest(BaseModel):
+    email: str
+
+
+@app.post("/api/session")
+def session_sign_in(req: SignInRequest):
+    """Register an address as the current user."""
+    try:
+        return {"account": ACCOUNTS.sign_in(req.email).public()}
+    except AccountError as exc:
+        raise HTTPException(400, str(exc))
+
+
+@app.get("/api/session")
+def session_current(x_railsetu_user: str | None = Header(default=None)):
+    """Who the caller is, if anyone. Used to restore a session on page load."""
+    account = ACCOUNTS.resolve(x_railsetu_user)
+    return {"account": account.public() if account else None}
+
+
+@app.delete("/api/session")
+def session_sign_out(x_railsetu_user: str | None = Header(default=None)):
+    ACCOUNTS.touch_sign_out(x_railsetu_user or "")
+    return {"signed_out": True}
+
+
+@app.get("/api/accounts")
+def accounts_list(_user=Depends(require_user)):
+    """Everyone the platform has seen — the people behind the change history."""
+    return ACCOUNTS.list_payload()
+
+
+class DraftRequest(BaseModel):
+    text: str
+
+
+class LocationPayload(BaseModel):
+    """What the browser was able to determine, with the author's permission."""
+    available: bool | None = None
+    latitude: float | None = None
+    longitude: float | None = None
+    accuracy_m: float | None = None
+    captured_at: str | None = None
+    reason: str | None = None
+
+
+class ActivateRequest(BaseModel):
+    text: str
+    title: str
+    description: str = ""
+    location: LocationPayload | None = None
+
+
+class RollbackRequest(BaseModel):
+    version_id: str
+    location: LocationPayload | None = None
+
+
+class RevertRequest(BaseModel):
+    version_id: str
+    location: LocationPayload | None = None
+
+
+def _client_ip(request: Request) -> str | None:
+    """The caller's address as the server actually saw it.
+
+    nginx terminates TLS and proxies, so the socket address is always
+    127.0.0.1; the original is in X-Forwarded-For, whose FIRST entry is the
+    client and the rest the proxy chain.
+    """
+    fwd = request.headers.get("x-forwarded-for")
+    if fwd:
+        return fwd.split(",")[0].strip() or None
+    return request.client.host if request.client else None
+
+
+@app.get("/api/policy/library")
+def policy_library(_user=Depends(require_user)):
+    """Every policy document, and where each one currently stands."""
+    return POLICY.library_payload()
+
+
+class NewDocumentRequest(BaseModel):
+    """file type -> name -> body."""
+    format: str
+    title: str
+    summary: str = ""
+    department: str = ""
+    text: str
+    location: LocationPayload | None = None
+
+
+@app.post("/api/policy/documents")
+def policy_document_create(req: NewDocumentRequest, request: Request,
+                           user=Depends(require_user)):
+    """Add a written standard to the library, recorded like any other change."""
+    try:
+        return POLICY.create_document(
+            title=req.title, summary=req.summary, department=req.department,
+            fmt=req.format, text=req.text,
+            author_name=user.display_name, author_email=user.email,
+            location=req.location.model_dump() if req.location else None,
+            client_ip=_client_ip(request))
+    except PolicyError as exc:
+        raise HTTPException(400, str(exc))
+
+
+@app.get("/api/policy/documents/{key}")
+def policy_document(key: str, _user=Depends(require_user)):
+    """One document: its text in force, and which version that is."""
+    out = POLICY.document_payload(key)
+    if out is None:
+        raise HTTPException(404, f"unknown policy document '{key}'")
+    return out
+
+
+@app.get("/api/policy/documents/{key}/default")
+def policy_document_default(key: str, _user=Depends(require_user)):
+    """The text this document shipped with — lets the editor offer a reset."""
+    text = POLICY.default_text(key)
+    if text is None:
+        raise HTTPException(404, f"unknown policy document '{key}'")
+    return {"key": key, "text": text}
+
+
+@app.post("/api/policy/documents/{key}/validate")
+def policy_document_validate(key: str, req: DraftRequest, _user=Depends(require_user)):
+    """Cheap check for live feedback while typing."""
+    return POLICY.validate_payload(key, req.text)
+
+
+@app.post("/api/policy/documents/{key}/preview")
+def policy_document_preview(key: str, req: DraftRequest, _user=Depends(require_user)):
+    """Run the real models under the library as it stands, and with this draft.
+
+    This is the 'before activation' step: it reports what the change would do
+    without writing anything or altering the rules in force.
+    """
+    return POLICY.preview(key, req.text, _run)
+
+
+@app.post("/api/policy/documents/{key}/activate")
+def policy_document_activate(key: str, req: ActivateRequest, request: Request,
+                             user=Depends(require_user)):
+    """Record an immutable version of this document and put it in force.
+
+    Attribution comes from the signed-in account, never from the request body —
+    so a change cannot be recorded against someone the caller merely names.
+    """
+    try:
+        return POLICY.activate(
+            key, req.text, title=req.title, description=req.description,
+            author_name=user.display_name, author_email=user.email, run_crowd=_run,
+            location=req.location.model_dump() if req.location else None,
+            client_ip=_client_ip(request),
+        )
+    except PolicyError as exc:
+        raise HTTPException(400, str(exc))
+
+
+@app.get("/api/policy/documents/{key}/history")
+def policy_document_history(key: str, limit: int = Query(50, ge=1, le=200),
+                            _user=Depends(require_user)):
+    """Every activation of this document, newest first."""
+    out = POLICY.history_payload(key, limit)
+    if out is None:
+        raise HTTPException(404, f"unknown policy document '{key}'")
+    return out
+
+
+@app.get("/api/policy/documents/{key}/versions/{version_id}")
+def policy_document_version(key: str, version_id: str, _user=Depends(require_user)):
+    """One version: its text, its diff against its parent, what changed."""
+    out = POLICY.version_payload(key, version_id)
+    if out is None:
+        raise HTTPException(404, f"unknown version '{version_id}' for '{key}'")
+    return out
+
+
+@app.post("/api/policy/documents/{key}/revert")
+def policy_document_revert(key: str, req: RevertRequest, request: Request,
+                           user=Depends(require_user)):
+    """Back out ONE earlier change, keeping every later one — like `git revert`.
+
+    Returns 409 with the conflicting blocks when a later version has already
+    edited the same lines, rather than producing a document nobody authored.
+    """
+    try:
+        return POLICY.revert_change(
+            key, req.version_id, author_name=user.display_name,
+            author_email=user.email, run_crowd=_run,
+            location=req.location.model_dump() if req.location else None,
+            client_ip=_client_ip(request))
+    except PolicyConflict as exc:
+        raise HTTPException(409, {"message": str(exc), "conflicts": exc.conflicts,
+                                  "seq": exc.seq})
+    except PolicyError as exc:
+        raise HTTPException(400, str(exc))
+
+
+@app.post("/api/policy/documents/{key}/rollback")
+def policy_document_rollback(key: str, req: RollbackRequest, request: Request,
+                             user=Depends(require_user)):
+    """Reinstate an earlier text — recorded as a new version, not a rewrite."""
+    try:
+        return POLICY.rollback(
+            key, req.version_id, author_name=user.display_name,
+            author_email=user.email, run_crowd=_run,
+            location=req.location.model_dump() if req.location else None,
+            client_ip=_client_ip(request))
+    except PolicyError as exc:
+        raise HTTPException(400, str(exc))
+
+# M3 — Rail Surface Defect Inspection (EfficientNet-B0 + YOLO11-s)
+# ----------------------------------------------------------------------------
+from app.m3_defect import service as m3_service  # noqa: E402
+
+# Phone photos are routinely 3-8 MB. The cap exists so a hostile upload cannot
+# park hundreds of MB in the single worker's memory, not to stop normal use.
+MAX_UPLOAD_BYTES = 20 * 1024 * 1024
+
+
+@app.get("/api/m3/status")
+def m3_status():
+    """Readiness, device, architectures and published test metrics."""
+    return m3_service.status()
+
+
+@app.post("/api/m3/warm")
+def m3_warm():
+    """Force the model load now, so the first real request does not pay for it."""
+    return m3_service.warm()
+
+
+@app.get("/api/m3/samples")
+def m3_samples():
+    """The bundled held-out test photos, with ground truth where it is known."""
+    return {"samples": m3_service.list_samples()}
+
+
+@app.get("/api/m3/samples/{sample_id:path}")
+def m3_sample(sample_id: str):
+    path = m3_service.sample_path(sample_id)
+    if path is None:
+        raise HTTPException(404, f"unknown sample '{sample_id}'")
+    return FileResponse(path, media_type="image/jpeg")
+
+
+@app.post("/api/m3/analyse")
+async def m3_analyse(
+    file: UploadFile | None = File(default=None),
+    sample: str | None = Form(default=None),
+    localizer: bool = Form(default=True),
+    cam: bool = Form(default=True),
+    conf: float | None = Form(default=None),
+):
+    """Run both models over one image — uploaded, or one of the bundled samples."""
+    if file is not None and file.filename:
+        data = await file.read()
+        if len(data) > MAX_UPLOAD_BYTES:
+            raise HTTPException(413, f"image exceeds {MAX_UPLOAD_BYTES // (1024 * 1024)} MB")
+        frame_id = Path(file.filename).stem
+    elif sample:
+        path = m3_service.sample_path(sample)
+        if path is None:
+            raise HTTPException(404, f"unknown sample '{sample}'")
+        data = path.read_bytes()
+        frame_id = path.stem
+    else:
+        raise HTTPException(400, "provide either an uploaded file or a sample id")
+
+    try:
+        return m3_service.analyse(
+            data,
+            localizer=localizer,
+            cam=cam,
+            conf=settings.m3_conf if conf is None else conf,
+            frame_id=frame_id,
+        )
+    except RuntimeError as exc:            # models unavailable -> not the caller's fault
+        raise HTTPException(503, str(exc))
+    except HTTPException:
+        raise
+    except Exception as exc:               # unreadable/corrupt image
+        log.exception("m3: analyse failed")
+        raise HTTPException(400, f"could not analyse image: {exc}")
