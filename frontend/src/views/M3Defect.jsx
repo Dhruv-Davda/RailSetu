@@ -354,9 +354,9 @@ export default function M3Defect() {
 
           <div className="m3-strip">
             <div className="m3-strip-head">
-              <span className="section-label">Held-out test photographs</span>
+              <span className="m3-strip-title">Example images — click one to test</span>
               <span className="faint small">
-                never seen during training · file name carries the true label
+                held out · never seen during training · the true label appears after the model answers
               </span>
             </div>
             <div className="m3-thumbs">
@@ -365,13 +365,10 @@ export default function M3Defect() {
                   key={s.id}
                   className={`m3-thumb ${active?.id === s.id ? 'on' : ''}`}
                   onClick={() => pickSample(s)}
-                  title={`${s.kind} — ${s.truth || 'unlabelled'}`}
+                  title={s.kind}
                   disabled={running}
                 >
                   <img src={m3SampleUrl(s.id)} alt={s.name} loading="lazy" />
-                  <span className="m3-thumb-tag" style={{ color: CLASS_COLOR[s.truth] || 'var(--t1)' }}>
-                    {s.truth || 'crack'}
-                  </span>
                 </button>
               ))}
             </div>
