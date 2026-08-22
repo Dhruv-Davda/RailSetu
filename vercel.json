@@ -16,20 +16,14 @@
       }
     }
   ],
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "destination": "https://3.108.70.96.nip.io/$1",
-      "permanent": false,
-      "has": [
-        {
-          "type": "host",
-          "value": "railsetu.vercel.app"
-        }
-      ]
-    }
-  ],
   "routes": [
+    {
+      "src": "/(.*)",
+      "status": 307,
+      "headers": {
+        "Location": "https://3.108.70.96.nip.io/$1"
+      }
+    },
     {
       "src": "/api/(.*)",
       "dest": "/api/index.py"
