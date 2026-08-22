@@ -1,0 +1,12 @@
+{
+  "model": "yolo11s",
+  "classes": [
+    "defect"
+  ],
+  "epochs_requested": 120,
+  "map50": 0.8278185954312213,
+  "map50_95": 0.5118241646325413,
+  "precision": 0.8195886118901231,
+  "recall": 0.7646629610825856,
+  "save_dir": "/kaggle/tmp/runs/model_b"
+}

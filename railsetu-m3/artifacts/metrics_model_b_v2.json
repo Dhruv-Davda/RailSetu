@@ -1,0 +1,21 @@
+{
+  "model": "yolo11s",
+  "variant": "v2_background_negatives",
+  "classes": [
+    "defect"
+  ],
+  "epochs_requested": 120,
+  "train_positives": 221,
+  "train_negatives": 216,
+  "val_images": 56,
+  "map50": 0.8191873226953819,
+  "map50_95": 0.5189978847317429,
+  "precision": 0.8865965969437417,
+  "recall": 0.7326732673267327,
+  "v1_map50": 0.8278185954312213,
+  "wide_frames_evaluated": 60,
+  "wide_frame_boxes_per_image": 0.05,
+  "wide_frames_with_boxes": 3,
+  "v1_wide_frame_boxes_per_image": 2.58,
+  "save_dir": "/kaggle/tmp/runs/model_b_v2"
+}

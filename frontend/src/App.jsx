@@ -7,13 +7,19 @@ import M1Crowd from './views/M1Crowd.jsx'
 import M2Delays from './views/M2Delays.jsx'
 import M6Kavach from './views/M6Kavach.jsx'
 import Policy from './views/Policy.jsx'
-import { IconPanel, IconStation, IconTrain, IconShield, IconPolicy } from './icons.jsx'
+import M3Defect from './views/M3Defect.jsx'
+import {
+  IconPanel, IconStation, IconTrain, IconShield, IconScan, IconPolicy,
+} from './icons.jsx'
 
+// No module-number chips: those labels belong to the project's own paperwork,
+// not to the people using the platform. A duty officer opens "Defects", not M3.
 const TABS = [
   { key: 'overview', Ico: IconPanel, label: 'Overview' },
   { key: 'm1', Ico: IconStation, label: 'Crowd-Flow' },
   { key: 'm2', Ico: IconTrain, label: 'Delays' },
   { key: 'm6', Ico: IconShield, label: 'Kavach' },
+  { key: 'm3', Ico: IconScan, label: 'Defects' },
   { key: 'policy', Ico: IconPolicy, label: 'Policy', needsUser: true },
 ]
 
@@ -144,6 +150,7 @@ export default function App() {
       {tab === 'm1' && <M1Crowd />}
       {tab === 'm2' && <M2Delays />}
       {tab === 'm6' && <M6Kavach />}
+      {tab === 'm3' && <M3Defect />}
       {tab === 'policy' && (account
         ? <Policy account={account} />
         : <SignInRequired onSignIn={onSignIn} busy={authBusy} error={authError} />)}

@@ -124,6 +124,20 @@ class Settings(BaseSettings):
     calibration_min_scale: float = 0.3
     calibration_max_scale: float = 2.5
 
+    # ---- M3 · Rail surface defect inspection ----
+    # Torch + ultralytics are heavy and are imported lazily, so a deployment
+    # without them still serves every other module; the M3 page reports itself
+    # unavailable instead of taking the API down.
+    m3_artifacts_dir: str = ""   # default: <repo>/railsetu-m3/artifacts
+    m3_device: str = "cpu"       # "cpu" | "mps" | "cuda" | "auto"
+    # Model B box confidence floor. Measured on the held-out photos: every
+    # false box on a wide track frame scored <=0.49, while real detections on
+    # railhead close-ups run 0.71-0.81. 0.40 keeps 12/12 close-ups detected and
+    # cuts wide-frame false boxes from 3 images to 1. Going to 0.50 clears the
+    # last one but costs two real detections -- a bad trade for an inspection
+    # tool, where a missed defect is worse than a box on gravel.
+    m3_conf: float = 0.40
+
     @field_validator("cors_origins", mode="before")
     @classmethod
     def _parse_origins(cls, v):
