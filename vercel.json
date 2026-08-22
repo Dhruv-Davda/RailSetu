@@ -4,16 +4,39 @@
     {
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
+      "config": {
+        "distDir": "dist"
+      }
     },
     {
       "src": "api/index.py",
       "use": "@vercel/python",
-      "config": { "includeFiles": "backend/**" }
+      "config": {
+        "includeFiles": "backend/**"
+      }
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://3.108.70.96.nip.io/$1",
+      "permanent": false,
+      "has": [
+        {
+          "type": "host",
+          "value": "railsetu.vercel.app"
+        }
+      ]
     }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/index.py" },
-    { "src": "/(.*)", "dest": "/frontend/$1" }
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/frontend/$1"
+    }
   ]
 }
