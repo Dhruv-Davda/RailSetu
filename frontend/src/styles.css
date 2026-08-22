@@ -747,7 +747,9 @@ select:focus { outline: 1px solid var(--accent); outline-offset: -1px; }
 }
 
 .pol-body { flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 16px 18px; }
-.pol-body.scroll { overflow-y: auto; padding-bottom: 72px; }
+/* Clearance so the last rows of the diff can scroll clear of the sticky
+   action bar instead of coming to rest underneath it. */
+.pol-body.scroll { overflow-y: auto; padding-bottom: 96px; }
 
 /* ---- file bar ---- */
 .pol-filebar {
@@ -788,9 +790,15 @@ select:focus { outline: 1px solid var(--accent); outline-offset: -1px; }
 
 /* ---- actions ---- */
 .pol-actions { display: flex; align-items: center; gap: 8px; margin-top: 14px; }
-.pol-actions.sticky {
-  position: sticky; bottom: 0; background: var(--bg-1);
-  padding: 12px 0; border-top: 1px solid var(--border); margin-top: 18px;
+/* The preview is a scrolling body plus a footer. The footer is a SIBLING of the
+   scroll area rather than a sticky child of it, so the browser reserves its
+   height and nothing — no impact row, no diff line — can come to rest behind it.
+   A sticky footer inside the scroll always occludes; this cannot. */
+.pol-preview { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.pol-preview > .pol-body.scroll { flex: 1; min-height: 0; padding-bottom: 14px; }
+.pol-actions.footer {
+  flex: 0 0 auto; margin-top: 0; padding: 12px 18px;
+  background: var(--bg-1); border-top: 1px solid var(--border);
 }
 .pol-actions .spacer { flex: 1; }
 .pol-hint { font-size: 11.5px; color: var(--t2); max-width: 560px; line-height: 1.5; }

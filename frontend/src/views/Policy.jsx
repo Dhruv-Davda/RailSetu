@@ -288,6 +288,11 @@ export default function Policy({ account }) {
       )}
 
       {tab === 'preview' && (
+        /* The actions sit OUTSIDE the scrolling body, as a footer with its own
+           reserved height. As a sticky child of the scroll they floated over the
+           impact table and the diff, hiding whichever rows were passing beneath —
+           the content had nowhere left to scroll to. */
+        <div className="pol-preview">
         <div className="pol-body scroll">
           {!preview ? (
             <div className="pd-empty">
@@ -320,14 +325,17 @@ export default function Policy({ account }) {
               )}
               <div className="pol-difftitle">Document diff</div>
               <PolicyDiff hunks={preview.hunks} stats={preview.stats} />
-              <div className="pol-actions sticky">
-                <div className="spacer" />
-                <button className="gh-btn" onClick={() => setTab('document')}>Back to document</button>
-                <button className="gh-btn primary" disabled={!validity.valid}
-                  onClick={() => setShowPush(true)}>Activate…</button>
-              </div>
             </>
           )}
+        </div>
+        {preview && preview.valid && (
+          <div className="pol-actions footer">
+            <div className="spacer" />
+            <button className="gh-btn" onClick={() => setTab('document')}>Back to document</button>
+            <button className="gh-btn primary" disabled={!validity.valid}
+              onClick={() => setShowPush(true)}>Activate…</button>
+          </div>
+        )}
         </div>
       )}
 
