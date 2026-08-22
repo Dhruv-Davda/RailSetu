@@ -1,0 +1,18 @@
+{
+  "id": "abidimahir/railsetu-m3-model-b-localization",
+  "title": "RailSetu M3 Model B Localization",
+  "code_file": "train_model_b.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "abidimahir/railsetu-m3-localization"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": [],
+  "machine_shape": "NvidiaTeslaT4"
+}

@@ -78,3 +78,15 @@ export function IconArrow(p) {
     </svg>
   )
 }
+
+/** M3 — inspection: a lens over a rail surface, with corner registration marks. */
+export function IconScan(p) {
+  return (
+    <svg {...base} {...p}>
+      <path d="M3 8V4h4M17 4h4v4M21 16v4h-4M7 20H3v-4" />
+      <circle cx="12" cy="12" r="3.2" />
+      <path d="M14.3 14.3L17 17" />
+    </svg>
+  )
+}
+

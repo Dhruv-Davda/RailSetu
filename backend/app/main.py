@@ -11,8 +11,11 @@ from __future__ import annotations
 
 import logging
 
-from fastapi import FastAPI, HTTPException, Query
+from pathlib import Path
+
+from fastapi import FastAPI, File, Form, HTTPException, Query, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 from app.config import configure_logging, get_settings
@@ -393,3 +396,79 @@ def m6_coverage():
 def m6_correlation():
     """Kavach gap × accident correlation (indicative policy analysis)."""
     return m6_service.correlation_payload()
+
+
+# ----------------------------------------------------------------------------
+# M3 — Rail Surface Defect Inspection (EfficientNet-B0 + YOLO11-s)
+# ----------------------------------------------------------------------------
+from app.m3_defect import service as m3_service  # noqa: E402
+
+# Phone photos are routinely 3-8 MB. The cap exists so a hostile upload cannot
+# park hundreds of MB in the single worker's memory, not to stop normal use.
+MAX_UPLOAD_BYTES = 20 * 1024 * 1024
+
+
+@app.get("/api/m3/status")
+def m3_status():
+    """Readiness, device, architectures and published test metrics."""
+    return m3_service.status()
+
+
+@app.post("/api/m3/warm")
+def m3_warm():
+    """Force the model load now, so the first real request does not pay for it."""
+    return m3_service.warm()
+
+
+@app.get("/api/m3/samples")
+def m3_samples():
+    """The bundled held-out test photos, with ground truth where it is known."""
+    return {"samples": m3_service.list_samples()}
+
+
+@app.get("/api/m3/samples/{sample_id:path}")
+def m3_sample(sample_id: str):
+    path = m3_service.sample_path(sample_id)
+    if path is None:
+        raise HTTPException(404, f"unknown sample '{sample_id}'")
+    return FileResponse(path, media_type="image/jpeg")
+
+
+@app.post("/api/m3/analyse")
+async def m3_analyse(
+    file: UploadFile | None = File(default=None),
+    sample: str | None = Form(default=None),
+    localizer: bool = Form(default=True),
+    cam: bool = Form(default=True),
+    conf: float | None = Form(default=None),
+):
+    """Run both models over one image — uploaded, or one of the bundled samples."""
+    if file is not None and file.filename:
+        data = await file.read()
+        if len(data) > MAX_UPLOAD_BYTES:
+            raise HTTPException(413, f"image exceeds {MAX_UPLOAD_BYTES // (1024 * 1024)} MB")
+        frame_id = Path(file.filename).stem
+    elif sample:
+        path = m3_service.sample_path(sample)
+        if path is None:
+            raise HTTPException(404, f"unknown sample '{sample}'")
+        data = path.read_bytes()
+        frame_id = path.stem
+    else:
+        raise HTTPException(400, "provide either an uploaded file or a sample id")
+
+    try:
+        return m3_service.analyse(
+            data,
+            localizer=localizer,
+            cam=cam,
+            conf=settings.m3_conf if conf is None else conf,
+            frame_id=frame_id,
+        )
+    except RuntimeError as exc:            # models unavailable -> not the caller's fault
+        raise HTTPException(503, str(exc))
+    except HTTPException:
+        raise
+    except Exception as exc:               # unreadable/corrupt image
+        log.exception("m3: analyse failed")
+        raise HTTPException(400, f"could not analyse image: {exc}")

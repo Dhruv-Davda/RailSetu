@@ -4,13 +4,15 @@ import Overview from './views/Overview.jsx'
 import M1Crowd from './views/M1Crowd.jsx'
 import M2Delays from './views/M2Delays.jsx'
 import M6Kavach from './views/M6Kavach.jsx'
-import { IconPanel, IconStation, IconTrain, IconShield } from './icons.jsx'
+import M3Defect from './views/M3Defect.jsx'
+import { IconPanel, IconStation, IconTrain, IconShield, IconScan } from './icons.jsx'
 
 const TABS = [
   { key: 'overview', Ico: IconPanel, label: 'Overview' },
   { key: 'm1', Ico: IconStation, label: 'Crowd-Flow', tag: 'M1' },
   { key: 'm2', Ico: IconTrain, label: 'Delays', tag: 'M2' },
   { key: 'm6', Ico: IconShield, label: 'Kavach', tag: 'M6' },
+  { key: 'm3', Ico: IconScan, label: 'Defects', tag: 'M3' },
 ]
 
 // Indian Standard Time, independent of where the machine running the demo is.
@@ -71,6 +73,7 @@ export default function App() {
       {tab === 'm1' && <M1Crowd />}
       {tab === 'm2' && <M2Delays />}
       {tab === 'm6' && <M6Kavach />}
+      {tab === 'm3' && <M3Defect />}
     </div>
   )
 }
