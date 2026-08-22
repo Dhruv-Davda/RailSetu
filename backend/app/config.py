@@ -90,6 +90,33 @@ class Settings(BaseSettings):
     # is simply set well above observed thinking usage (~1.3k).
     gemini_max_tokens: int = 2500
 
+    # ---- Policy register (rule changes: preview, activate, history) ----
+    # "s3"    -> versions as objects under policy_s3_prefix in policy_s3_bucket.
+    # "local" -> JSON under policy_local_root (no credentials needed).
+    # S3 is the default because the register is meant to outlive any one host.
+    # If S3 cannot be reached (no credentials, wrong region, network) the store
+    # degrades to local rather than taking the platform down — a change register
+    # that refuses to start is worse than one that is temporarily host-local.
+    policy_store: str = "s3"
+    policy_local_root: str = "fixtures/policy"
+    policy_s3_bucket: str = "railsetu-deploy-043848616679"
+    policy_s3_prefix: str = "policy"
+    policy_s3_region: str = "ap-south-1"
+    # Preview runs the real simulators twice (active vs draft). These are the
+    # scenarios it measures impact on — keep the list short, it is on the
+    # critical path of every preview request.
+    policy_preview_crowd_scenario: str = "kumbh_surge"
+    policy_preview_corridor_scenario: str = "passenger_ahead"
+
+    # ---- Accounts (sign-in identity behind every recorded change) ----
+    # Same seam as the policy register: "s3" by default so an identity outlives
+    # any one host; degrades to local if S3 cannot be reached.
+    accounts_store: str = "s3"
+    accounts_local_root: str = "fixtures/accounts"
+    accounts_s3_bucket: str = "railsetu-deploy-043848616679"
+    accounts_s3_prefix: str = "accounts"
+    accounts_s3_region: str = "ap-south-1"
+
     # ---- Crowd sensing / calibration ----
     crowd_sensor: str = "none"      # "none" | "stub"
     crowd_sensor_fixture: str = ""  # optional JSON of measured observations

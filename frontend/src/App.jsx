@@ -1,16 +1,20 @@
-import { useEffect, useState } from 'react'
-import { getHealth } from './api.js'
+import { useCallback, useEffect, useState } from 'react'
+import { getHealth, getSession, signIn as apiSignIn, signOut as apiSignOut } from './api.js'
+import SignIn from './components/SignIn.jsx'
+import { currentEmail, forgetEmail, rememberEmail } from './session.js'
 import Overview from './views/Overview.jsx'
 import M1Crowd from './views/M1Crowd.jsx'
 import M2Delays from './views/M2Delays.jsx'
 import M6Kavach from './views/M6Kavach.jsx'
-import { IconPanel, IconStation, IconTrain, IconShield } from './icons.jsx'
+import Policy from './views/Policy.jsx'
+import { IconPanel, IconStation, IconTrain, IconShield, IconPolicy } from './icons.jsx'
 
 const TABS = [
   { key: 'overview', Ico: IconPanel, label: 'Overview' },
-  { key: 'm1', Ico: IconStation, label: 'Crowd-Flow', tag: 'M1' },
-  { key: 'm2', Ico: IconTrain, label: 'Delays', tag: 'M2' },
-  { key: 'm6', Ico: IconShield, label: 'Kavach', tag: 'M6' },
+  { key: 'm1', Ico: IconStation, label: 'Crowd-Flow' },
+  { key: 'm2', Ico: IconTrain, label: 'Delays' },
+  { key: 'm6', Ico: IconShield, label: 'Kavach' },
+  { key: 'policy', Ico: IconPolicy, label: 'Policy', needsUser: true },
 ]
 
 // Indian Standard Time, independent of where the machine running the demo is.
@@ -33,11 +37,79 @@ function Clock() {
   )
 }
 
+/* Shown in place of the policy register when nobody is signed in. */
+function SignInRequired({ onSignIn, busy, error }) {
+  const [email, setEmail] = useState('')
+  const valid = /\S+@\S+\.\S+/.test(email.trim())
+  return (
+    <div className="gate">
+      <div className="gate-card">
+        <div className="gate-ico"><IconPolicy width={26} height={26} /></div>
+        <h2>Sign in to open the operating policy</h2>
+        <p>
+          The policy register records who changed which rule, and when. That only
+          works if the platform knows who you are, so this section is closed until
+          you sign in.
+        </p>
+        <form className="gate-form" onSubmit={(e) => { e.preventDefault(); if (valid && !busy) onSignIn(email.trim()) }}>
+          <input type="email" value={email} autoFocus placeholder="you@railsetu.in"
+            aria-label="Email address" onChange={(e) => setEmail(e.target.value)} />
+          <button className="gh-btn primary" type="submit" disabled={!valid || busy}>
+            {busy ? 'Signing in…' : 'Sign in'}
+          </button>
+        </form>
+        {error && <p className="gate-err">{error}</p>}
+        <p className="gate-note">
+          Your address becomes your identity on every change you make. Anyone
+          reading the history later will see it against your edits.
+        </p>
+      </div>
+    </div>
+  )
+}
+
 export default function App() {
   const [tab, setTab] = useState('overview')
   const [health, setHealth] = useState(null)
+  const [account, setAccount] = useState(null)
+  const [authBusy, setAuthBusy] = useState(false)
+  const [authError, setAuthError] = useState(null)
 
   useEffect(() => { getHealth().then(setHealth).catch(() => setHealth(null)) }, [])
+
+  // Restore a session on load. The address is remembered locally, but the
+  // server decides whether it is still a known account.
+  //
+  // A FAILED check is not a signed-out user. Treating a transient error as a
+  // sign-out silently dropped people mid-session — their next policy request
+  // then went out with no identity and came back 401. Only an explicit "no
+  // such account" clears the stored address; a network blip leaves it alone,
+  // and the server still refuses anything it should refuse.
+  useEffect(() => {
+    if (!currentEmail()) return
+    getSession()
+      .then((a) => { if (a) setAccount(a); else forgetEmail() })
+      .catch(() => { /* transient — keep the session, the server still gates each call */ })
+  }, [])
+
+  const onSignIn = useCallback(async (email) => {
+    setAuthBusy(true); setAuthError(null)
+    try {
+      rememberEmail(email)              // set first: the call itself is attributed
+      const { account: a } = await apiSignIn(email)
+      setAccount(a)
+    } catch (e) {
+      forgetEmail()
+      setAuthError(e.message.replace(/^API \d+ on \/session — /, ''))
+    } finally { setAuthBusy(false) }
+  }, [])
+
+  const onSignOut = useCallback(async () => {
+    setAuthBusy(true)
+    try { await apiSignOut() } catch { /* the local session goes either way */ }
+    forgetEmail(); setAccount(null); setAuthError(null); setAuthBusy(false)
+    setTab((t) => (TABS.find((x) => x.key === t)?.needsUser ? 'overview' : t))
+  }, [])
 
   return (
     <div className="app">
@@ -51,11 +123,10 @@ export default function App() {
           </div>
         </div>
         <nav className="nav">
-          {TABS.map(({ key, Ico, label, tag }) => (
+          {TABS.map(({ key, Ico, label }) => (
             <button key={key} className={tab === key ? 'active' : ''} onClick={() => setTab(key)}>
               <span className="ico"><Ico width={16} height={16} /></span>
               <span>{label}</span>
-              {tag && <span className="tag">{tag}</span>}
             </button>
           ))}
         </nav>
@@ -64,6 +135,8 @@ export default function App() {
           <span className="pip" style={{ background: health ? 'var(--good)' : 'var(--bad)' }} />
           {health ? `${health.station} · live` : 'backend offline'}
         </div>
+        <SignIn account={account} onSignIn={onSignIn} onSignOut={onSignOut}
+          busy={authBusy} error={authError} />
         <Clock />
       </header>
 
@@ -71,6 +144,9 @@ export default function App() {
       {tab === 'm1' && <M1Crowd />}
       {tab === 'm2' && <M2Delays />}
       {tab === 'm6' && <M6Kavach />}
+      {tab === 'policy' && (account
+        ? <Policy account={account} />
+        : <SignInRequired onSignIn={onSignIn} busy={authBusy} error={authError} />)}
     </div>
   )
 }

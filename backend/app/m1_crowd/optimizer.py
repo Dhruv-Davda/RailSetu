@@ -34,6 +34,14 @@ log = logging.getLogger("railsetu.optimizer")
 # The four levers, in the order the UI lists them.
 LEVERS = ["metered_holding", "open_fob", "stagger_release", "extra_exits"]
 
+# Human phrasing for the policy-set objective, echoed back to the UI.
+LEVER_OBJECTIVE_LABEL = {
+    "crush_points": "crush points",
+    "peak_density": "peak density",
+    "throughput": "throughput",
+    "measure_count": "measures used",
+}
+
 LEVER_LABEL = {
     "metered_holding": "Metered holding",
     "open_fob": "One-way / extra FOB lanes",
@@ -42,14 +50,27 @@ LEVER_LABEL = {
 }
 
 
-def _score(summary: dict, n_active: int) -> tuple:
-    """Lexicographic objective — lower is better on every component."""
-    return (
-        summary["crush_count"],
-        round(summary["peak_density"], 2),
-        -round(summary["total_cleared"], 1),
-        n_active,
-    )
+# Each objective, expressed so that LOWER is always better. The ORDER they are
+# applied in is not a constant — it is policy (intervention_priority), because
+# "what do we optimise for" is a decision, not an implementation detail.
+_OBJECTIVE_FN = {
+    "crush_points": lambda s, n: s["crush_count"],
+    "peak_density": lambda s, n: round(s["peak_density"], 2),
+    "throughput": lambda s, n: -round(s["total_cleared"], 1),   # more is better
+    "measure_count": lambda s, n: n,
+}
+
+
+def _score(summary: dict, n_active: int, order: list[str] | None = None) -> tuple:
+    """Lexicographic objective — lower is better on every component.
+
+    `order` comes from the active policy, so changing the policy genuinely
+    changes which plan wins, not merely how the result is described.
+    """
+    if order is None:
+        from app.policy.context import current
+        order = current().intervention_priority
+    return tuple(_OBJECTIVE_FN[o](summary, n_active) for o in order)
 
 
 def search(run_fn, scenario_key: str, mitigation_cls) -> dict:
@@ -58,6 +79,9 @@ def search(run_fn, scenario_key: str, mitigation_cls) -> dict:
     `run_fn(scenario_key, mitigations)` is injected (app.main._run) so this
     module stays independent of the HTTP layer and is unit-testable.
     """
+    from app.policy.context import current
+    order = current().intervention_priority
+
     baseline = run_fn(scenario_key, None)
     bs = baseline["summary"]
 
@@ -80,7 +104,7 @@ def search(run_fn, scenario_key: str, mitigation_cls) -> dict:
             "danger_count": s["danger_count"],
             "cleared": round(s["total_cleared"], 1),
             "worst_node": top["node"] if top else None,
-            "score": _score(s, len(active)),
+            "score": _score(s, len(active), order),
         })
 
     plans.sort(key=lambda p: p["score"])
@@ -118,4 +142,6 @@ def search(run_fn, scenario_key: str, mitigation_cls) -> dict:
         "single_levers": singles,
         "evaluated": len(plans),
         "method": "exhaustive simulation over all 16 mitigation combinations",
+        "objective": order,
+        "objective_labels": [LEVER_OBJECTIVE_LABEL.get(o, o) for o in order],
     }

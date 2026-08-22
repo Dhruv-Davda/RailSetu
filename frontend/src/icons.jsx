@@ -78,3 +78,16 @@ export function IconArrow(p) {
     </svg>
   )
 }
+
+export function IconPolicy(p) {
+  // A document with a rule line and a check — a register, not a code file.
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"
+      strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <path d="M6 2.5h8.5L19 7v14.5H6z" />
+      <path d="M14 2.5V7h5" />
+      <path d="M9 11.5h7M9 15h7" />
+      <path d="M9 18.2l1.4 1.3 2.6-2.6" />
+    </svg>
+  )
+}

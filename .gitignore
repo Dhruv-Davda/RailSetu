@@ -15,3 +15,14 @@ frontend/dist/
 .DS_Store
 *.log
 .vercel
+
+# SSH / cloud keys — never commit
+sshkey.txt
+*.pem
+*_rsa
+*_ed25519
+
+# Policy register + account runtime state (these are stored records, not source)
+backend/fixtures/policy/
+backend/fixtures/accounts/
+Shaswat_accessKeys.csv

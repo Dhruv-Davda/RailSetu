@@ -6,3 +6,5 @@ networkx
 pydantic
 pydantic-settings
 httpx
+PyYAML
+boto3
