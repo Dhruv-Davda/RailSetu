@@ -104,7 +104,7 @@ export default function M1Crowd() {
           <section className="panel">
             <h3>AI optimizer</h3>
             <button className="btn primary full" disabled={optRunning} onClick={runOptimizer}>
-              {optRunning ? 'Evaluating 16 plans…' : 'Run AI optimizer'}
+              {optRunning ? 'Evaluating 16 plans…' : 'Run Nova Optimizer'}
             </button>
             <p className="muted small" style={{ marginTop: 8 }}>
               Runs the flow model on every combination of the four measures, ranks
