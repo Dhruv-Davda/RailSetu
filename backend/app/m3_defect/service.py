@@ -69,9 +69,31 @@ SAMPLE_FOLDERS = {
 FOLDER_ORDER = {"railhead_crops": 0, "rail_frames": 1}
 CLASS_ORDER = {"squat": 0, "flaking": 1, "spalling": 2, "shelling": 3}
 
-# Shelling is the weakest class (F1 0.45 on 19 held-out images) and six near
-# identical thumbnails of it crowded the strip without adding information.
-MAX_PER_CLASS = {"shelling": 2}
+# Hand-picked filmstrip. The testpack holds 40 photographs, but many are
+# consecutive frames of the same physical defect and add nothing at thumbnail
+# size. These were chosen by eye for clarity; order within each class follows
+# this list.
+CURATED = [
+    # Six crack close-ups, chosen by eye to be visually distinct. The source set
+    # holds 33, but most are repeat shots of the same few rails -- near-identical
+    # thumbnails add nothing. Model B's own training domain: one tight box each.
+    "railhead_crops/coco_images27-3_jpeg.rf.127fc8ae.jpg",
+    "railhead_crops/coco_18_jpeg.rf.5e0ff959.jpg",
+    "railhead_crops/coco_imag3_jpeg.rf.700c3757.jpg",
+    "railhead_crops/coco_20_jpeg.rf.7f781b1e.jpg",
+    "railhead_crops/coco_11-1_jpeg.rf.b4e63a60.jpg",
+    "railhead_crops/coco_Y_jpeg.rf.49009b7c.jpg",
+    # squat — the most serious of the four surface conditions
+    "rail_frames/squat_0541_6661.jpg",
+    "rail_frames/squat_4152_4335.jpg",
+    # flaking
+    "rail_frames/flaking_1849_6978.jpg",
+    "rail_frames/flaking_1849_6996.jpg",
+    "rail_frames/flaking_1849_7130.jpg",
+    # spalling
+    "rail_frames/spalling_1849_5196.jpg",
+]
+CURATED_RANK = {name: i for i, name in enumerate(CURATED)}
 
 _LOCK = threading.Lock()      # guards both loading and inference
 _M: dict = {"tried": False, "ok": False, "error": None}
@@ -265,22 +287,11 @@ def list_samples() -> list[dict]:
                 "truth": truth,
             })
 
-    # Cap over-represented classes. Filename order is stable, so "the first two"
-    # means the same two photographs on every machine.
-    kept, seen = [], {}
-    for s in found:
-        cap = MAX_PER_CLASS.get(s["truth"])
-        if cap is not None:
-            seen[s["truth"]] = seen.get(s["truth"], 0) + 1
-            if seen[s["truth"]] > cap:
-                continue
-        kept.append(s)
-
-    kept.sort(key=lambda s: (
-        FOLDER_ORDER.get(s["folder"], 9),
-        CLASS_ORDER.get(s["truth"], 9),
-        s["name"],
-    ))
+    # Keep only the curated set, in the order it lists them. A name in CURATED
+    # that no longer exists on disk is simply skipped, so a deleted photo
+    # shortens the strip rather than breaking the page.
+    kept = [f for f in found if f["id"] in CURATED_RANK]
+    kept.sort(key=lambda f: CURATED_RANK[f["id"]])
     return kept
 
 
