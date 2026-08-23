@@ -31,7 +31,7 @@ becomes the identity every change you make is recorded against.
 
 ### ▶️ Watch the demo
 
-[![RailSetu demo video](https://img.youtube.com/vi/1xAeFJn1vCQ/maxresdefault.jpg)](https://youtu.be/1xAeFJn1vCQ)
+[![RailSetu demo video](https://img.youtube.com/vi/1xAeFJn1vCQ/maxresdefault.jpg)](https://youtu.be/BvpuV2pg0qE)
 
 </div>
 
@@ -126,7 +126,7 @@ Japan benchmark, and the provenance key that labels every figure on the platform
 > **3 · Delays** — a slow passenger train is pathed ahead of the morning express
 > fleet. The running chart bunches: **1,106 delay-minutes across 7 trains.** Run
 > the optimizer and the lines fan out as expresses overtake —
-> **15 minutes, 1 train, 1,091 delay-minutes recovered (98.6%).**
+> **1.4 minutes, 1,105 delay-minutes recovered (99.9%), in seven moves.**
 >
 > **4 · Defects** — drop in a railhead photograph. Two networks answer in under a
 > second: what the defect is, where it is, and an estimated severity.
@@ -660,8 +660,8 @@ rather than a property of the code.
 | Scenario | No action | Rescheduled | Recovered | Moves |
 |---|---:|---:|---:|:---:|
 | Normal running | 1.4 min | 1.4 min | — | 0 |
-| **Slow passenger pathed ahead** | **1,106.4 min** | **15.0 min** | **1,091.4 min (98.6%)** | **7** |
-| Passenger ahead + fault at Aligarh | 647.7 min | 28.0 min | 619.7 min (95.7%) | 7 |
+| **Slow passenger pathed ahead** | **1,106.4 min** | **1.4 min** | **1,105.0 min (99.9%)** | **7** |
+| Passenger ahead + fault at Aligarh | 647.7 min | 14.4 min | 633.3 min (97.8%) | 7 |
 
 > **Is it hardcoded? No.** The timetable is an authored fixture; the delay numbers
 > and the optimization are **computed live**, by running the corridor simulation
