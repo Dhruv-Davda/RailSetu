@@ -42,3 +42,9 @@ datasets/
 railsetu-m3/bundle/
 railsetu-m3/artifacts/predictions_*/
 railsetu-m3/__pycache__/
+
+# Written for the submission form and the demo recordings: both are working
+# material, not part of the platform. The recordings are also ~65 MB of video,
+# which has no business in git history.
+docs/SUBMISSION.txt
+docs/recordings/
